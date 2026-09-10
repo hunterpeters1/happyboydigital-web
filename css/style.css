@@ -348,9 +348,9 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
   100% { text-shadow:  0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28); }
 }
 nav .logo {
-  /* faint permanent misregistration, with a rare flicker (~every 16s) */
+  /* faint permanent misregistration, with a flicker burst ~every 6s */
   text-shadow: 0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28);
-  animation: wordmarkGlitch 16s steps(1, end) infinite;
+  animation: wordmarkGlitch 6s steps(1, end) infinite;
 }
 nav .logo:hover,
 nav .logo:focus-visible {
