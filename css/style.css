@@ -134,8 +134,10 @@ section { padding: 80px 0; }
 /* Gallery treatment: cream mat + hairline edge + soft cast shadow */
 .hero-vis img {
   width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 520px;
+  object-fit: contain;
   border-radius: 4px;
   background: #FFFDF9;
   padding: 14px;
@@ -174,13 +176,14 @@ section { padding: 80px 0; }
   background: var(--hbd-yellow); color: var(--hbd-deep); font-weight: 600; font-size: 0.95rem;
   transition: background 0.2s ease, transform 0.1s ease;
 }
-.btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); font-weight: 600; font-size: 0.95rem;}
+.btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); }
+.btn-sm { padding: 6px 16px; font-size: 0.85rem; }
 .btn-secondary {
   background: transparent;
   border: 1px solid var(--hbd-brown);
   color: var(--hbd-brown);
 }
-.btn-secondary:hover { background: rgba(107, 66, 38, 0.05); color: var(--hbd-yellow-dark); font-weight: 600; font-size: 0.95rem;}
+.btn-secondary:hover { background: rgba(107, 66, 38, 0.05); color: var(--hbd-yellow-dark); }
 .btn-group { display: flex; gap: 16px; align-items: center; }
 @media (max-width: 768px) { .btn-group { flex-direction: column; align-items: stretch; } }
 
@@ -217,6 +220,8 @@ section { padding: 80px 0; }
   box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
 }
 .app-shot + .app-shot { margin-top: 24px; }
+.app-shot--icon { width: 320px; }   /* base .app-shot max-width:100% clamps this on mobile */
+.app-shot--wide { width: 480px; }
 .atelier-grid { gap: 64px; align-items: start; }
 
 a.card {
@@ -238,16 +243,10 @@ a.card:hover {
 .project-info { padding: 16px; }
 .project-info p { font-size: 0.9rem; opacity: 0.8; }
 
-/* Uniform painting cards on the Work page: crop every painting thumb to one
-   ratio so the grid rows line up. Scoped to .work-page so the homepage
-   preview is untouched; the Atelier card (an app icon, not a painting) opts
-   out so it isn't cropped. */
-.work-page .grid { align-items: start; }
-.work-page .project-thumb:not(.project-thumb--app) img {
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: center;
-}
+/* Paintings show at their true aspect ratio — no cropping, an honest
+   representation of each piece. Rows are top-aligned so uneven heights sit
+   cleanly. */
+.grid:has(.project-thumb) { align-items: start; }
 
 /* "Sold" / status marker pinned to a thumb corner */
 .status-badge {
@@ -307,3 +306,28 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.7; }
     transition: none;
   }
 }
+
+/* ---- Painting detail pages ---- */
+.breadcrumb { display: block; height: auto; font-size: 0.85rem; opacity: 0.7; margin-bottom: 16px; }
+.breadcrumb a { color: var(--hbd-brown); }
+.piece-grid { gap: 64px; align-items: start; }
+.art-wrap { position: relative; }
+.framed-art {
+  display: block; width: 100%; height: auto;
+  border-radius: 4px; background: #FFFDF9; padding: 14px;
+  box-shadow: 0 0 0 1px rgba(107, 66, 38, 0.18), 0 24px 44px -18px rgba(74, 44, 18, 0.35);
+}
+.piece-details > h2 { font-size: 1.2rem; margin: 28px 0 8px; }
+.piece-details > h2:first-child { margin-top: 0; }
+.price-lg { font-size: 1.5rem; font-weight: 700; color: var(--hbd-deep); margin: 4px 0 0; }
+.price-list { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.95rem; }
+.price-list td { padding: 8px 0; border-bottom: 1px solid rgba(107, 66, 38, 0.12); }
+.price-list td:last-child { text-align: right; font-weight: 600; color: var(--hbd-deep); }
+.buy-box {
+  background: #FFFDF9; border: 1px solid rgba(107, 66, 38, 0.15);
+  border-radius: 8px; padding: 24px; margin-top: 28px;
+}
+.buy-box h2 { font-size: 1.05rem; margin: 0 0 10px; }
+.buy-box ol { margin: 0 0 12px 20px; }
+.buy-box li { margin-bottom: 6px; }
+.buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.75; margin-top: 4px; }
