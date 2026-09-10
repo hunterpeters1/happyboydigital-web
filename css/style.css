@@ -26,12 +26,13 @@ body {
   background-image: radial-gradient(rgba(74, 44, 18, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
   color: var(--hbd-brown);
-  line-height: 2;
+  line-height: 1.6;
   font-size: 16px;
 }
 h1, h2, h3 {
   color: var(--hbd-deep);
   line-height: 1.2;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 
@@ -111,6 +112,7 @@ section { padding: 80px 0; }
 
 /* ---- Page headings ---- */
 .lead { font-size: 2.5rem; font-weight: 700; color: var(--hbd-deep); margin-bottom: 16px; text-wrap: balance; }
+@media (max-width: 768px) { .lead { font-size: 2rem; } }
 .sub { font-size: 1.1rem; margin-bottom: 32px; color: var(--hbd-brown); max-width: 60ch; }
 
 .kicker {
@@ -241,7 +243,7 @@ a.card:hover {
 .project-thumb img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
 .project-thumb:hover img { transform: scale(1.05); }
 .project-info { padding: 16px; }
-.project-info p { font-size: 0.9rem; opacity: 0.8; }
+.project-info p { font-size: 0.9rem; opacity: 0.85; }
 
 /* Paintings show at their true aspect ratio — no cropping, an honest
    representation of each piece. Rows are top-aligned so uneven heights sit
@@ -263,7 +265,7 @@ footer {
   padding: 48px 0 24px; background: var(--hbd-beige);
   border-top: 1px solid rgba(107, 66, 38, 0.1);
 }
-footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.7; }
+footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
 
 .copy-email-btn {
   display: inline-flex; align-items: center;
@@ -315,9 +317,9 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.7; }
 .framed-art {
   display: block; width: 100%; height: auto;
   border-radius: 4px; background: #FFFDF9; padding: 14px;
-  box-shadow: 0 0 0 1px rgba(107, 66, 38, 0.18), 0 24px 44px -18px rgba(74, 44, 18, 0.35);
+  box-shadow: 0 0 0 1px rgba(107, 66, 38, 0.18), 0 28px 50px -18px rgba(74, 44, 18, 0.4);
 }
-.piece-details > h2 { font-size: 1.2rem; margin: 28px 0 8px; }
+.piece-details > h2 { font-size: 1.2rem; margin: 22px 0 8px; }
 .piece-details > h2:first-child { margin-top: 0; }
 .price-lg { font-size: 1.5rem; font-weight: 700; color: var(--hbd-deep); margin: 4px 0 0; }
 .price-list { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.95rem; }
@@ -330,4 +332,4 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.7; }
 .buy-box h2 { font-size: 1.05rem; margin: 0 0 10px; }
 .buy-box ol { margin: 0 0 12px 20px; }
 .buy-box li { margin-bottom: 6px; }
-.buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.75; margin-top: 4px; }
+.buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.85; margin-top: 8px; }
