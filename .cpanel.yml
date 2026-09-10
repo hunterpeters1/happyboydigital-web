@@ -1,0 +1,24 @@
+---
+# cPanel "Git Version Control" deploy script (Namecheap shared hosting).
+#
+# Workflow after this is set up:
+#   1. I push changes to GitHub.
+#   2. You open cPanel > Git Version Control > Manage > "Pull or Deploy".
+#   3. Click "Update from Remote", then "Deploy HEAD Commit".
+#
+# The tasks below copy the site into public_html. Nothing is deleted except the
+# two large source files that don't belong on the live server (originals/ and
+# paintings.zip) — everything else is only added or overwritten.
+#
+# If a deploy fails with a path error, replace  $HOME/public_html  with the
+# absolute path cPanel shows for your account, e.g. /home/yourusername/public_html
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html
+    - /bin/mkdir -p "$DEPLOYPATH/css" "$DEPLOYPATH/js" "$DEPLOYPATH/assets" "$DEPLOYPATH/work"
+    - /bin/cp -R index.html work.html services.html atelier.html "$DEPLOYPATH/"
+    - /bin/cp -R css/. "$DEPLOYPATH/css/"
+    - /bin/cp -R js/. "$DEPLOYPATH/js/"
+    - /bin/cp -R assets/. "$DEPLOYPATH/assets/"
+    - /bin/cp -R work/. "$DEPLOYPATH/work/"
+    - /bin/rm -rf "$DEPLOYPATH/assets/originals" "$DEPLOYPATH/assets/paintings.zip"
