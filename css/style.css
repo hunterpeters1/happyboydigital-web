@@ -412,7 +412,10 @@ nav .nav-links a:focus-visible,
     kCaretOff 0.01s linear calc(var(--kt) + 2.1s) forwards;
 }
 .kicker-center.kicker--type { margin-left: auto; margin-right: auto; }
-@keyframes kType { from { clip-path: inset(0 100% 0 0); } }
+@keyframes kType {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
 @keyframes kCaret { 0%, 100% { border-right-color: var(--hbd-yellow-dark); } 50% { border-right-color: transparent; } }
 @keyframes kCaretOff { to { border-right-color: transparent; } }
 
