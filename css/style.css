@@ -333,3 +333,29 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
 .buy-box ol { margin: 0 0 12px 20px; }
 .buy-box li { margin-bottom: 6px; }
 .buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.85; margin-top: 8px; }
+
+/* ---- Wordmark glitch: cyan/magenta chromatic split on the header logo ---- */
+@keyframes wordmarkGlitch {
+  0%, 96%, 100% { text-shadow:  0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28); }
+  97%           { text-shadow: -0.06em  0 rgba(255, 0, 200, 0.5),   0.05em  0 rgba(0, 231, 255, 0.5); }
+  98%           { text-shadow:  0.07em  0 rgba(255, 0, 200, 0.42), -0.06em  0 rgba(0, 231, 255, 0.42); }
+  99%           { text-shadow: -0.03em  0 rgba(255, 0, 200, 0.32),  0.03em  0 rgba(0, 231, 255, 0.32); }
+}
+@keyframes wordmarkJudder {
+  0%   { text-shadow: -0.06em 0 rgba(255, 0, 200, 0.6),   0.06em 0 rgba(0, 231, 255, 0.6); }
+  35%  { text-shadow:  0.07em 0 rgba(255, 0, 200, 0.5),  -0.05em 0 rgba(0, 231, 255, 0.5); }
+  65%  { text-shadow: -0.04em 0 rgba(255, 0, 200, 0.5),   0.04em 0 rgba(0, 231, 255, 0.5); }
+  100% { text-shadow:  0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28); }
+}
+nav .logo {
+  /* faint permanent misregistration, with a rare flicker (~every 16s) */
+  text-shadow: 0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28);
+  animation: wordmarkGlitch 16s steps(1, end) infinite;
+}
+nav .logo:hover,
+nav .logo:focus-visible {
+  animation: wordmarkJudder 0.3s steps(2, end) 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  nav .logo { animation: none; }
+}
