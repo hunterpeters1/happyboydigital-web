@@ -1,0 +1,309 @@
+/* ===== VIRIDIA GARDENS / HBD — Minimal Design System ===== */
+/* ---- Font ---- */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/css/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Color palette ---- */
+:root {
+  --hbd-beige:    #F6F1E8;   /* off-white background */
+  --hbd-yellow:   #F9D93A;   /* bright yellow accent */
+  --hbd-yellow-dark: #E0B516; /* button hover */
+  --hbd-brown:    #6B4226;   /* body text */
+  --hbd-deep:     #4A2C18;   /* headings */
+}
+
+/* ---- Reset & base ---- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--hbd-beige);
+  background-image: radial-gradient(rgba(74, 44, 18, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--hbd-brown);
+  line-height: 2;
+  font-size: 16px;
+}
+h1, h2, h3 {
+  color: var(--hbd-deep);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+a { color: var(--hbd-deep); text-decoration: none; }
+a:hover { color: var(--hbd-yellow-dark); text-decoration: underline; }
+
+::selection { background: var(--hbd-yellow); color: var(--hbd-deep); }
+
+:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+
+/* ---- Layout ---- */
+body { padding-top: 64px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+@media (max-width: 768px) { .container { padding: 0 24px; } }
+
+/* ---- Yellow header bar (scroll-away navigation) ---- */
+.yellow-bar {
+  position: fixed; top: 0; left: 0; width: 100%; height: 64px;
+  background: var(--hbd-yellow); z-index: 1000;
+  box-shadow: 0 3px 0 rgba(74, 44, 18, 0.15);
+  display: flex; align-items: center;
+  transition: transform 0.3s ease, height 0.3s ease;
+}
+
+.yellow-bar .container { max-width: 100%; width: 100%; padding: 0 24px; }
+
+.yellow-bar.scrolled {
+  height: 56px;
+}
+.yellow-bar.hidden {
+  transform: translateY(-100%);
+}
+
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  height: 100%;
+}
+nav .logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 1.2rem; color: var(--hbd-deep);
+}
+nav .logo:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
+nav .logo-icon { width: 22px; height: 22px; display: block; }
+nav .nav-links { display: flex; gap: 32px; }
+nav .nav-links a { font-size: 0.9rem; color: var(--hbd-deep); }
+nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
+nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weight: 600; }
+
+#nav-toggle {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  font-size: 0.9rem; font-weight: 600; color: var(--hbd-deep);
+  padding: 8px 4px;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  nav .nav-links {
+    display: none; flex-direction: column; gap: 16px;
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--hbd-beige); padding: 24px;
+    border-bottom: 1px solid rgba(107,66,38,0.2);
+  }
+  #nav-toggle { display: block; }
+  nav .nav-links.open { display: flex; }
+}
+
+/* ---- Sections ---- */
+section { padding: 80px 0; }
+@media (max-width: 768px) { section { padding: 48px 0; } }
+
+/* A page-heading section sits directly above its content — collapse the
+   doubled vertical padding so there's no empty band between them. */
+.page-head { padding-bottom: 0; }
+.page-head + section { padding-top: 40px; }
+@media (max-width: 768px) { .page-head + section { padding-top: 24px; } }
+
+/* ---- Page headings ---- */
+.lead { font-size: 2.5rem; font-weight: 700; color: var(--hbd-deep); margin-bottom: 16px; text-wrap: balance; }
+.sub { font-size: 1.1rem; margin-bottom: 32px; color: var(--hbd-brown); max-width: 60ch; }
+
+.kicker {
+  display: block; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--hbd-yellow-dark); margin-bottom: 12px;
+}
+.kicker-center { text-align: center; }
+
+/* ---- Hero ---- */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 768px) { .hero { grid-template-columns: 1fr; } }
+.hero-vis { position: relative; text-align: center; }
+.hero-vis::before {
+  content: "";
+  position: absolute; inset: -22%;
+  background: radial-gradient(circle at 58% 42%, rgba(249, 217, 58, 0.55), transparent 68%);
+  filter: blur(32px);
+  z-index: -1;
+}
+/* Gallery treatment: cream mat + hairline edge + soft cast shadow */
+.hero-vis img {
+  width: auto;
+  max-width: 100%;
+  max-height: 520px;
+  border-radius: 4px;
+  background: #FFFDF9;
+  padding: 14px;
+  box-shadow:
+    0 0 0 1px rgba(107, 66, 38, 0.18),
+    0 28px 50px -18px rgba(74, 44, 18, 0.4);
+}
+@media (max-width: 768px) { .hero-vis img { max-height: 62vh; } }
+.hero-caption {
+  margin-top: 18px; font-size: 0.8rem; color: var(--hbd-brown); opacity: 0.7;
+}
+
+/* Hero entrance: staggered fade-up on load */
+@keyframes heroRise { from { opacity: 0; transform: translateY(18px); } }
+.hero-copy > *,
+.hero-vis {
+  animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-vis                { animation-delay: 0.12s; }
+.hero-copy > .lead       { animation-delay: 0.08s; }
+.hero-copy > .sub        { animation-delay: 0.16s; }
+.hero-copy > .btn-group  { animation-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > *,
+  .hero-vis { animation: none; }
+}
+
+/* ---- Section headings ---- */
+.section-title {
+  text-align: center; margin-bottom: 48px; font-size: 2rem; color: var(--hbd-deep);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block; padding: 12px 28px; border-radius: 4px;
+  background: var(--hbd-yellow); color: var(--hbd-deep); font-weight: 600; font-size: 0.95rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); font-weight: 600; font-size: 0.95rem;}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--hbd-brown);
+  color: var(--hbd-brown);
+}
+.btn-secondary:hover { background: rgba(107, 66, 38, 0.05); color: var(--hbd-yellow-dark); font-weight: 600; font-size: 0.95rem;}
+.btn-group { display: flex; gap: 16px; align-items: center; }
+@media (max-width: 768px) { .btn-group { flex-direction: column; align-items: stretch; } }
+
+/* ---- Cards ---- */
+.grid { display: grid; gap: 32px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+.card {
+  position: relative;
+  background: #FFFDF9;
+  border: 1px solid rgba(107, 66, 38, 0.15);
+  border-radius: 8px; padding: 32px;
+  box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
+}
+.card h2, .card h3 { font-size: 1.4rem; margin-bottom: 8px; }
+.price { font-weight: 700; color: var(--hbd-deep); margin: 8px 0; }
+.card .price { font-size: 1.15rem; }
+.card ul { margin-top: 16px; padding-left: 20px; font-size: 0.95rem; }
+.card li { margin-bottom: 4px; }
+.card-num {
+  position: absolute; top: 16px; right: 20px;
+  font-size: 2.25rem; font-weight: 700; line-height: 1;
+  color: rgba(74, 44, 18, 0.1);
+}
+
+/* App screenshots (Atelier) — one shared frame, matches the card shadow */
+.app-shot {
+  display: block; height: auto; max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(107, 66, 38, 0.15);
+  box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
+}
+.app-shot + .app-shot { margin-top: 24px; }
+.atelier-grid { gap: 64px; align-items: start; }
+
+a.card {
+  display: block;
+  color: inherit; text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+a.card:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(74, 44, 18, 0.14);
+  border-color: rgba(224, 181, 22, 0.6);
+}
+
+/* ---- Portfolio ---- */
+.project-thumb { position: relative; overflow: hidden; border-radius: 8px; }
+.project-thumb img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
+.project-thumb:hover img { transform: scale(1.05); }
+.project-info { padding: 16px; }
+.project-info p { font-size: 0.9rem; opacity: 0.8; }
+
+/* Uniform painting cards on the Work page: crop every painting thumb to one
+   ratio so the grid rows line up. Scoped to .work-page so the homepage
+   preview is untouched; the Atelier card (an app icon, not a painting) opts
+   out so it isn't cropped. */
+.work-page .grid { align-items: start; }
+.work-page .project-thumb:not(.project-thumb--app) img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* "Sold" / status marker pinned to a thumb corner */
+.status-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  padding: 5px 12px; border-radius: 999px;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--hbd-deep); color: var(--hbd-beige);
+  box-shadow: 0 2px 8px rgba(74, 44, 18, 0.25);
+}
+
+/* ---- Footer ---- */
+footer {
+  padding: 48px 0 24px; background: var(--hbd-beige);
+  border-top: 1px solid rgba(107, 66, 38, 0.1);
+}
+footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.7; }
+
+.copy-email-btn {
+  display: inline-flex; align-items: center;
+  margin-left: 8px; padding: 2px 10px;
+  font-family: inherit; font-size: 0.75rem; font-weight: 600;
+  color: var(--hbd-brown); background: transparent;
+  border: 1px solid rgba(107, 66, 38, 0.3); border-radius: 999px;
+  cursor: pointer; vertical-align: middle;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.copy-email-btn:hover { background: rgba(107, 66, 38, 0.06); }
+.copy-email-btn.copied { color: var(--hbd-yellow-dark); border-color: var(--hbd-yellow-dark); }
+
+/* ---- Scroll-reveal: [data-reveal] elements fade up as they enter view ---- */
+/* Default is fully visible; JS adds .reveal-on to <body> before hiding, so
+   no-JS visitors always see the content. data-reveal="info" animates the
+   element's .project-info child (the painting itself stays visible); any
+   other value animates the element itself. */
+.reveal-on [data-reveal="info"] .project-info,
+.reveal-on [data-reveal]:not([data-reveal="info"]) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal-on [data-reveal="info"].is-revealed .project-info,
+.reveal-on [data-reveal]:not([data-reveal="info"]).is-revealed {
+  opacity: 1;
+  transform: none;
+}
+/* once a card has arrived, hand hover transitions back to it */
+.reveal-on a.card[data-reveal].is-revealed {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on [data-reveal="info"] .project-info,
+  .reveal-on [data-reveal]:not([data-reveal="info"]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
