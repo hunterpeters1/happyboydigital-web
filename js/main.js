@@ -121,4 +121,27 @@
       revealItems.forEach(function(el) { revealObserver.observe(el); });
     }
   }
+
+
+  // Terminal-style type-on for section kickers (skips the hero kicker, which
+  // has its own entrance). JS just sets the character count; CSS does the rest.
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var kickers = Array.prototype.filter.call(
+    document.querySelectorAll('.kicker'),
+    function(k) { return !k.closest('.hero-copy'); }
+  );
+  if (kickers.length && !reduceMotion && 'IntersectionObserver' in window) {
+    var kickerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var k = entry.target;
+        var chars = (k.textContent || '').replace(/\s+$/, '').length || 10;
+        k.style.setProperty('--kn', String(chars));
+        k.classList.add('kicker--type');
+        kickerObserver.unobserve(k);
+      });
+    }, { threshold: 0.9, rootMargin: '0px 0px -6% 0px' });
+    kickers.forEach(function(k) { kickerObserver.observe(k); });
+  }
 })();

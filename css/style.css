@@ -39,7 +39,10 @@ h1, h2, h3 {
 a { color: var(--hbd-deep); text-decoration: none; }
 a:hover { color: var(--hbd-yellow-dark); text-decoration: underline; }
 
-::selection { background: var(--hbd-yellow); color: var(--hbd-deep); }
+::selection {
+  background: var(--hbd-yellow); color: var(--hbd-deep);
+  text-shadow: 0.03em 0 rgba(255, 0, 200, 0.5), -0.03em 0 rgba(0, 231, 255, 0.5);
+}
 
 :focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
 
@@ -265,7 +268,7 @@ footer {
   padding: 48px 0 24px; background: var(--hbd-beige);
   border-top: 1px solid rgba(107, 66, 38, 0.1);
 }
-footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
+footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .copy-email-btn {
   display: inline-flex; align-items: center;
@@ -313,7 +316,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
 .breadcrumb { display: block; height: auto; font-size: 0.85rem; opacity: 0.7; margin-bottom: 16px; }
 .breadcrumb a { color: var(--hbd-brown); }
 .piece-grid { gap: 64px; align-items: start; }
-.art-wrap { position: relative; }
+.art-wrap, .hero-frame { position: relative; display: inline-block; }
 .framed-art {
   display: block; width: 100%; height: auto;
   border-radius: 4px; background: #FFFDF9; padding: 14px;
@@ -332,7 +335,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; }
 .buy-box h2 { font-size: 1.05rem; margin: 0 0 10px; }
 .buy-box ol { margin: 0 0 12px 20px; }
 .buy-box li { margin-bottom: 6px; }
-.buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.85; margin-top: 8px; }
+.buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.85; margin-top: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 /* ---- Wordmark glitch: cyan/magenta chromatic split on the header logo ---- */
 @keyframes wordmarkGlitch {
@@ -358,4 +361,66 @@ nav .logo:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   nav .logo { animation: none; }
+}
+
+/* ---- Hover judder: quick RGB judder on interactive text (matches wordmark) ---- */
+@keyframes glitchJudder {
+  0%   { text-shadow: -0.05em 0 rgba(255, 0, 200, 0.55),  0.05em 0 rgba(0, 231, 255, 0.55); }
+  40%  { text-shadow:  0.06em 0 rgba(255, 0, 200, 0.45), -0.04em 0 rgba(0, 231, 255, 0.45); }
+  70%  { text-shadow: -0.03em 0 rgba(255, 0, 200, 0.45),  0.03em 0 rgba(0, 231, 255, 0.45); }
+  100% { text-shadow: none; }
+}
+nav .nav-links a:hover,
+nav .nav-links a:focus-visible,
+.project-thumb:hover .project-info h3 {
+  animation: glitchJudder 0.26s steps(2, end) 1;
+}
+
+/* ---- Crop marks at the corners of framed art ---- */
+.hero-frame::after,
+.art-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  pointer-events: none;
+  --cm-len: 12px;
+  --cm-w: 1px;
+  --cm-c: rgba(107, 66, 38, 0.4);
+  background:
+    linear-gradient(var(--cm-c), var(--cm-c)) top left     / var(--cm-len) var(--cm-w) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) top left     / var(--cm-w) var(--cm-len) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) top right    / var(--cm-len) var(--cm-w) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) top right    / var(--cm-w) var(--cm-len) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) bottom left  / var(--cm-len) var(--cm-w) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) bottom left  / var(--cm-w) var(--cm-len) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) bottom right / var(--cm-len) var(--cm-w) no-repeat,
+    linear-gradient(var(--cm-c), var(--cm-c)) bottom right / var(--cm-w) var(--cm-len) no-repeat;
+}
+
+/* ---- Terminal-style type-on for section kickers (JS adds .kicker--type + --kn) ---- */
+.kicker--type {
+  --kt: calc(var(--kn, 10) * 42ms);
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.14em solid var(--hbd-yellow-dark);
+  animation:
+    kType var(--kt) steps(var(--kn, 10)) both,
+    kCaret 0.7s linear var(--kt) 3,
+    kCaretOff 0.01s linear calc(var(--kt) + 2.1s) forwards;
+}
+.kicker-center.kicker--type { margin-left: auto; margin-right: auto; }
+@keyframes kType { from { clip-path: inset(0 100% 0 0); } }
+@keyframes kCaret { 0%, 100% { border-right-color: var(--hbd-yellow-dark); } 50% { border-right-color: transparent; } }
+@keyframes kCaretOff { to { border-right-color: transparent; } }
+
+@media (prefers-reduced-motion: reduce) {
+  nav .nav-links a:hover,
+  nav .nav-links a:focus-visible,
+  .project-thumb:hover .project-info h3 { animation: none; }
+  .kicker--type {
+    animation: none; clip-path: none; border-right: 0; width: auto; overflow: visible;
+  }
 }
