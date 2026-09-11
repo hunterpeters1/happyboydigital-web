@@ -404,7 +404,7 @@ nav .nav-links a:focus-visible,
 
 /* ---- Terminal-style type-on for section kickers (JS adds .kicker--type + --kn) ---- */
 .kicker--type {
-  --kt: calc(var(--kn, 10) * 42ms);
+  --kt: calc(var(--kn, 10) * 60ms);
   width: -moz-fit-content;
   width: fit-content;
   max-width: 100%;
