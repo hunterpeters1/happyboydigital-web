@@ -253,6 +253,11 @@ a.card:hover {
    cleanly. */
 .grid:has(.project-thumb) { align-items: start; }
 
+/* Work page only: give the paintings a bit more room, and a stronger
+   hover zoom than the rest of the site. */
+.work-page .container { max-width: 1320px; }
+.work-page .project-thumb:hover img { transform: scale(1.08); }
+
 /* "Sold" / status marker pinned to a thumb corner */
 .status-badge {
   position: absolute; top: 12px; left: 12px; z-index: 2;
