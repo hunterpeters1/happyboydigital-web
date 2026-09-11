@@ -252,6 +252,10 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
+/* Sticker shop tiles — reuse .card, just center the artwork above the label */
+.sticker-card { text-align: center; }
+.sticker-card img { display: block; width: 100%; max-width: 180px; height: auto; margin: 0 auto 16px; }
+
 /* App screenshots (Atelier) — one shared frame, matches the card shadow */
 .app-shot {
   display: block; height: auto; max-width: 100%;
