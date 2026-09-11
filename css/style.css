@@ -114,6 +114,8 @@ nav .logo {
 }
 nav .logo:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
 nav .logo-icon { width: 22px; height: 22px; display: block; }
+/* Comic wordmark graphic -- used on the Stickers page nav only for now */
+nav .logo-wordmark { display: block; height: 40px; width: auto; }
 nav .nav-links { display: flex; gap: 32px; }
 nav .nav-links a { font-size: 0.9rem; color: var(--hbd-deep); }
 nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
