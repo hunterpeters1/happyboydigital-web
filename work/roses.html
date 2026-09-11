@@ -19,6 +19,52 @@
   <meta name="twitter:image" content="https://happyboy.digital/assets/roses.jpeg">
 
   <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Roses",
+  "image": "https://happyboy.digital/assets/roses.jpeg",
+  "brand": {
+    "@type": "Brand",
+    "name": "Happy Boy Digital"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Original painting",
+      "price": "120.00",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://happyboy.digital/work/roses.html"
+    },
+    {
+      "@type": "Offer",
+      "name": "Print, 8 x 10 in",
+      "price": "55.00",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://happyboy.digital/work/roses.html"
+    },
+    {
+      "@type": "Offer",
+      "name": "Print, 11 x 14 in",
+      "price": "80.00",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://happyboy.digital/work/roses.html"
+    },
+    {
+      "@type": "Offer",
+      "name": "Print, 16 x 20 in",
+      "price": "140.00",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://happyboy.digital/work/roses.html"
+    }
+  ]
+}
+  </script>
   <link rel="stylesheet" href="/css/style.css?v=3">
 </head>
 <body>
@@ -53,7 +99,8 @@
         <div class="grid grid-2 piece-grid">
 
           <div class="art-wrap" data-reveal>
-            <img class="framed-art" src="/assets/roses.jpeg" alt="Roses, acrylic painting by Hunter Peters" width="1125" height="1500" decoding="async">
+            <img class="framed-art" src="/assets/roses.jpeg" alt="Roses, acrylic painting by Hunter Peters" width="1125" height="1500" data-large="/assets/large/roses.jpeg" decoding="async">
+          <p class="zoom-hint">Click to zoom in</p>
           </div>
 
           <div class="piece-details" data-reveal>
@@ -77,7 +124,7 @@
                 <li>In the e-Transfer message, put the painting name (<strong>Roses</strong>) and “original”, or the print size(s) and quantity.</li>
                 <li>I&rsquo;ll email you back within a day or two to confirm and get it in the mail.</li>
               </ol>
-              <span class="fine">Prints ship within Canada only. Questions first? <a href="mailto:petershunter45@gmail.com">Email me</a>.</span>
+              <span class="fine">Prints ship within Canada only. Common questions are on the <a href="/services.html#faq">FAQ</a>, or <a href="mailto:petershunter45@gmail.com">email me</a>.</span>
             </div>
           </div>
 
@@ -87,6 +134,11 @@
         </div>
       </div>
     </section>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button type="button" class="lightbox-close" aria-label="Close zoomed image">&times;</button>
+      <img src="" alt="">
+    </div>
   </main>
 
   <footer>

@@ -432,3 +432,63 @@ nav .nav-links a:focus-visible,
     animation: none; clip-path: none; border-right: 0; width: auto; overflow: visible;
   }
 }
+
+/* ---- Painting zoom (lightbox on detail pages) ---- */
+.framed-art[data-large] { cursor: zoom-in; }
+.zoom-hint { display: block; text-align: center; font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(26, 16, 8, 0.92);
+  padding: 32px;
+  cursor: zoom-out;
+}
+.lightbox[hidden] { display: none; }
+.lightbox img {
+  max-width: 100%; max-height: 100%;
+  border-radius: 4px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12); color: #FFFDF9;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 1.5rem; line-height: 1; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+
+/* ---- Self Portrait shelf (work page) ---- */
+.shelf { max-width: 420px; margin: 0 auto; text-align: center; }
+.shelf .art-wrap { text-align: left; }
+.shelf-info { margin-top: 20px; }
+.price-wink { font-size: 0.8rem; font-weight: 400; opacity: 0.6; margin-left: 6px; }
+
+/* ---- FAQ (services page) ---- */
+.faq { max-width: 760px; margin: 0 auto; }
+.faq details {
+  background: #FFFDF9;
+  border: 1px solid rgba(107, 66, 38, 0.15);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+}
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--hbd-deep);
+  list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  font-size: 1.3rem; font-weight: 400; color: var(--hbd-yellow-dark);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin-top: 12px; font-size: 0.95rem; opacity: 0.9; }
+.faq details p + p { margin-top: 8px; }

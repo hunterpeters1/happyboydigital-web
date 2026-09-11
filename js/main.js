@@ -144,4 +144,46 @@
     }, { threshold: 0.9, rootMargin: '0px 0px -6% 0px' });
     kickers.forEach(function(k) { kickerObserver.observe(k); });
   }
+
+
+  // Click-to-zoom lightbox for painting detail pages. Each such page has one
+  // .framed-art[data-large] image and one #lightbox overlay.
+  var zoomImg = document.querySelector('.framed-art[data-large]');
+  var lightbox = document.getElementById('lightbox');
+  if (zoomImg && lightbox) {
+    var lightboxImg = lightbox.querySelector('img');
+    var lightboxClose = lightbox.querySelector('.lightbox-close');
+    var lastFocused = null;
+
+    var openLightbox = function() {
+      lightboxImg.src = zoomImg.getAttribute('data-large');
+      lightboxImg.alt = zoomImg.alt;
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lastFocused = document.activeElement;
+      if (lightboxClose) lightboxClose.focus();
+    };
+    var closeLightbox = function() {
+      lightbox.hidden = true;
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    };
+
+    zoomImg.setAttribute('tabindex', '0');
+    zoomImg.setAttribute('role', 'button');
+    zoomImg.setAttribute('aria-label', 'Zoom in on this painting');
+    zoomImg.addEventListener('click', openLightbox);
+    zoomImg.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+    });
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
+  }
 })();
