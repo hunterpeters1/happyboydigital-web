@@ -464,27 +464,6 @@ nav .nav-links a:focus-visible,
   animation: glitchJudder 0.26s steps(2, end) 1;
 }
 
-/* ---- Crop marks at the corners of framed art ---- */
-.hero-frame::after,
-.art-wrap::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  pointer-events: none;
-  --cm-len: 12px;
-  --cm-w: 1px;
-  --cm-c: rgba(107, 66, 38, 0.4);
-  background:
-    linear-gradient(var(--cm-c), var(--cm-c)) top left     / var(--cm-len) var(--cm-w) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) top left     / var(--cm-w) var(--cm-len) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) top right    / var(--cm-len) var(--cm-w) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) top right    / var(--cm-w) var(--cm-len) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) bottom left  / var(--cm-len) var(--cm-w) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) bottom left  / var(--cm-w) var(--cm-len) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) bottom right / var(--cm-len) var(--cm-w) no-repeat,
-    linear-gradient(var(--cm-c), var(--cm-c)) bottom right / var(--cm-w) var(--cm-len) no-repeat;
-}
-
 /* ---- Terminal-style type-on for section kickers (JS adds .kicker--type + --kn) ---- */
 .kicker--type {
   --kt: calc(var(--kn, 10) * 60ms);
