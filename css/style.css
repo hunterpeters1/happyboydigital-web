@@ -262,8 +262,18 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
-/* Sticker shop tiles — reuse .card, just center the artwork above the label */
-.sticker-tile { text-align: center; padding: 8px; }
+/* Sticker shelf — a loose scattered cluster instead of a rigid grid:
+   varied sizes, staggered heights, each tile its own rotation. */
+.sticker-shelf {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  align-items: flex-start; gap: 4px 28px;
+}
+.sticker-tile { text-align: center; padding: 8px; width: 190px; }
+.sticker-tile:nth-child(1) { margin-top: 0; }
+.sticker-tile:nth-child(2) { margin-top: 46px; }
+.sticker-tile:nth-child(3) { margin-top: 14px; }
+.sticker-tile:nth-child(4) { margin-top: 52px; }
+.sticker-tile:nth-child(5) { margin-top: 22px; }
 .sticker-tile img {
   display: block; width: 100%; max-width: 180px; height: auto; margin: 0 auto 14px;
   /* faux die-cut white edge (8 tight offset shadows) + a soft cast shadow,
@@ -276,12 +286,19 @@ section { padding: 80px 0; }
     drop-shadow(0 10px 16px rgba(74, 44, 18, 0.3));
   transition: transform 0.25s ease;
 }
-.sticker-tile:nth-child(1) img { transform: rotate(-6deg); }
-.sticker-tile:nth-child(2) img { transform: rotate(5deg); }
-.sticker-tile:nth-child(3) img { transform: rotate(-4deg); }
-.sticker-tile:nth-child(4) img { transform: rotate(4deg); }
-.sticker-tile:nth-child(5) img { transform: rotate(-5deg); }
-.sticker-tile:hover img { transform: rotate(0deg) scale(1.06); }
+.sticker-tile:nth-child(1) img { transform: rotate(-6deg); max-width: 190px; }
+.sticker-tile:nth-child(2) img { transform: rotate(5deg); max-width: 150px; }
+.sticker-tile:nth-child(3) img { transform: rotate(-4deg); max-width: 200px; }
+.sticker-tile:nth-child(4) img { transform: rotate(4deg); max-width: 145px; }
+.sticker-tile:nth-child(5) img { transform: rotate(-5deg); max-width: 175px; }
+.sticker-tile:hover img { transform: rotate(0deg) scale(1.08); }
+@media (max-width: 768px) {
+  .sticker-tile:nth-child(1),
+  .sticker-tile:nth-child(2),
+  .sticker-tile:nth-child(3),
+  .sticker-tile:nth-child(4),
+  .sticker-tile:nth-child(5) { margin-top: 0; width: 42%; }
+}
 
 /* App screenshots (Atelier) — one shared frame, matches the card shadow */
 .app-shot {
