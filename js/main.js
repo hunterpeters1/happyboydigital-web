@@ -171,18 +171,45 @@
     var lightboxClose = lightbox.querySelector('.lightbox-close');
     var lastFocused = null;
 
+    // Walk up from the lightbox to <body>, inerting true siblings at each
+    // level (everything NOT on the path down to the lightbox). Needed
+    // because #lightbox lives inside <main> alongside other sections, not
+    // as a direct child of <body>.
+    var inertSiblings = [];
+    var setBackgroundInert = function(isInert) {
+      if (isInert) {
+        inertSiblings = [];
+        var node = lightbox;
+        while (node && node !== document.body) {
+          var parent = node.parentNode;
+          Array.prototype.forEach.call(parent.children, function(sibling) {
+            if (sibling !== node) {
+              sibling.inert = true;
+              inertSiblings.push(sibling);
+            }
+          });
+          node = parent;
+        }
+      } else {
+        inertSiblings.forEach(function(el) { el.inert = false; });
+        inertSiblings = [];
+      }
+    };
+
     var openLightbox = function() {
       lightboxImg.src = zoomImg.getAttribute('data-large');
       lightboxImg.alt = zoomImg.alt;
       lightbox.hidden = false;
       document.body.style.overflow = 'hidden';
       lastFocused = document.activeElement;
+      setBackgroundInert(true);
       if (lightboxClose) lightboxClose.focus();
     };
     var closeLightbox = function() {
       lightbox.hidden = true;
       lightboxImg.src = '';
       document.body.style.overflow = '';
+      setBackgroundInert(false);
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     };
 
