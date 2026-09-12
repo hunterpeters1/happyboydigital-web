@@ -104,12 +104,22 @@ nav .logo-wordmark { display: block; height: 40px; width: auto; }
 .logo-group { display: flex; align-items: center; gap: 10px; }
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(74, 44, 18, 0.1); border: none; cursor: pointer;
-  font-size: 0.95rem; line-height: 1; padding: 0;
-  transition: background 0.15s ease, transform 0.15s ease;
+  position: relative; width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(74, 44, 18, 0.08); border: 1px solid rgba(74, 44, 18, 0.15);
+  cursor: pointer; padding: 0;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
-.theme-toggle:hover { background: rgba(74, 44, 18, 0.2); transform: scale(1.08); }
+.theme-toggle:hover { background: rgba(74, 44, 18, 0.16); transform: scale(1.08); }
+.theme-toggle svg {
+  position: absolute; width: 16px; height: 16px; color: var(--hbd-on-yellow);
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+/* Swap either icon for a custom-designed one later -- just keep the
+   icon-sun / icon-moon class so this crossfade keeps working. */
+.theme-toggle .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
+.theme-toggle .icon-moon { opacity: 0; transform: scale(0.5) rotate(-45deg); }
+[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; transform: scale(0.5) rotate(45deg); }
+[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
 nav .nav-links { display: flex; gap: 32px; }
 nav .nav-links a { font-size: 0.9rem; color: var(--hbd-on-yellow); }
 nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
