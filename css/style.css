@@ -28,42 +28,9 @@ body {
   font-size: 16px;
 }
 
-/* ---- Ambient background: slow drifting color, replaces the old dot grid ---- */
-/* Two large, very soft blurred circles behind all content, drifting almost
-   imperceptibly. Pure CSS pseudo-elements on <body> — no markup needed on
-   any page, so this covers the whole site from one place. */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(90px);
-}
-body::before {
-  width: 60vw; height: 60vw; max-width: 620px; max-height: 620px;
-  top: -12vh; left: -10vw;
-  background: radial-gradient(circle, rgba(249, 217, 58, 0.55), transparent 70%);
-  animation: bgDriftA 46s ease-in-out infinite alternate;
-}
-body::after {
-  width: 55vw; height: 55vw; max-width: 560px; max-height: 560px;
-  bottom: -16vh; right: -8vw;
-  background: radial-gradient(circle, rgba(224, 181, 22, 0.4), transparent 70%);
-  animation: bgDriftB 58s ease-in-out infinite alternate;
-}
-@keyframes bgDriftA {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(6vw, 8vh) scale(1.12); }
-}
-@keyframes bgDriftB {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(-7vw, -6vh) scale(1.08); }
-}
-@media (prefers-reduced-motion: reduce) {
-  body::before, body::after { animation: none; }
-}
+/* Background is flat var(--hbd-beige) for now (set above), while a custom
+   hand-designed background is worked on for a future project. Previously
+   had two slow-drifting gradient blobs here — removed, wasn't landing. */
 h1, h2, h3 {
   color: var(--hbd-deep);
   line-height: 1.2;
