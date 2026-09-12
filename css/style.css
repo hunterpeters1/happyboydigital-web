@@ -574,16 +574,16 @@ nav .nav-links a:focus-visible,
 
 /* ---- Blog / weekly journal ---- */
 .prose { max-width: 640px; margin: 0 auto; }
-.prose h2 { font-size: 1.3rem; margin: 36px 0 10px; }
+.prose h2 { font-size: 1.3rem; margin: 52px 0 14px; }
 .prose h2:first-child { margin-top: 0; }
-.prose p { margin-bottom: 4px; }
+.prose p { margin-bottom: 14px; }
 .prose img {
   display: block; width: 100%; height: auto; border-radius: 8px;
   border: 1px solid rgba(107, 66, 38, 0.15);
   box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
-  margin: 8px 0 10px;
+  margin: 14px 0 10px;
 }
-.prose figcaption { font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px; }
+.prose figcaption { font-size: 0.85rem; opacity: 0.7; margin-bottom: 8px; }
 .prose .section-emoji { margin-right: 8px; }
 
 .post-list { list-style: none; max-width: 640px; margin: 0 auto; }
