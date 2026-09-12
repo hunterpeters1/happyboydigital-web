@@ -159,6 +159,14 @@ section { padding: 80px 0; }
 @media (max-width: 768px) { .lead { font-size: 2rem; } }
 .sub { font-size: 1.1rem; margin-bottom: 32px; color: var(--hbd-brown); max-width: 60ch; }
 
+/* Page-head subtitle sharing a row with a couple of secondary links (e.g. Work page) */
+.page-head-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 16px 24px; flex-wrap: wrap; margin-bottom: 32px;
+}
+.page-head-row .sub { margin-bottom: 0; }
+@media (max-width: 640px) { .page-head-row { align-items: flex-start; } }
+
 /* Comic-lettering page titles (Work, Services, Atelier, About) */
 .page-title-art { display: block; width: auto; height: auto; max-width: 100%; max-height: 56px; }
 .page-title-art--wide { max-height: 44px; }
