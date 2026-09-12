@@ -279,6 +279,8 @@ section { padding: 80px 0; }
 .sticker-tile:nth-child(1) img { transform: rotate(-6deg); }
 .sticker-tile:nth-child(2) img { transform: rotate(5deg); }
 .sticker-tile:nth-child(3) img { transform: rotate(-4deg); }
+.sticker-tile:nth-child(4) img { transform: rotate(4deg); }
+.sticker-tile:nth-child(5) img { transform: rotate(-5deg); }
 .sticker-tile:hover img { transform: rotate(0deg) scale(1.06); }
 
 /* App screenshots (Atelier) — one shared frame, matches the card shadow */
