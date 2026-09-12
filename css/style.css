@@ -262,18 +262,19 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
-/* Sticker shelf — an offset checkerboard: two columns, the right column
-   dropped half a step down. Built on nth-child(odd/even) rather than
-   per-item rules, so it stays a clean checker as more stickers are added
-   -- no CSS to touch when the roster grows. */
+/* Sticker shelf — an offset checkerboard, three columns. With an odd
+   column count, plain nth-child(odd/even) already lands on the correct
+   checker square in both directions (like real chessboard squares), so
+   no per-item or per-row rules are needed -- it stays a clean checker
+   as more stickers are added. */
 .sticker-shelf {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 4px 20px; max-width: 520px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 4px 20px; max-width: 640px; margin: 0 auto;
 }
-.sticker-tile { text-align: center; padding: 8px; justify-self: center; width: 100%; max-width: 220px; }
-.sticker-tile:nth-child(even) { margin-top: 64px; }
+.sticker-tile { text-align: center; padding: 8px; justify-self: center; width: 100%; max-width: 180px; }
+.sticker-tile:nth-child(even) { margin-top: 56px; }
 .sticker-tile img {
-  display: block; width: 100%; max-width: 190px; height: auto; margin: 0 auto 14px;
+  display: block; width: 100%; max-width: 160px; height: auto; margin: 0 auto 14px;
   /* faux die-cut white edge (8 tight offset shadows) + a soft cast shadow,
      so each one reads as a sticker sitting on the page, not an icon in a box */
   filter:
@@ -290,8 +291,8 @@ section { padding: 80px 0; }
 .sticker-tile:nth-child(4n+3) img { transform: rotate(5deg); }
 .sticker-tile:nth-child(4n+4) img { transform: rotate(-4deg); }
 .sticker-tile:hover img { transform: rotate(0deg) scale(1.08); }
-@media (max-width: 480px) {
-  .sticker-shelf { gap: 0 12px; max-width: 340px; }
+@media (max-width: 640px) {
+  .sticker-shelf { grid-template-columns: repeat(2, 1fr); gap: 0 16px; max-width: 380px; }
   .sticker-tile:nth-child(even) { margin-top: 40px; }
 }
 
