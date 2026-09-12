@@ -11,10 +11,28 @@
 /* ---- Color palette ---- */
 :root {
   --hbd-beige:    #F6F1E8;   /* off-white background */
-  --hbd-yellow:   #F9D93A;   /* bright yellow accent */
-  --hbd-yellow-dark: #E0B516; /* button hover */
+  --hbd-yellow:   #F9D93A;   /* bright yellow accent -- same in both themes */
+  --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
   --hbd-brown:    #6B4226;   /* body text */
   --hbd-deep:     #4A2C18;   /* headings */
+  --hbd-on-yellow: #4A2C18;  /* text sitting on the yellow bar/buttons -- always dark, ignores theme */
+  --hbd-card:     #FFFDF9;   /* card/mat surfaces, a touch off the page background */
+  --hbd-border:   rgba(107, 66, 38, 0.15); /* the common hairline border */
+  --hbd-shadow:   rgba(74, 44, 18, 0.08);  /* the common soft card shadow */
+}
+
+/* ---- Dark mode ---- */
+/* Toggled via the button beside the logo; choice is saved to localStorage
+   and applied instantly on load by an inline script in <head> (avoids a
+   flash of the light theme). Only the variables below change -- the yellow
+   bar, buttons, and accent yellow stay identical in both themes. */
+[data-theme="dark"] {
+  --hbd-beige: #1B140F;
+  --hbd-brown: #E8DCC0;
+  --hbd-deep:  #F9D93A;
+  --hbd-card:  #241C15;
+  --hbd-border: rgba(249, 217, 58, 0.2);
+  --hbd-shadow: rgba(0, 0, 0, 0.45);
 }
 
 /* ---- Reset & base ---- */
@@ -77,21 +95,30 @@ nav {
 }
 nav .logo {
   display: flex; align-items: center; gap: 8px;
-  font-weight: 700; font-size: 1.2rem; color: var(--hbd-deep);
+  font-weight: 700; font-size: 1.2rem; color: var(--hbd-on-yellow);
 }
 nav .logo:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
 nav .logo-icon { width: 22px; height: 22px; display: block; }
 /* Comic wordmark graphic -- used on the Stickers page nav only for now */
 nav .logo-wordmark { display: block; height: 40px; width: auto; }
+.logo-group { display: flex; align-items: center; gap: 10px; }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(74, 44, 18, 0.1); border: none; cursor: pointer;
+  font-size: 0.95rem; line-height: 1; padding: 0;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.theme-toggle:hover { background: rgba(74, 44, 18, 0.2); transform: scale(1.08); }
 nav .nav-links { display: flex; gap: 32px; }
-nav .nav-links a { font-size: 0.9rem; color: var(--hbd-deep); }
+nav .nav-links a { font-size: 0.9rem; color: var(--hbd-on-yellow); }
 nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
 nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weight: 600; }
 
 #nav-toggle {
   display: none;
   background: none; border: none; cursor: pointer;
-  font-size: 0.9rem; font-weight: 600; color: var(--hbd-deep);
+  font-size: 0.9rem; font-weight: 600; color: var(--hbd-on-yellow);
   padding: 8px 4px;
 }
 
@@ -156,7 +183,7 @@ section { padding: 80px 0; }
   max-height: 520px;
   object-fit: contain;
   border-radius: 4px;
-  background: #FFFDF9;
+  background: var(--hbd-card);
   padding: 14px;
   box-shadow:
     0 0 0 1px rgba(107, 66, 38, 0.18),
@@ -190,7 +217,7 @@ section { padding: 80px 0; }
 /* ---- Buttons ---- */
 .btn {
   display: inline-block; padding: 12px 28px; border-radius: 4px;
-  background: var(--hbd-yellow); color: var(--hbd-deep); font-weight: 600; font-size: 0.95rem;
+  background: var(--hbd-yellow); color: var(--hbd-on-yellow); font-weight: 600; font-size: 0.95rem;
   transition: background 0.2s ease, transform 0.1s ease;
 }
 .btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); }
@@ -213,10 +240,10 @@ section { padding: 80px 0; }
 }
 .card {
   position: relative;
-  background: #FFFDF9;
-  border: 1px solid rgba(107, 66, 38, 0.15);
+  background: var(--hbd-card);
+  border: 1px solid var(--hbd-border);
   border-radius: 8px; padding: 32px;
-  box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
+  box-shadow: 0 6px 20px var(--hbd-shadow);
 }
 .card h2, .card h3 { font-size: 1.4rem; margin-bottom: 8px; }
 .price { font-weight: 700; color: var(--hbd-deep); margin: 8px 0; }
@@ -267,8 +294,8 @@ section { padding: 80px 0; }
 .app-shot {
   display: block; height: auto; max-width: 100%;
   border-radius: 8px;
-  border: 1px solid rgba(107, 66, 38, 0.15);
-  box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
+  border: 1px solid var(--hbd-border);
+  box-shadow: 0 6px 20px var(--hbd-shadow);
 }
 .app-shot + .app-shot { margin-top: 24px; }
 .app-shot--icon { width: 320px; }   /* base .app-shot max-width:100% clamps this on mobile */
@@ -370,7 +397,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .art-wrap, .hero-frame { position: relative; display: inline-block; }
 .framed-art {
   display: block; width: 100%; height: auto;
-  border-radius: 4px; background: #FFFDF9; padding: 14px;
+  border-radius: 4px; background: var(--hbd-card); padding: 14px;
   box-shadow: 0 0 0 1px rgba(107, 66, 38, 0.18), 0 28px 50px -18px rgba(74, 44, 18, 0.4);
 }
 .piece-details > h2 { font-size: 1.2rem; margin: 22px 0 8px; }
@@ -380,7 +407,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .price-list td { padding: 8px 0; border-bottom: 1px solid rgba(107, 66, 38, 0.12); }
 .price-list td:last-child { text-align: right; font-weight: 600; color: var(--hbd-deep); }
 .buy-box {
-  background: #FFFDF9; border: 1px solid rgba(107, 66, 38, 0.15);
+  background: var(--hbd-card); border: 1px solid var(--hbd-border);
   border-radius: 8px; padding: 24px; margin-top: 28px;
 }
 .buy-box h2 { font-size: 1.05rem; margin: 0 0 10px; }
@@ -515,8 +542,8 @@ nav .nav-links a:focus-visible,
 /* ---- FAQ (services page) ---- */
 .faq { max-width: 760px; margin: 0 auto; }
 .faq details {
-  background: #FFFDF9;
-  border: 1px solid rgba(107, 66, 38, 0.15);
+  background: var(--hbd-card);
+  border: 1px solid var(--hbd-border);
   border-radius: 8px;
   padding: 20px 24px;
   margin-bottom: 12px;
@@ -546,8 +573,8 @@ nav .nav-links a:focus-visible,
 .prose p { margin-bottom: 14px; }
 .prose img {
   display: block; width: 100%; height: auto; border-radius: 8px;
-  border: 1px solid rgba(107, 66, 38, 0.15);
-  box-shadow: 0 6px 20px rgba(74, 44, 18, 0.08);
+  border: 1px solid var(--hbd-border);
+  box-shadow: 0 6px 20px var(--hbd-shadow);
   margin: 14px 0 10px;
 }
 .prose figcaption { font-size: 0.85rem; opacity: 0.7; margin-bottom: 8px; }

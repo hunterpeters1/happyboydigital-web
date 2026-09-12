@@ -37,6 +37,28 @@
     }
   });
 
+  // Dark mode toggle. The <head> inline script already applied the saved
+  // theme before paint (avoids a flash); this just wires up the button and
+  // keeps its icon in sync.
+  var themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    var syncIcon = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    };
+    syncIcon();
+    themeToggle.addEventListener('click', function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      try { localStorage.setItem('hbd-theme', isDark ? 'light' : 'dark'); } catch (e) {}
+      syncIcon();
+    });
+  }
+
   // Mobile nav toggle
   var toggle = document.getElementById('nav-toggle');
   var links = document.getElementById('nav-links');
