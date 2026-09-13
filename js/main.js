@@ -57,8 +57,32 @@
   var toggle = document.getElementById('nav-toggle');
   var links = document.getElementById('nav-links');
   if (toggle && links) {
+    var openNav = function() {
+      links.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    var closeNav = function() {
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    };
     toggle.addEventListener('click', function() {
-      links.classList.toggle('open');
+      if (links.classList.contains('open')) closeNav(); else openNav();
+    });
+    // Tapping a link should close the menu, not leave it open underneath
+    // the page it just navigated to (or over the same page, for #anchors).
+    links.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeNav);
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && links.classList.contains('open')) {
+        closeNav();
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', function(e) {
+      if (!links.classList.contains('open')) return;
+      if (links.contains(e.target) || toggle.contains(e.target)) return;
+      closeNav();
     });
   }
 

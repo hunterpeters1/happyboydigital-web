@@ -151,6 +151,10 @@ nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weig
     background: var(--hbd-beige); padding: 24px;
     border-bottom: 1px solid rgba(107,66,38,0.2);
   }
+  /* The dropdown panel is beige (dark mode: near-black), not the always-
+     yellow bar -- so its links need theme-aware text, not --hbd-on-yellow
+     (fixed dark, unreadable here in dark mode). */
+  nav .nav-links a { color: var(--hbd-deep); }
   /* Single word "Menu" -- safe to flex-center without the multi-word
      min-content wrap issue that hit .btn-sm above. */
   #nav-toggle { display: flex; align-items: center; min-height: 44px; }
