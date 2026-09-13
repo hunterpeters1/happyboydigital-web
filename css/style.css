@@ -2,7 +2,8 @@
 /* ---- Font ---- */
 @font-face {
   font-family: 'Space Grotesk';
-  src: url('/css/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  src: url('/css/SpaceGrotesk-VariableFont_wght.woff2') format('woff2'),
+       url('/css/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
@@ -45,6 +46,16 @@ body {
   line-height: 1.6;
   font-size: 16px;
 }
+
+/* ---- Skip link (keyboard/screen-reader users only, until focused) ---- */
+.skip-link {
+  position: absolute; top: -48px; left: 16px; z-index: 2000;
+  background: var(--hbd-deep); color: var(--hbd-beige);
+  padding: 10px 20px; border-radius: 4px;
+  font-weight: 600; font-size: 0.9rem;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 16px; }
 
 /* Background is flat var(--hbd-beige) for now (set above), while a custom
    hand-designed background is worked on for a future project. Previously
@@ -140,7 +151,9 @@ nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weig
     background: var(--hbd-beige); padding: 24px;
     border-bottom: 1px solid rgba(107,66,38,0.2);
   }
-  #nav-toggle { display: block; }
+  /* Single word "Menu" -- safe to flex-center without the multi-word
+     min-content wrap issue that hit .btn-sm above. */
+  #nav-toggle { display: flex; align-items: center; min-height: 44px; }
   nav .nav-links.open { display: flex; }
 }
 
@@ -186,13 +199,6 @@ section { padding: 80px 0; }
 .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 @media (max-width: 768px) { .hero { grid-template-columns: 1fr; } }
 .hero-vis { position: relative; text-align: center; }
-.hero-vis::before {
-  content: "";
-  position: absolute; inset: -22%;
-  background: radial-gradient(circle at 58% 42%, rgba(249, 217, 58, 0.55), transparent 68%);
-  filter: blur(32px);
-  z-index: -1;
-}
 /* Gallery treatment: cream mat + hairline edge + soft cast shadow */
 .hero-vis img {
   width: auto;
@@ -239,7 +245,9 @@ section { padding: 80px 0; }
   transition: background 0.2s ease, transform 0.1s ease;
 }
 .btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); }
-.btn-sm { padding: 6px 16px; font-size: 0.85rem; }
+/* Padding (not min-height/flex) hits the 44px touch target -- flexing this
+   would shrink multi-word labels to min-content width and wrap them. */
+.btn-sm { padding: 12px 16px; font-size: 0.85rem; }
 .btn-secondary {
   background: transparent;
   border: 1px solid var(--hbd-brown);

@@ -199,7 +199,21 @@
     });
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      // Trap focus inside the lightbox while it's open (there's just the
+      // close button today, but this keeps working if more get added).
+      if (e.key === 'Tab') {
+        var focusable = lightbox.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
     });
   }
 })();
