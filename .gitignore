@@ -1,0 +1,6 @@
+# Full-resolution source images -- never referenced by any page and
+# already stripped from the live site on every deploy (see .cpanel.yml).
+# Keep them locally for your own backup / print-order use; they just
+# don't belong in git.
+**/originals/
+assets/paintings.zip

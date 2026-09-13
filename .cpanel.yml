@@ -6,9 +6,11 @@
 #   2. You open cPanel > Git Version Control > Manage > "Pull or Deploy".
 #   3. Click "Update from Remote", then "Deploy HEAD Commit".
 #
-# The tasks below copy the site into public_html. Nothing is deleted except the
-# two large source files that don't belong on the live server (originals/ and
-# paintings.zip) — everything else is only added or overwritten.
+# The tasks below copy the site into public_html. Nothing is deleted except
+# full-res source files that don't belong on the live server (originals/
+# folders and paintings.zip) — everything else is only added or overwritten.
+# Those source files are also gitignored now, so this rm is mainly a safety
+# net for anything already sitting in public_html from before that change.
 #
 # If a deploy fails with a path error, replace  $HOME/public_html  with the
 # absolute path cPanel shows for your account, e.g. /home/yourusername/public_html
@@ -22,4 +24,4 @@ deployment:
     - /bin/cp -R assets/. "$DEPLOYPATH/assets/"
     - /bin/cp -R work/. "$DEPLOYPATH/work/"
     - /bin/cp -R blog/. "$DEPLOYPATH/blog/"
-    - /bin/rm -rf "$DEPLOYPATH/assets/originals" "$DEPLOYPATH/assets/paintings.zip"
+    - /bin/rm -rf "$DEPLOYPATH/assets/originals" "$DEPLOYPATH/assets/paintings.zip" "$DEPLOYPATH/blog/blogasets/Sept1226/originals"
