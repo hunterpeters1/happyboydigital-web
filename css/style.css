@@ -57,9 +57,18 @@ body {
 }
 .skip-link:focus { top: 16px; }
 
-/* Background is flat var(--hbd-beige) for now (set above), while a custom
-   hand-designed background is worked on for a future project. Previously
-   had two slow-drifting gradient blobs here — removed, wasn't landing. */
+/* Dark mode gets a full-bleed hand-drawn background, fixed to the viewport
+   so it reads as a backdrop rather than stretching over the whole
+   scrollable page. Light mode stays flat var(--hbd-beige) (set above)
+   until its own background is ready. Previously had two slow-drifting
+   gradient blobs here — removed, wasn't landing. */
+[data-theme="dark"] body {
+  background-image: url('/assets/dark-background2.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 h1, h2, h3 {
   color: var(--hbd-deep);
   line-height: 1.2;
