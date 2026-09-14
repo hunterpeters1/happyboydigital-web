@@ -297,6 +297,39 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
+/* Dark mode: hand-illustrated plaques behind text that would otherwise sit
+   on the busy background illustration. Each SVG is sized to match its box
+   almost exactly, so background-size:100% 100% maps it on with no crop. */
+[data-theme="dark"] .hero-copy {
+  background-color: #1B140F;
+  background-image: url('/assets/dark-hero-container.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 36px;
+}
+[data-theme="dark"] .atelier-copy {
+  background-color: #1B140F;
+  background-image: url('/assets/dark-atelier-container.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 36px;
+}
+[data-theme="dark"] .card {
+  background-color: #1B140F;
+  background-image: url('/assets/dark-service-blank.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  box-shadow: none;
+}
+/* The container art has a number badge drawn into its top-right corner --
+   center the numeral on it instead of the old free-floating faint digit. */
+[data-theme="dark"] .card-num {
+  left: 83%; right: auto; top: 10%;
+  transform: translate(-50%, -50%);
+  color: var(--hbd-deep);
+}
+
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
    column count, plain nth-child(odd/even) already lands on the correct
    checker square in both directions (like real chessboard squares), so
