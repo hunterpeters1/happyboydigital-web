@@ -331,7 +331,7 @@ section { padding: 80px 0; }
 /* The container art has a number badge drawn into its top-right corner --
    center the numeral on it instead of the old free-floating faint digit. */
 [data-theme="dark"] .card-num {
-  left: 83%; right: auto; top: 10%;
+  left: 83.7%; right: auto; top: 11.8%;
   transform: translate(-50%, -50%);
   color: var(--hbd-deep);
 }
@@ -341,7 +341,7 @@ section { padding: 80px 0; }
   background-image: url('/assets/dark-service-detailed.svg');
 }
 [data-theme="dark"] .services-page .card-num {
-  left: 86.6%; top: 8%;
+  top: 6.5%;
 }
 
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
