@@ -298,26 +298,32 @@ section { padding: 80px 0; }
 }
 
 /* Dark mode: hand-illustrated plaques behind text that would otherwise sit
-   on the busy background illustration. Each SVG is sized to match its box
-   almost exactly, so background-size:100% 100% maps it on with no crop. */
+   on the busy background illustration. background-size is width-only (auto
+   height) so the art keeps its own proportions at every viewport width --
+   100% 100% would stretch it non-uniformly to match whatever box shape the
+   reflowed text happens to create on a given resize, warping circles into
+   ovals. Any leftover height below the art falls back to the flat fill. */
 [data-theme="dark"] .hero-copy {
   background-color: #1B140F;
   background-image: url('/assets/dark-hero-container.svg');
-  background-size: 100% 100%;
+  background-size: 100% auto;
+  background-position: top;
   background-repeat: no-repeat;
   padding: 36px;
 }
 [data-theme="dark"] .atelier-copy {
   background-color: #1B140F;
   background-image: url('/assets/dark-atelier-container.svg');
-  background-size: 100% 100%;
+  background-size: 100% auto;
+  background-position: top;
   background-repeat: no-repeat;
   padding: 36px;
 }
 [data-theme="dark"] .card {
   background-color: #1B140F;
   background-image: url('/assets/dark-service-blank.svg');
-  background-size: 100% 100%;
+  background-size: 100% auto;
+  background-position: top;
   background-repeat: no-repeat;
   border-color: transparent;
   box-shadow: none;
