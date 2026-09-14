@@ -297,51 +297,61 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
-/* Dark mode: hand-illustrated plaques behind text that would otherwise sit
-   on the busy background illustration. background-size is width-only (auto
-   height) so the art keeps its own proportions at every viewport width --
-   100% 100% would stretch it non-uniformly to match whatever box shape the
-   reflowed text happens to create on a given resize, warping circles into
-   ovals. Any leftover height below the art falls back to the flat fill. */
-[data-theme="dark"] .hero-copy {
-  background-color: #1B140F;
-  background-image: url('/assets/dark-hero-container.svg');
-  background-size: 100% auto;
-  background-position: top;
-  background-repeat: no-repeat;
-  padding: 36px;
-}
-[data-theme="dark"] .atelier-copy {
-  background-color: #1B140F;
-  background-image: url('/assets/dark-atelier-container.svg');
-  background-size: 100% auto;
-  background-position: top;
-  background-repeat: no-repeat;
-  padding: 36px;
-}
+/* Dark mode: solid fill + a CSS-drawn border, with the hand-drawn medallion
+   logo (happyboy-logo0926.svg) sitting at the corners. Replaces the earlier
+   approach of stretching a full-panel illustration to fit the box -- a
+   solid fill + CSS lines can never gap or distort at any box size, and the
+   medallion is a fixed-size image so it never stretches either. Simplified
+   from the original hand-drawn border: the short secondary accent line and
+   the diamond marker near the right edge aren't reproduced here since they
+   don't translate to a technique that adapts to an arbitrary box size the
+   way a straight border and a gradient line do -- the border, the inset
+   rail line, and the medallion carry the design faithfully. */
+[data-theme="dark"] .hero-copy,
+[data-theme="dark"] .atelier-copy,
 [data-theme="dark"] .card {
+  position: relative;
   background-color: #1B140F;
-  background-image: url('/assets/dark-service-blank.svg');
-  background-size: 100% auto;
-  background-position: top;
+  border: 2px solid #F9D93A;
+  border-radius: 8px;
+  background-image: linear-gradient(#F9D93A, #F9D93A);
+  background-size: 2px 100%;
+  background-position: right 10px top 0;
   background-repeat: no-repeat;
-  border-color: transparent;
   box-shadow: none;
 }
-/* The container art has a number badge drawn into its top-right corner --
-   center the numeral on it instead of the old free-floating faint digit. */
+[data-theme="dark"] .hero-copy::after,
+[data-theme="dark"] .atelier-copy::after,
+[data-theme="dark"] .card::after {
+  content: "";
+  position: absolute; right: -3px; bottom: -3px;
+  width: 48px; height: 48px;
+  background-image: url('/assets/happyboy-logo0926.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+[data-theme="dark"] .hero-copy::before,
+[data-theme="dark"] .atelier-copy::before {
+  content: "";
+  position: absolute; right: -3px; top: -3px;
+  width: 48px; height: 48px;
+  background-image: url('/assets/happyboy-logo0926.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+[data-theme="dark"] .hero-copy { padding: 36px 60px 36px 36px; }
+[data-theme="dark"] .atelier-copy { padding: 36px 60px 36px 36px; }
+[data-theme="dark"] .card { padding: 32px 56px 32px 32px; }
+/* Cards keep the top-right corner for the number instead of a second
+   medallion -- a small CSS-drawn pill in the same border language rather
+   than the old drawn badge-tab artwork. */
 [data-theme="dark"] .card-num {
-  left: 83.7%; right: auto; top: 11.8%;
-  transform: translate(-50%, -50%);
-  color: var(--hbd-deep);
-}
-/* Services page cards run longer (2-3 list items) than the homepage's
-   teaser cards, so they get their own taller container + badge position. */
-[data-theme="dark"] .services-page .card {
-  background-image: url('/assets/dark-service-detailed.svg');
-}
-[data-theme="dark"] .services-page .card-num {
-  top: 6.5%;
+  position: absolute; top: -3px; right: -3px; left: auto;
+  transform: none;
+  background: #1B140F; border: 2px solid #F9D93A; border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 1.5rem;
+  color: #F9D93A;
 }
 
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
