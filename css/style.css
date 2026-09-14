@@ -329,6 +329,14 @@ section { padding: 80px 0; }
   transform: translate(-50%, -50%);
   color: var(--hbd-deep);
 }
+/* Services page cards run longer (2-3 list items) than the homepage's
+   teaser cards, so they get their own taller container + badge position. */
+[data-theme="dark"] .services-page .card {
+  background-image: url('/assets/dark-service-detailed.svg');
+}
+[data-theme="dark"] .services-page .card-num {
+  left: 86.6%; top: 8%;
+}
 
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
    column count, plain nth-child(odd/even) already lands on the correct
