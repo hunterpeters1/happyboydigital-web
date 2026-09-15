@@ -14,6 +14,8 @@
 </head>
 <body class="error-404">
 
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <div class="error-stage" id="errorStage">
 
     <!-- Facade: a corrupted painting-detail page. No nav on purpose. -->
@@ -54,25 +56,26 @@
     <!-- Revealed: the real site, found again -->
     <div class="error-revealed" id="errorRevealed" aria-hidden="true">
 
-      <div class="yellow-bar">
+      <div class="yellow-bar" id="yellow-bar">
         <div class="container">
           <nav>
             <div class="logo-group">
               <a href="/index.html" class="logo"><img src="/assets/happyboy-logo0926.svg" alt="" class="logo-icon">Happy Boy Digital</a>
               <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><img class="toggle-art--light" src="/assets/LightDarktoggle_light.svg" alt="" aria-hidden="true"><img class="toggle-art--dark" src="/assets/LightDarktoggle_dark.svg" alt="" aria-hidden="true"></button>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
               <a href="/work.html">Work</a>
               <a href="/services.html">Services</a>
               <a href="/atelier.html">Atelier</a>
               <a href="/about.html">About</a>
               <a href="/blog.html">Blog</a>
             </div>
+            <button id="nav-toggle" class="nav-toggle">Menu</button>
           </nav>
         </div>
       </div>
 
-      <main>
+      <main id="main">
         <section class="error-found">
           <div class="container">
             <div class="error-mark-frame">
