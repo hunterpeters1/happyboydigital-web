@@ -709,63 +709,49 @@ nav .logo:focus-visible {
 
 /* ===== 404 — corrupted painting page that glitches into the real site ===== */
 body.error-404 {
-  --error-void: #0A0703;
-  --error-void-2: #120C07;
-  --error-line: rgba(249, 217, 58, 0.4);
-  --error-line-dim: rgba(249, 217, 58, 0.16);
-  --error-text: rgba(240, 228, 200, 0.82);
-  --error-text-dim: rgba(240, 228, 200, 0.45);
   --error-cyan: #3AD9F9;
   --error-magenta: #FF2FB0;
 }
 .error-stage { position: relative; min-height: 100vh; }
 
+/* The facade reuses the real page's own theme tokens (--hbd-*) so it reads as
+   a corrupted version of a real painting page, not a separate dark microsite —
+   it inherits whichever theme (light/dark) the visitor already has set. */
 .error-facade {
   position: fixed; inset: 0; z-index: 40; overflow: hidden;
-  background: radial-gradient(120% 90% at 50% -10%, var(--error-void-2), var(--error-void));
-  color: var(--error-text);
+  background: var(--hbd-beige); color: var(--hbd-brown);
   display: flex; align-items: center;
   transition: opacity 0.5s ease;
 }
 .error-facade .container { max-width: 900px; }
 .error-facade .page-head { padding-bottom: 8px; }
-.error-tag {
-  display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--error-text-dim); margin-bottom: 14px;
-}
-.error-facade .lead { color: #F1E6CE; font-size: clamp(1.6rem, 4vw, 2.2rem); }
 .error-facade .piece-grid { align-items: center; }
 
 .error-void-frame {
-  position: relative; aspect-ratio: 3 / 4; width: 100%;
-  border: 1.5px dashed var(--error-line-dim);
+  aspect-ratio: 3 / 4; width: 100%; position: relative;
   display: flex; align-items: center; justify-content: center;
+  border-style: dashed; border-color: rgba(107, 66, 38, 0.35);
 }
-.error-void-frame::before, .error-void-frame::after {
-  content: ""; position: absolute; width: 22px; height: 22px;
-  border: 1px solid var(--error-line-dim); border-radius: 50%;
-}
-.error-void-frame::before { top: -11px; left: -11px; }
-.error-void-frame::after { bottom: -11px; right: -11px; }
+[data-theme="dark"] .error-void-frame { border-color: rgba(249, 217, 58, 0.35); }
 .error-void-static {
   width: 55%; height: 35%;
-  background: repeating-linear-gradient(115deg, rgba(240, 228, 200, 0.05) 0 2px, transparent 2px 5px);
+  background: repeating-linear-gradient(115deg, var(--hbd-brown) 0 2px, transparent 2px 5px);
   animation: errorStatic 1.6s steps(6) infinite;
-  opacity: 0.5;
+  opacity: 0.12;
 }
 @keyframes errorStatic { to { background-position: 140px 0; } }
 
 .error-specs { display: flex; flex-direction: column; gap: 6px; margin: 0 0 20px; font-size: 0.85rem; }
-.error-specs span { color: var(--error-text-dim); margin-right: 8px; }
-.error-warning { font-size: 0.9rem; line-height: 1.65; color: var(--error-text); max-width: 46ch; margin: 0 0 28px; }
+.error-specs span { color: var(--hbd-brown); opacity: 0.6; margin-right: 8px; }
+.error-warning { font-size: 0.9rem; line-height: 1.65; color: var(--hbd-brown); max-width: 46ch; margin: 0 0 28px; }
 .error-corrupt { color: var(--error-magenta); text-shadow: 1px 0 0 var(--error-cyan), -1px 0 0 var(--error-magenta); }
 
 .error-hint {
   font: inherit; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--error-line); background: none; border: none; padding: 0; cursor: pointer;
+  color: var(--hbd-yellow-dark); background: none; border: none; padding: 0; cursor: pointer;
   animation: errorPulse 2.2s ease-in-out infinite;
 }
-.error-hint:focus-visible { outline: 1px dashed var(--error-line); outline-offset: 4px; }
+.error-hint:focus-visible { outline: 1px dashed var(--hbd-yellow-dark); outline-offset: 4px; }
 @keyframes errorPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
 /* glitch burst on trigger */
