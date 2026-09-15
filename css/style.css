@@ -706,3 +706,119 @@ nav .logo:focus-visible {
 }
 .post-list .post-title { font-weight: 600; }
 .post-empty { text-align: center; opacity: 0.75; padding: 24px 0; }
+
+/* ===== 404 — corrupted painting page that glitches into the real site ===== */
+body.error-404 {
+  --error-void: #0A0703;
+  --error-void-2: #120C07;
+  --error-line: rgba(249, 217, 58, 0.4);
+  --error-line-dim: rgba(249, 217, 58, 0.16);
+  --error-text: rgba(240, 228, 200, 0.82);
+  --error-text-dim: rgba(240, 228, 200, 0.45);
+  --error-cyan: #3AD9F9;
+  --error-magenta: #FF2FB0;
+}
+.error-stage { position: relative; min-height: 100vh; }
+
+.error-facade {
+  position: fixed; inset: 0; z-index: 40; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% -10%, var(--error-void-2), var(--error-void));
+  color: var(--error-text);
+  display: flex; align-items: center;
+  transition: opacity 0.5s ease;
+}
+.error-facade .container { max-width: 900px; }
+.error-facade .page-head { padding-bottom: 8px; }
+.error-tag {
+  display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--error-text-dim); margin-bottom: 14px;
+}
+.error-facade .lead { color: #F1E6CE; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.error-facade .piece-grid { align-items: center; }
+
+.error-void-frame {
+  position: relative; aspect-ratio: 3 / 4; width: 100%;
+  border: 1.5px dashed var(--error-line-dim);
+  display: flex; align-items: center; justify-content: center;
+}
+.error-void-frame::before, .error-void-frame::after {
+  content: ""; position: absolute; width: 22px; height: 22px;
+  border: 1px solid var(--error-line-dim); border-radius: 50%;
+}
+.error-void-frame::before { top: -11px; left: -11px; }
+.error-void-frame::after { bottom: -11px; right: -11px; }
+.error-void-static {
+  width: 55%; height: 35%;
+  background: repeating-linear-gradient(115deg, rgba(240, 228, 200, 0.05) 0 2px, transparent 2px 5px);
+  animation: errorStatic 1.6s steps(6) infinite;
+  opacity: 0.5;
+}
+@keyframes errorStatic { to { background-position: 140px 0; } }
+
+.error-specs { display: flex; flex-direction: column; gap: 6px; margin: 0 0 20px; font-size: 0.85rem; }
+.error-specs span { color: var(--error-text-dim); margin-right: 8px; }
+.error-warning { font-size: 0.9rem; line-height: 1.65; color: var(--error-text); max-width: 46ch; margin: 0 0 28px; }
+.error-corrupt { color: var(--error-magenta); text-shadow: 1px 0 0 var(--error-cyan), -1px 0 0 var(--error-magenta); }
+
+.error-hint {
+  font: inherit; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--error-line); background: none; border: none; padding: 0; cursor: pointer;
+  animation: errorPulse 2.2s ease-in-out infinite;
+}
+.error-hint:focus-visible { outline: 1px dashed var(--error-line); outline-offset: 4px; }
+@keyframes errorPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+/* glitch burst on trigger */
+.error-stage.is-glitching .error-facade { animation: errorGlitchBurst 0.68s steps(2, end) both; }
+.error-stage.is-glitching .error-void-frame,
+.error-stage.is-glitching .error-facade .lead { animation: errorGlitchShift 0.68s steps(2, end) both; }
+@keyframes errorGlitchBurst {
+  0%   { filter: none; transform: translateX(0); }
+  8%   { filter: drop-shadow(2px 0 0 var(--error-cyan)) drop-shadow(-2px 0 0 var(--error-magenta)); transform: translateX(-3px); }
+  16%  { filter: drop-shadow(-3px 0 0 var(--error-cyan)) drop-shadow(3px 0 0 var(--error-magenta)) brightness(1.4); transform: translateX(4px); }
+  24%  { filter: none; transform: translateX(0); }
+  34%  { filter: drop-shadow(4px 0 0 var(--error-cyan)) drop-shadow(-4px 0 0 var(--error-magenta)); transform: translateX(-6px) scaleY(1.01); }
+  46%  { filter: brightness(1.7) contrast(1.3); transform: translateX(3px); opacity: 0.85; }
+  58%  { filter: drop-shadow(-5px 0 0 var(--error-cyan)) drop-shadow(5px 0 0 var(--error-magenta)); transform: translateX(-8px); opacity: 0.5; }
+  70%  { filter: brightness(2) saturate(0); transform: translateX(5px); opacity: 0.25; }
+  85%  { opacity: 0.08; transform: translateX(-3px); }
+  100% { opacity: 0; transform: translateX(0); }
+}
+@keyframes errorGlitchShift {
+  0%, 100% { clip-path: inset(0 0 0 0); }
+  20% { clip-path: inset(10% 0 60% 0); }
+  40% { clip-path: inset(55% 0 8% 0); }
+  60% { clip-path: inset(2% 0 80% 0); }
+  80% { clip-path: inset(70% 0 3% 0); }
+}
+.error-stage.is-revealed .error-facade { display: none; }
+
+/* revealed — the real site, at real theme tokens */
+.error-revealed { display: none; }
+.error-stage.is-revealed .error-revealed { display: block; }
+.error-found { padding: 72px 0 100px; text-align: center; }
+.error-mark-frame {
+  width: min(460px, 88vw); aspect-ratio: 1260 / 365; margin: 0 auto 28px;
+  position: relative; overflow: hidden;
+  opacity: 0; transform: scale(0.94);
+  animation: errorMarkIn 0.6s ease 0.15s both;
+}
+@keyframes errorMarkIn { to { opacity: 1; transform: scale(1); } }
+.error-mark {
+  position: absolute; width: 152.4%; height: auto; max-width: none;
+  left: -45.2%; top: -142.5%; display: block;
+}
+.error-found h2 { margin-bottom: 10px; }
+.error-found p { margin: 0 0 28px; opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .error-facade .piece-grid { grid-template-columns: 1fr; }
+  .error-void-frame { aspect-ratio: 4 / 3; margin-bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-facade, .error-void-frame, .error-facade .lead, .error-hint, .error-void-static, .error-mark-frame {
+    animation: none !important;
+  }
+  .error-mark-frame { opacity: 1; transform: none; }
+}

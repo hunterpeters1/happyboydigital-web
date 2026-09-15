@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — Happy Boy Digital</title>
+  <meta name="description" content="This page has gone missing. Welcome to the gap between listings.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/happyboy-logo0926.svg">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preload" href="/css/SpaceGrotesk-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=23">
+</head>
+<body class="error-404">
+
+  <div class="error-stage" id="errorStage">
+
+    <!-- Facade: a corrupted painting-detail page. No nav on purpose. -->
+    <div class="error-facade" id="errorFacade">
+      <main>
+        <section class="page-head">
+          <div class="container">
+            <span class="error-tag">Untitled &middot; Location unstable</span>
+            <h1 class="lead">This page exists between listings.</h1>
+          </div>
+        </section>
+
+        <section>
+          <div class="container">
+            <div class="grid grid-2 piece-grid">
+
+              <div class="art-wrap error-void-frame">
+                <span class="error-void-static"></span>
+              </div>
+
+              <div class="piece-details">
+                <h2>Original</h2>
+                <div class="error-specs">
+                  <p><span>Medium</span> unknown</p>
+                  <p><span>Dimensions</span> shifting</p>
+                  <p><span>Status</span> do not linger</p>
+                </div>
+                <p class="error-warning">The gap between two real pages wasn&rsquo;t meant to be found. It isn&rsquo;t dangerous, exactly &mdash; it&rsquo;s just not finished being made yet. <span class="error-corrupt">D&#815;o n&#817;ot&#820; st&#821;ay.</span></p>
+                <button type="button" class="error-hint" id="errorHint">click, or scroll &mdash; it&rsquo;s the only way through</button>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Revealed: the real site, found again -->
+    <div class="error-revealed" id="errorRevealed" aria-hidden="true">
+
+      <div class="yellow-bar">
+        <div class="container">
+          <nav>
+            <div class="logo-group">
+              <a href="/index.html" class="logo"><img src="/assets/happyboy-logo0926.svg" alt="" class="logo-icon">Happy Boy Digital</a>
+              <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><img class="toggle-art--light" src="/assets/LightDarktoggle_light.svg" alt="" aria-hidden="true"><img class="toggle-art--dark" src="/assets/LightDarktoggle_dark.svg" alt="" aria-hidden="true"></button>
+            </div>
+            <div class="nav-links">
+              <a href="/work.html">Work</a>
+              <a href="/services.html">Services</a>
+              <a href="/atelier.html">Atelier</a>
+              <a href="/about.html">About</a>
+              <a href="/blog.html">Blog</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <main>
+        <section class="error-found">
+          <div class="container">
+            <div class="error-mark-frame">
+              <img src="/assets/404layout.svg" alt="404" class="error-mark">
+            </div>
+            <h2 class="section-title">Found the gap.</h2>
+            <p>Not much here yet &mdash; just the way back.</p>
+            <a href="/index.html" class="btn">Back to the studio</a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">
+          <p style="margin-bottom:8px;">Say hi: <a href="mailto:petershunter45@gmail.com">petershunter45@gmail.com</a><button type="button" class="copy-email-btn" data-email="petershunter45@gmail.com" aria-label="Copy email address">Copy</button></p>
+          <p class="small">Happy Boy Digital.</p>
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+
+  <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script src="/js/main.js?v=8"></script>
+  <script>
+  (function () {
+    var stage = document.getElementById('errorStage');
+    var facade = document.getElementById('errorFacade');
+    var revealed = document.getElementById('errorRevealed');
+    var hintBtn = document.getElementById('errorHint');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var triggered = false;
+
+    function swapAria() {
+      facade.setAttribute('aria-hidden', 'true');
+      revealed.removeAttribute('aria-hidden');
+    }
+
+    function trigger() {
+      if (triggered) return;
+      triggered = true;
+
+      if (reduce) {
+        stage.classList.add('is-revealed');
+        swapAria();
+        return;
+      }
+
+      stage.classList.add('is-glitching');
+      setTimeout(function () {
+        stage.classList.add('is-revealed');
+        swapAria();
+      }, 640);
+    }
+
+    window.addEventListener('scroll', trigger, { passive: true, once: true });
+    window.addEventListener('wheel', trigger, { passive: true, once: true });
+    window.addEventListener('touchmove', trigger, { passive: true, once: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') trigger();
+    });
+    document.addEventListener('click', function () {
+      if (stage.classList.contains('is-revealed')) return;
+      trigger();
+    });
+  })();
+  </script>
+</body>
+</html>
