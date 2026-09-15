@@ -712,7 +712,7 @@ body.error-404 {
   --error-cyan: #3AD9F9;
   --error-magenta: #FF2FB0;
 }
-.error-stage { position: relative; min-height: 100vh; }
+.error-stage { position: relative; }
 
 /* The facade reuses the real page's own theme tokens (--hbd-*) so it reads as
    a corrupted version of a real painting page, not a separate dark microsite —
@@ -781,7 +781,13 @@ body.error-404 {
 
 /* revealed — the real site, at real theme tokens */
 .error-revealed { display: none; }
-.error-stage.is-revealed .error-revealed { display: block; }
+.error-stage.is-revealed .error-revealed {
+  /* body has padding-top:64px to clear the fixed .yellow-bar, which itself
+     takes no space in this flex column (position:fixed) -- subtract that
+     same 64px here or the column runs 64px past the true viewport bottom */
+  display: flex; flex-direction: column; min-height: calc(100vh - 64px);
+}
+.error-revealed main { flex: 1 0 auto; }
 .error-found { padding: 72px 0 100px; text-align: center; }
 .error-mark-frame {
   width: min(460px, 88vw); aspect-ratio: 1313 / 484; margin: 0 auto 28px;
