@@ -143,9 +143,27 @@ nav .logo-wordmark { display: block; height: 40px; width: auto; }
 [data-theme="dark"] .theme-toggle .toggle-art--light { opacity: 0; }
 [data-theme="dark"] .theme-toggle .toggle-art--dark { opacity: 1; }
 nav .nav-links { display: flex; gap: 32px; }
-nav .nav-links a { font-size: 0.9rem; color: var(--hbd-on-yellow); }
+nav .nav-links a { position: relative; font-size: 0.9rem; color: var(--hbd-on-yellow); }
 nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
 nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weight: 600; }
+/* A tiny medallion appears beside a nav link on hover instead of a plain
+   underline -- ties the interaction back to the logo itself. */
+nav .nav-links a::after {
+  content: "";
+  position: absolute; right: -20px; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  background-image: url('/assets/happyboy-logo0926.svg');
+  background-size: contain; background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.25s ease, right 0.25s ease;
+  pointer-events: none;
+}
+nav .nav-links a:hover::after,
+nav .nav-links a:focus-visible::after {
+  right: -18px;
+  opacity: 0.85;
+}
 
 #nav-toggle {
   display: none;
@@ -309,7 +327,9 @@ section { padding: 80px 0; }
    rail line, and the medallion carry the design faithfully. */
 [data-theme="dark"] .hero-copy,
 [data-theme="dark"] .atelier-copy,
-[data-theme="dark"] .card {
+[data-theme="dark"] .card,
+[data-theme="dark"] .page-head-frame,
+[data-theme="dark"] .prose {
   position: relative;
   background-color: #1B140F;
   border: 2px solid #F9D93A;
@@ -322,7 +342,9 @@ section { padding: 80px 0; }
 }
 [data-theme="dark"] .hero-copy::after,
 [data-theme="dark"] .atelier-copy::after,
-[data-theme="dark"] .card::after {
+[data-theme="dark"] .card::after,
+[data-theme="dark"] .page-head-frame::after,
+[data-theme="dark"] .prose::after {
   content: "";
   position: absolute; right: -3px; bottom: -3px;
   width: 48px; height: 48px;
@@ -331,7 +353,9 @@ section { padding: 80px 0; }
   background-repeat: no-repeat;
 }
 [data-theme="dark"] .hero-copy::before,
-[data-theme="dark"] .atelier-copy::before {
+[data-theme="dark"] .atelier-copy::before,
+[data-theme="dark"] .page-head-frame::before,
+[data-theme="dark"] .prose::before {
   content: "";
   position: absolute; right: -3px; top: -3px;
   width: 48px; height: 48px;
@@ -342,6 +366,8 @@ section { padding: 80px 0; }
 [data-theme="dark"] .hero-copy { padding: 36px 60px 36px 36px; }
 [data-theme="dark"] .atelier-copy { padding: 36px 60px 36px 36px; }
 [data-theme="dark"] .card { padding: 32px 56px 32px 32px; }
+[data-theme="dark"] .page-head-frame { padding: 28px 60px 28px 32px; margin-bottom: 8px; }
+[data-theme="dark"] .prose { padding: 36px 60px 36px 36px; }
 /* Cards keep the top-right corner for the number instead of a second
    medallion -- a small CSS-drawn pill in the same border language rather
    than the old drawn badge-tab artwork. */
@@ -442,7 +468,7 @@ a.card:hover {
 
 /* ---- Footer ---- */
 footer {
-  padding: 48px 0 24px; background: var(--hbd-beige);
+  padding: 48px 0 24px; background: var(--hbd-card);
   border-top: 1px solid rgba(107, 66, 38, 0.1);
 }
 footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
@@ -505,6 +531,24 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .price-list { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.95rem; }
 .price-list td { padding: 8px 0; border-bottom: 1px solid rgba(107, 66, 38, 0.12); }
 .price-list td:last-child { text-align: right; font-weight: 600; color: var(--hbd-deep); }
+.promo-box {
+  background: rgba(249, 217, 58, 0.1);
+  border: 1px solid rgba(249, 217, 58, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin: 16px 0;
+}
+.piece-details .description {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--hbd-border);
+}
+.artist-notes {
+  margin-top: 20px; background: var(--hbd-card); border: 1px solid var(--hbd-border);
+  border-radius: 8px; padding: 14px 18px;
+}
+.artist-notes summary { font-weight: 600; cursor: pointer; }
+.artist-notes p { margin-top: 10px; font-size: 0.9rem; opacity: 0.9; }
 .buy-box {
   background: var(--hbd-card); border: 1px solid var(--hbd-border);
   border-radius: 8px; padding: 24px; margin-top: 28px;
@@ -538,19 +582,6 @@ nav .logo:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   nav .logo { animation: none; }
-}
-
-/* ---- Hover judder: quick RGB judder on interactive text (matches wordmark) ---- */
-@keyframes glitchJudder {
-  0%   { text-shadow: -0.05em 0 rgba(255, 0, 200, 0.55),  0.05em 0 rgba(0, 231, 255, 0.55); }
-  40%  { text-shadow:  0.06em 0 rgba(255, 0, 200, 0.45), -0.04em 0 rgba(0, 231, 255, 0.45); }
-  70%  { text-shadow: -0.03em 0 rgba(255, 0, 200, 0.45),  0.03em 0 rgba(0, 231, 255, 0.45); }
-  100% { text-shadow: none; }
-}
-nav .nav-links a:hover,
-nav .nav-links a:focus-visible,
-.project-thumb:hover .project-info h3 {
-  animation: glitchJudder 0.26s steps(2, end) 1;
 }
 
 /* ---- Terminal-style type-on for section kickers (JS adds .kicker--type + --kn) ---- */
