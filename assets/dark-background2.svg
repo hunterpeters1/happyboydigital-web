@@ -26,14 +26,14 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="1.0494603"
-     inkscape:cx="952.39425"
-     inkscape:cy="551.23569"
+     inkscape:cx="1168.6959"
+     inkscape:cy="398.77638"
      inkscape:window-width="2560"
      inkscape:window-height="1411"
      inkscape:window-x="1911"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer21"
      showguides="false">
     <inkscape:grid
        id="grid1"
@@ -211,7 +211,7 @@
        xlink:href="#linearGradient860"
        id="radialGradient869"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.159159,0,-9.1890504e-8,10.160779,199.57373,690.33422)"
+       gradientTransform="matrix(1.159159,0,-9.1890503e-8,10.160779,193.42306,699.07738)"
        cx="251.03543"
        cy="-64.239258"
        fx="251.03543"
@@ -875,15 +875,15 @@
        ry="0"
        transform="rotate(12.382517)" />
     <rect
-       style="opacity:1;fill:#1b140f;fill-opacity:1;stroke:#1b140f;stroke-width:1.0967;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
+       style="opacity:1;fill:#1b140f;fill-opacity:1;stroke:#1b140f;stroke-width:1.27669;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
        id="rect838"
-       width="38.841583"
-       height="294.41721"
-       x="472.98312"
-       y="-65.860413"
-       rx="19.420792"
+       width="43.503132"
+       height="356.23764"
+       x="468.80478"
+       y="-137.33264"
+       rx="21.751566"
        ry="0"
-       transform="rotate(12.382517)" />
+       transform="matrix(0.97259652,0.23249948,-0.19765239,0.98027217,0,0)" />
     <rect
        style="opacity:1;fill:#1b140f;fill-opacity:1;stroke:#1b140f;stroke-width:1.0967;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
        id="rect839"
@@ -2342,8 +2342,8 @@
        id="rect869"
        width="33.049751"
        height="289.70245"
-       x="474.03885"
-       y="-107.23786"
+       x="467.88818"
+       y="-98.494698"
        rx="16.524876"
        ry="0"
        transform="matrix(0.96835946,0.24955952,-0.18384053,0.98295608,0,0)" />
