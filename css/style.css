@@ -544,7 +544,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   border-top: 1px solid var(--hbd-border);
 }
 .artist-notes {
-  margin-top: 20px; background: var(--hbd-card); border: 1px solid var(--hbd-border);
+  margin-top: 20px; max-width: 60ch; background: var(--hbd-card); border: 1px solid var(--hbd-border);
   border-radius: 8px; padding: 14px 18px;
 }
 .artist-notes summary { font-weight: 600; cursor: pointer; }
