@@ -113,104 +113,127 @@ body { padding-top: 64px; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
 @media (max-width: 768px) { .container { padding: 0 24px; } }
 
-/* ---- Yellow header bar (scroll-away navigation) ---- */
-.yellow-bar {
+/* ---- Site header: just the logo badge + toggle + menu button, no bar
+   background -- the hand-drawn sky is meant to show through here instead
+   of being covered by a solid color. All nav links live in the slide-out
+   .side-nav panel below, opened by #nav-toggle, so there's no separate
+   desktop-inline vs. mobile-dropdown split to maintain anymore. ---- */
+.site-header {
   position: fixed; top: 0; left: 0; width: 100%; height: 64px;
-  background: var(--hbd-yellow); z-index: 1000;
-  box-shadow: 0 3px 0 rgba(74, 44, 18, 0.15);
-  display: flex; align-items: center;
-  transition: transform 0.3s ease, height 0.3s ease;
+  z-index: 1000; pointer-events: none;
+  transition: transform 0.3s ease;
 }
-
-.yellow-bar .container { max-width: 100%; width: 100%; padding: 0 24px; }
-
-.yellow-bar.scrolled {
-  height: 56px;
-}
-.yellow-bar.hidden {
-  transform: translateY(-100%);
-}
-
-nav {
+.site-header .container {
+  max-width: 100%; width: 100%; padding: 0 24px; height: 100%;
   display: flex; justify-content: space-between; align-items: center;
-  height: 100%;
 }
-nav .logo {
-  display: flex; align-items: center; gap: 8px;
-  font-weight: 700; font-size: 1.2rem; color: var(--hbd-on-yellow);
-}
-nav .logo:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
-nav .logo-icon { width: 22px; height: 22px; display: block; }
-/* Comic wordmark graphic -- used on the Stickers page nav only for now */
-nav .logo-wordmark { display: block; height: 40px; width: auto; }
-.logo-group { display: flex; align-items: center; gap: 10px; }
+.site-header.hidden { transform: translateY(-100%); }
+
+.logo-badge { display: block; line-height: 0; pointer-events: auto; }
+.logo-badge-img { display: block; height: 46px; width: auto; }
+.logo-badge:hover { filter: brightness(1.12); }
+.logo-badge:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+
+.header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  position: relative; width: 56px; height: 28px; border-radius: 6px;
+  position: relative; width: 60px; height: 36px;
   background: none; border: none;
-  cursor: pointer; padding: 0; overflow: hidden;
+  cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .theme-toggle:hover { transform: scale(1.05); }
-.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
 .theme-toggle img {
   position: absolute; inset: 0; width: 100%; height: 100%; display: block;
   transition: opacity 0.25s ease;
 }
-/* Two hand-drawn "plaque" states (moon pane always on, sun pane swaps for
-   clouds at night) -- LightDarktoggle_light.svg / _dark.svg in /assets.
-   Swap either file for a redrawn one later, just keep these two classes. */
+/* Two hand-drawn states of the same moon/sun switch -- the sun pane swaps
+   for clouds at night. nav-toggle-light.svg / nav-toggle-dark.svg. */
 .theme-toggle .toggle-art--light { opacity: 1; }
 .theme-toggle .toggle-art--dark { opacity: 0; }
 [data-theme="dark"] .theme-toggle .toggle-art--light { opacity: 0; }
 [data-theme="dark"] .theme-toggle .toggle-art--dark { opacity: 1; }
-nav .nav-links { display: flex; gap: 32px; }
-nav .nav-links a { position: relative; font-size: 0.9rem; color: var(--hbd-on-yellow); }
-nav .nav-links a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
-nav .nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); font-weight: 600; }
-/* A tiny medallion appears beside a nav link on hover instead of a plain
-   underline -- ties the interaction back to the logo itself. */
-nav .nav-links a::after {
+
+.menu-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: none; border: none;
+  cursor: pointer; padding: 0;
+  transition: transform 0.15s ease;
+}
+.menu-btn:hover { transform: scale(1.05); }
+.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+.menu-btn img { display: block; width: 100%; height: 100%; }
+
+/* ---- Side slide-out nav panel (all viewport widths) ---- */
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 1500;
+  background: rgba(20, 14, 8, 0.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+.side-nav {
+  position: fixed; top: 0; right: 0; height: 100%;
+  width: 300px; max-width: 85vw;
+  background: var(--hbd-card);
+  border-left: 1px solid var(--hbd-border);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
+  z-index: 1600;
+  display: flex; flex-direction: column;
+  padding: 20px 24px 24px;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.side-nav.open { transform: translateX(0); }
+
+.side-nav-close {
+  align-self: flex-end;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer;
+  font-size: 1.8rem; line-height: 1; color: var(--hbd-brown);
+}
+.side-nav-close:hover { color: var(--hbd-yellow-dark); }
+
+.side-nav-links { display: flex; flex-direction: column; gap: 4px; margin-top: 24px; }
+.side-nav-links a {
+  position: relative;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--hbd-deep);
+  padding: 14px 34px 14px 10px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.side-nav-links a:hover,
+.side-nav-links a:focus-visible {
+  color: var(--hbd-yellow-dark);
+  background: rgba(107, 66, 38, 0.08);
+  text-decoration: none;
+}
+[data-theme="dark"] .side-nav-links a:hover,
+[data-theme="dark"] .side-nav-links a:focus-visible {
+  background: rgba(249, 217, 58, 0.08);
+}
+.side-nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); }
+/* A tiny medallion appears beside a link on hover -- ties the interaction
+   back to the logo itself. */
+.side-nav-links a::after {
   content: "";
-  position: absolute; right: -20px; top: 50%;
+  position: absolute; right: 10px; top: 50%;
   transform: translateY(-50%);
   width: 14px; height: 14px;
   background-image: url('/assets/happyboy-logo0926.svg');
   background-size: contain; background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 0.25s ease, right 0.25s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
 }
-nav .nav-links a:hover::after,
-nav .nav-links a:focus-visible::after {
-  right: -18px;
-  opacity: 0.85;
-}
-
-#nav-toggle {
-  display: none;
-  background: none; border: none; cursor: pointer;
-  font-size: 0.9rem; font-weight: 600; color: var(--hbd-on-yellow);
-  padding: 8px 4px;
-}
-
-/* Mobile nav */
-@media (max-width: 768px) {
-  nav .nav-links {
-    display: none; flex-direction: column; gap: 16px;
-    position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--hbd-beige); padding: 24px;
-    border-bottom: 1px solid rgba(107,66,38,0.2);
-  }
-  /* The dropdown panel is beige (dark mode: near-black), not the always-
-     yellow bar -- so its links need theme-aware text, not --hbd-on-yellow
-     (fixed dark, unreadable here in dark mode). */
-  nav .nav-links a { color: var(--hbd-deep); }
-  /* Single word "Menu" -- safe to flex-center without the multi-word
-     min-content wrap issue that hit .btn-sm above. */
-  #nav-toggle { display: flex; align-items: center; min-height: 44px; }
-  nav .nav-links.open { display: flex; }
-}
+.side-nav-links a:hover::after,
+.side-nav-links a:focus-visible::after { opacity: 0.85; }
 
 /* ---- Sections ---- */
 section { padding: 80px 0; }
@@ -477,7 +500,7 @@ a.card:hover {
 .grid:has(.project-thumb) { align-items: start; }
 
 /* Work page only: give the paintings a bit more room. Scoped to <main> so
-   it doesn't also widen the yellow-bar nav's own full-width .container.
+   it doesn't also widen the site-header's own full-width .container.
    Hover zoom stays at the site-wide 1.05 — a bigger scale made the
    rounded-corner clip look off. */
 .work-page main .container { max-width: 1320px; }
@@ -584,32 +607,6 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .buy-box li { margin-bottom: 6px; }
 .buy-box .fine { display: block; font-size: 0.85rem; opacity: 0.85; margin-top: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
-/* ---- Wordmark glitch: cyan/magenta chromatic split on the header logo ---- */
-@keyframes wordmarkGlitch {
-  0%, 96%, 100% { text-shadow:  0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28); }
-  97%           { text-shadow: -0.06em  0 rgba(255, 0, 200, 0.5),   0.05em  0 rgba(0, 231, 255, 0.5); }
-  98%           { text-shadow:  0.07em  0 rgba(255, 0, 200, 0.42), -0.06em  0 rgba(0, 231, 255, 0.42); }
-  99%           { text-shadow: -0.03em  0 rgba(255, 0, 200, 0.32),  0.03em  0 rgba(0, 231, 255, 0.32); }
-}
-@keyframes wordmarkJudder {
-  0%   { text-shadow: -0.06em 0 rgba(255, 0, 200, 0.6),   0.06em 0 rgba(0, 231, 255, 0.6); }
-  35%  { text-shadow:  0.07em 0 rgba(255, 0, 200, 0.5),  -0.05em 0 rgba(0, 231, 255, 0.5); }
-  65%  { text-shadow: -0.04em 0 rgba(255, 0, 200, 0.5),   0.04em 0 rgba(0, 231, 255, 0.5); }
-  100% { text-shadow:  0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28); }
-}
-nav .logo {
-  /* faint permanent misregistration, with a flicker burst ~every 6s */
-  text-shadow: 0.018em 0 rgba(255, 0, 200, 0.28), -0.018em 0 rgba(0, 231, 255, 0.28);
-  animation: wordmarkGlitch 6s steps(1, end) infinite;
-}
-nav .logo:hover,
-nav .logo:focus-visible {
-  animation: wordmarkJudder 0.3s steps(2, end) 1;
-}
-@media (prefers-reduced-motion: reduce) {
-  nav .logo { animation: none; }
-}
-
 /* ---- Terminal-style type-on for section kickers (JS adds .kicker--type + --kn) ---- */
 .kicker--type {
   --kt: calc(var(--kn, 10) * 60ms);
@@ -633,8 +630,6 @@ nav .logo:focus-visible {
 @keyframes kCaretOff { to { border-right-color: transparent; } }
 
 @media (prefers-reduced-motion: reduce) {
-  nav .nav-links a:hover,
-  nav .nav-links a:focus-visible,
   .project-thumb:hover .project-info h3 { animation: none; }
   .kicker--type {
     animation: none; clip-path: none; border-right: 0; width: auto; overflow: visible;
@@ -808,7 +803,7 @@ body.error-404 {
 /* revealed — the real site, at real theme tokens */
 .error-revealed { display: none; }
 .error-stage.is-revealed .error-revealed {
-  /* body has padding-top:64px to clear the fixed .yellow-bar, which itself
+  /* body has padding-top:64px to clear the fixed .site-header, which itself
      takes no space in this flex column (position:fixed) -- subtract that
      same 64px here or the column runs 64px past the true viewport bottom */
   display: flex; flex-direction: column; min-height: calc(100vh - 64px);

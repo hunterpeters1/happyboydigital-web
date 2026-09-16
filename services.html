@@ -22,31 +22,34 @@
   <link rel="icon" type="image/svg+xml" href="/assets/happyboy-logo0926.svg">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="preload" href="/css/SpaceGrotesk-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=36">
+  <link rel="stylesheet" href="/css/style.css?v=37">
 </head>
 <body class="services-page">
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Yellow scroll-away header bar with nav -->
-  <div class="yellow-bar" id="yellow-bar">
+  <!-- Header (logo badge + toggle + menu) and slide-out side nav -->
+  <header class="site-header" id="site-header">
     <div class="container">
-      <nav>
-        <div class="logo-group">
-          <a href="/index.html" class="logo"><img src="/assets/happyboy-logo0926.svg" alt="" class="logo-icon">Happy Boy Digital</a>
-          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><img class="toggle-art--light" src="/assets/LightDarktoggle_light.svg" alt="" aria-hidden="true"><img class="toggle-art--dark" src="/assets/LightDarktoggle_dark.svg" alt="" aria-hidden="true"></button>
-        </div>
-        <div class="nav-links" id="nav-links">
-          <a href="/work.html">Work</a>
-          <a href="/services.html">Services</a>
-          <a href="/atelier.html">Atelier</a>
-          <a href="/about.html">About</a>
-          <a href="/blog.html">Blog</a>
-        </div>
-        <button id="nav-toggle" class="nav-toggle">Menu</button>
-      </nav>
+      <a href="/index.html" class="logo-badge" aria-label="Happy Boy Digital — home"><img src="/assets/nav-logo.svg" alt="Happy Boy Digital" class="logo-badge-img"></a>
+      <div class="header-controls">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"><img class="toggle-art--light" src="/assets/nav-toggle-light.svg" alt="" aria-hidden="true"><img class="toggle-art--dark" src="/assets/nav-toggle-dark.svg" alt="" aria-hidden="true"></button>
+        <button id="nav-toggle" class="menu-btn" type="button" aria-expanded="false" aria-controls="side-nav" aria-label="Open menu"><img src="/assets/nav-menu-icon.svg" alt="" aria-hidden="true"></button>
+      </div>
     </div>
-  </div>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <nav class="side-nav" id="side-nav" aria-label="Main navigation">
+    <button class="side-nav-close" id="side-nav-close" type="button" aria-label="Close menu">&times;</button>
+    <div class="side-nav-links" id="nav-links">
+      <a href="/work.html">Work</a>
+      <a href="/services.html">Services</a>
+      <a href="/atelier.html">Atelier</a>
+      <a href="/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+    </div>
+  </nav>
 
   <main id="main">
     <section class="page-head">
@@ -129,6 +132,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=8"></script>
+  <script src="/js/main.js?v=9"></script>
 </body>
 </html>

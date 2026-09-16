@@ -1,9 +1,8 @@
-// HBD main.js — scroll-away yellow header + mobile nav toggle
+// HBD main.js — scroll-away header + slide-out side nav
 
 (function() {
-  var bar = document.getElementById('yellow-bar');
+  var bar = document.getElementById('site-header');
   var lastScroll = 0;
-  var scrollThreshold = 80;
 
   if (!bar) return;
 
@@ -13,15 +12,7 @@
     if (!ticking) {
       window.requestAnimationFrame(function() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        var scrolledClass = bar.classList.contains('scrolled');
         var hiddenClass = bar.classList.contains('hidden');
-
-        // Add 'scrolled' class for subtle shrink effect
-        if (scrollTop > scrollThreshold) {
-          if (!scrolledClass) bar.classList.add('scrolled');
-        } else {
-          if (scrolledClass) bar.classList.remove('scrolled');
-        }
 
         // Hide on scroll down, show on scroll up
         if (scrollTop > lastScroll && scrollTop > 100 && !hiddenClass) {
@@ -53,36 +44,51 @@
     });
   }
 
-  // Mobile nav toggle
+  // Slide-out side nav (same panel at every viewport width)
   var toggle = document.getElementById('nav-toggle');
+  var panel = document.getElementById('side-nav');
+  var overlay = document.getElementById('nav-overlay');
+  var panelClose = document.getElementById('side-nav-close');
   var links = document.getElementById('nav-links');
-  if (toggle && links) {
+  if (toggle && panel && overlay && links) {
     var openNav = function() {
-      links.classList.add('open');
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (panelClose) panelClose.focus();
     };
     var closeNav = function() {
-      links.classList.remove('open');
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      toggle.focus();
     };
     toggle.addEventListener('click', function() {
-      if (links.classList.contains('open')) closeNav(); else openNav();
+      if (panel.classList.contains('open')) closeNav(); else openNav();
     });
-    // Tapping a link should close the menu, not leave it open underneath
+    if (panelClose) panelClose.addEventListener('click', closeNav);
+    overlay.addEventListener('click', closeNav);
+    // Tapping a link should close the panel, not leave it open underneath
     // the page it just navigated to (or over the same page, for #anchors).
     links.querySelectorAll('a').forEach(function(a) {
       a.addEventListener('click', closeNav);
     });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && links.classList.contains('open')) {
-        closeNav();
-        toggle.focus();
+      if (!panel.classList.contains('open')) return;
+      if (e.key === 'Escape') { closeNav(); return; }
+      if (e.key === 'Tab') {
+        var focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
       }
-    });
-    document.addEventListener('click', function(e) {
-      if (!links.classList.contains('open')) return;
-      if (links.contains(e.target) || toggle.contains(e.target)) return;
-      closeNav();
     });
   }
 
