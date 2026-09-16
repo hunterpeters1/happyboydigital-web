@@ -154,17 +154,22 @@ body { padding-top: 64px; }
 
 .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
 
+/* theme-toggle and menu-btn share the logo badge's pill chrome (dark fill,
+   yellow border) -- the icons themselves are bare linework, cropped out of
+   the artwork with their own baked-in boxes stripped, same idea as the logo
+   icon. */
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  position: relative; width: 60px; height: 36px;
-  background: none; border: none;
+  position: relative; width: 70px; height: 40px;
+  background: #0d0a07; border: 2px solid var(--hbd-yellow); border-radius: 999px;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .theme-toggle:hover { transform: scale(1.05); }
-.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
 .theme-toggle img {
-  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  position: absolute; inset: 6px 12px; width: calc(100% - 24px); height: calc(100% - 12px);
+  display: block;
   transition: opacity 0.25s ease;
 }
 /* Two hand-drawn states of the same moon/sun switch -- the sun pane swaps
@@ -176,14 +181,14 @@ body { padding-top: 64px; }
 
 .menu-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px;
-  background: none; border: none;
+  width: 48px; height: 48px;
+  background: #0d0a07; border: 2px solid var(--hbd-yellow); border-radius: 999px;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .menu-btn:hover { transform: scale(1.05); }
-.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
-.menu-btn img { display: block; width: 100%; height: 100%; }
+.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+.menu-btn img { display: block; width: 26px; height: 26px; }
 
 /* ---- Side slide-out nav panel (all viewport widths) ---- */
 .nav-overlay {
