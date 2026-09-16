@@ -13,15 +13,21 @@
       window.requestAnimationFrame(function() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         var hiddenClass = bar.classList.contains('hidden');
+        var delta = scrollTop - lastScroll;
 
-        // Hide on scroll down, show on scroll up
-        if (scrollTop > lastScroll && scrollTop > 100 && !hiddenClass) {
-          bar.classList.add('hidden');
-        } else if (scrollTop < lastScroll && hiddenClass) {
-          bar.classList.remove('hidden');
+        // Mobile Safari's address bar collapsing/expanding mid-scroll makes
+        // scrollTop jitter by a few px even during a single steady swipe --
+        // ignoring small deltas keeps that noise from flipping the class
+        // back and forth so the header never finishes hiding.
+        if (Math.abs(delta) > 5) {
+          if (delta > 0 && scrollTop > 100 && !hiddenClass) {
+            bar.classList.add('hidden');
+          } else if (delta < 0 && hiddenClass) {
+            bar.classList.remove('hidden');
+          }
+          lastScroll = scrollTop <= 0 ? 0 : scrollTop;
         }
 
-        lastScroll = scrollTop <= 0 ? 0 : scrollTop;
         ticking = false;
       });
       ticking = true;
