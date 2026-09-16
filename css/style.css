@@ -127,6 +127,8 @@ body { padding-top: 64px; }
   max-width: 100%; width: 100%; padding: 0 24px; height: 100%;
   display: flex; justify-content: space-between; align-items: center;
 }
+/* Nudged down a little from dead-center of the 64px bar */
+.logo-badge, .header-controls { margin-top: 10px; }
 .site-header.hidden { transform: translateY(-100%); }
 
 /* Real HTML text (not baked into the artwork) so it renders in Space
@@ -181,14 +183,14 @@ body { padding-top: 64px; }
 
 .menu-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 52px; height: 52px;
+  width: 60px; height: 60px;
   background: none; border: none;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .menu-btn:hover { transform: scale(1.05); }
 .menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
-.menu-btn img { display: block; width: 48px; height: 48px; }
+.menu-btn img { display: block; width: 56px; height: 56px; }
 
 /* ---- Side slide-out nav panel (all viewport widths) ---- */
 .nav-overlay {
