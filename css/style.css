@@ -16,17 +16,17 @@
   --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
   --hbd-brown:    #6B4226;   /* body text */
   --hbd-deep:     #4A2C18;   /* headings */
-  --hbd-on-yellow: #4A2C18;  /* text sitting on the yellow bar/buttons -- always dark, ignores theme */
+  --hbd-on-yellow: #4A2C18;  /* text sitting on yellow-filled buttons/badges -- always dark, ignores theme */
   --hbd-card:     #FFFDF9;   /* card/mat surfaces, a touch off the page background */
   --hbd-border:   rgba(107, 66, 38, 0.15); /* the common hairline border */
   --hbd-shadow:   rgba(74, 44, 18, 0.08);  /* the common soft card shadow */
 }
 
 /* ---- Dark mode ---- */
-/* Toggled via the button beside the logo; choice is saved to localStorage
+/* Toggled via the button in the header; choice is saved to localStorage
    and applied instantly on load by an inline script in <head> (avoids a
-   flash of the light theme). Only the variables below change -- the yellow
-   bar, buttons, and accent yellow stay identical in both themes. */
+   flash of the light theme). Only the variables below change -- buttons
+   and the accent yellow stay identical in both themes. */
 [data-theme="dark"] {
   --hbd-beige: #1B140F;
   --hbd-brown: #E8DCC0;
@@ -282,14 +282,6 @@ section { padding: 80px 0; }
 }
 .page-head-row .sub { margin-bottom: 0; }
 @media (max-width: 640px) { .page-head-row { align-items: flex-start; } }
-
-/* Comic-lettering page titles (Work, Services, Atelier, About) */
-.page-title-art { display: block; width: auto; height: auto; max-width: 100%; max-height: 56px; }
-.page-title-art--wide { max-height: 44px; }
-@media (max-width: 768px) {
-  .page-title-art { max-height: 40px; }
-  .page-title-art--wide { max-height: 32px; }
-}
 
 .kicker {
   display: block; font-size: 0.8rem; font-weight: 700;
@@ -750,7 +742,6 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 .post-list .post-title { font-weight: 600; }
-.post-empty { text-align: center; opacity: 0.75; padding: 24px 0; }
 
 /* ===== 404 — corrupted painting page that glitches into the real site ===== */
 body.error-404 {
