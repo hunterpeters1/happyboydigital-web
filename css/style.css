@@ -129,10 +129,28 @@ body { padding-top: 64px; }
 }
 .site-header.hidden { transform: translateY(-100%); }
 
-.logo-badge { display: block; line-height: 0; pointer-events: auto; }
-.logo-badge-img { display: block; height: 46px; width: auto; }
-.logo-badge:hover { filter: brightness(1.12); }
-.logo-badge:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+/* Real HTML text (not baked into the artwork) so it renders in Space
+   Grotesk like the rest of the site and can be sized independently of
+   the hand-drawn icon -- an SVG loaded via <img> can't reach the page's
+   @font-face, so baked-in text falls back to the browser's default serif. */
+.logo-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  pointer-events: auto;
+  background: #0d0a07; border: 2px solid var(--hbd-yellow);
+  border-radius: 999px; padding: 8px 20px 8px 10px;
+  text-decoration: none;
+}
+.logo-badge-icon { display: block; width: 32px; height: 32px; }
+.logo-badge-text {
+  font-weight: 700; font-size: 1.25rem; line-height: 1;
+  color: var(--hbd-yellow); white-space: nowrap;
+}
+.logo-badge:hover { filter: brightness(1.15); text-decoration: none; }
+.logo-badge:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+@media (max-width: 480px) {
+  .logo-badge-text { display: none; }
+  .logo-badge { padding: 8px; }
+}
 
 .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
 
