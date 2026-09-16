@@ -11,7 +11,7 @@
 
 /* ---- Color palette ---- */
 :root {
-  --hbd-beige:    #EEF3F8;   /* off-white background, faint sky-blue tint (light mode only) */
+  --hbd-beige:    #D9EAF9;   /* off-white background, sky-blue tint -- lighter than the cloud-hatching blue (light mode only) */
   --hbd-yellow:   #F9D93A;   /* bright yellow accent -- same in both themes */
   --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
   --hbd-brown:    #6B4226;   /* body text */
