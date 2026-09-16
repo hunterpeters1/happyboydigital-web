@@ -11,7 +11,7 @@
 
 /* ---- Color palette ---- */
 :root {
-  --hbd-beige:    #F6F1E8;   /* off-white background */
+  --hbd-beige:    #EEF3F8;   /* off-white background, faint sky-blue tint (light mode only) */
   --hbd-yellow:   #F9D93A;   /* bright yellow accent -- same in both themes */
   --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
   --hbd-brown:    #6B4226;   /* body text */
@@ -57,17 +57,37 @@ body {
 }
 .skip-link:focus { top: 16px; }
 
-/* Dark mode gets a full-bleed hand-drawn background, fixed to the viewport
-   so it reads as a backdrop rather than stretching over the whole
-   scrollable page. Light mode stays flat var(--hbd-beige) (set above)
-   until its own background is ready. Previously had two slow-drifting
-   gradient blobs here — removed, wasn't landing. */
-[data-theme="dark"] body {
-  background-image: url('/assets/dark-background2.svg');
+/* Hand-drawn background, fixed to the viewport, split into two layers:
+     ::before -- sun/moon + clouds.
+     ::after  -- the treeline, always full strength, pinned to the true
+                 bottom of the screen (what was actually asked for: "always
+                 visible at the bottom"). Sits on top of ::before in the
+                 stacking order for free, just from being the later box.
+   ::before runs dimmed in light mode -- there's no card system behind
+   hero/etc. there yet (see the manifest's light-mode container item), so
+   full strength runs the clouds straight through the hero heading. Dark
+   mode already has that card system shielding real content, so it stays
+   at full, sharp-contrast strength there.
+   All three files are exports of one source (bg_bananamoon.svg) with its
+   DarkMode/LightMode/Treetops layers toggled per file. */
+body::before, body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background-repeat: no-repeat; pointer-events: none;
+}
+body::before {
+  background-image: url('/assets/bg_bananamoon-light.svg');
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-position: center bottom;
+  opacity: 0.3;
+}
+[data-theme="dark"] body::before {
+  background-image: url('/assets/bg_bananamoon-dark.svg');
+  opacity: 1;
+}
+body::after {
+  background-image: url('/assets/bg_treetops.svg');
+  background-size: 100% auto;
+  background-position: center bottom;
 }
 h1, h2, h3 {
   color: var(--hbd-deep);
@@ -446,6 +466,10 @@ a.card:hover {
 .project-thumb:hover img { transform: scale(1.05); }
 .project-info { padding: 16px; }
 .project-info p { font-size: 0.9rem; opacity: 0.85; }
+[data-theme="dark"] .project-info {
+  background: var(--hbd-card);
+  border-radius: 8px;
+}
 
 /* Paintings show at their true aspect ratio — no cropping, an honest
    representation of each piece. Rows are top-aligned so uneven heights sit
@@ -469,10 +493,14 @@ a.card:hover {
 }
 
 /* ---- Footer ---- */
+/* Slightly translucent (not solid) card color so the treeline bleeds
+   through at the bottom edge, per the "maybe even the footer" ask --
+   85% keeps the email/copy-button text at full legibility. */
 footer {
-  padding: 48px 0 24px; background: var(--hbd-card);
+  padding: 48px 0 24px; background: rgba(255, 253, 249, 0.85);
   border-top: 1px solid rgba(107, 66, 38, 0.1);
 }
+[data-theme="dark"] footer { background: rgba(36, 28, 21, 0.85); }
 footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .copy-email-btn {
