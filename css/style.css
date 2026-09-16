@@ -154,21 +154,21 @@ body { padding-top: 64px; }
 
 .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
 
-/* theme-toggle and menu-btn share the logo badge's pill chrome (dark fill,
-   yellow border) -- the icons themselves are bare linework, cropped out of
-   the artwork with their own baked-in boxes stripped, same idea as the logo
-   icon. */
+/* Bare linework, no background chip -- forcing the rectangular toggle art
+   and the hamburger into a circular/pill frame (to match the logo badge)
+   looked worse than just letting them sit at a bigger size on the open
+   sky, same as the logo icon's own art has no box around it either. */
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  position: relative; width: 70px; height: 40px;
-  background: #0d0a07; border: 2px solid var(--hbd-yellow); border-radius: 999px;
+  position: relative; width: 96px; height: 56px;
+  background: none; border: none;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .theme-toggle:hover { transform: scale(1.05); }
-.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
 .theme-toggle img {
-  position: absolute; inset: 6px 12px; width: calc(100% - 24px); height: calc(100% - 12px);
+  position: absolute; inset: 0; width: 100%; height: 100%;
   display: block;
   transition: opacity 0.25s ease;
 }
@@ -181,14 +181,14 @@ body { padding-top: 64px; }
 
 .menu-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px;
-  background: #0d0a07; border: 2px solid var(--hbd-yellow); border-radius: 999px;
+  width: 52px; height: 52px;
+  background: none; border: none;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .menu-btn:hover { transform: scale(1.05); }
-.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
-.menu-btn img { display: block; width: 26px; height: 26px; }
+.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+.menu-btn img { display: block; width: 48px; height: 48px; }
 
 /* ---- Side slide-out nav panel (all viewport widths) ---- */
 .nav-overlay {
