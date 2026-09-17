@@ -185,14 +185,14 @@ body { padding-top: 64px; }
 
 .menu-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 60px; height: 60px;
+  width: 78px; height: 56px;
   background: none; border: none;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
 }
 .menu-btn:hover { transform: scale(1.05); }
 .menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
-.menu-btn img { display: block; width: 56px; height: 56px; }
+.menu-btn img { display: block; width: 100%; height: 100%; }
 
 /* ---- Side slide-out nav panel (all viewport widths) ---- */
 .nav-overlay {
