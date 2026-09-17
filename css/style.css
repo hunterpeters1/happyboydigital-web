@@ -109,7 +109,19 @@ a:hover { color: var(--hbd-yellow-dark); text-decoration: underline; }
 :focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
 
 /* ---- Layout ---- */
-body { padding-top: 64px; }
+/* Sticky footer: on short pages (few blog posts, short content) footer
+   used to just sit wherever <main> ended, leaving a gap below it up to
+   the viewport bottom. min-height + flex makes <main> (the only other
+   flex item -- header/nav overlay/panel are all position:fixed, out of
+   flow) grow to fill any leftover space, so footer always lands flush
+   with the bottom on pages taller *or* shorter than the viewport. */
+body {
+  padding-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1 0 auto; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
 @media (max-width: 768px) { .container { padding: 0 24px; } }
 
