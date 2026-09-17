@@ -379,24 +379,28 @@ section { padding: 80px 0; }
   color: rgba(74, 44, 18, 0.1);
 }
 
-/* Dark mode: solid fill + a CSS-drawn border, with the hand-drawn medallion
-   logo (happyboy-logo0926.svg) sitting at the corners. Replaces the earlier
-   approach of stretching a full-panel illustration to fit the box -- a
-   solid fill + CSS lines can never gap or distort at any box size, and the
-   medallion is a fixed-size image so it never stretches either. Simplified
-   from the original hand-drawn border: the short secondary accent line and
-   the diamond marker near the right edge aren't reproduced here since they
-   don't translate to a technique that adapts to an arbitrary box size the
-   way a straight border and a gradient line do -- the border, the inset
-   rail line, and the medallion carry the design faithfully. */
-[data-theme="dark"] .hero-copy,
-[data-theme="dark"] .atelier-copy,
-[data-theme="dark"] .card,
-[data-theme="dark"] .page-head-frame,
-[data-theme="dark"] .prose,
-[data-theme="dark"] .project-info {
+/* Card/container treatment: solid fill + a CSS-drawn border, with the
+   hand-drawn medallion logo (happyboy-logo0926.svg) sitting at the
+   corners. A solid fill + CSS lines can never gap or distort at any box
+   size, and the medallion is a fixed-size image so it never stretches
+   either. Simplified from the original hand-drawn border: the short
+   secondary accent line and the diamond marker near the right edge
+   aren't reproduced here since they don't translate to a technique that
+   adapts to an arbitrary box size the way a straight border and a
+   gradient line do -- the border, the inset rail line, and the medallion
+   carry the design faithfully.
+   Same treatment in both themes now -- light mode's fill is --hbd-card
+   (the cream used on the Commission cards), dark mode's is the deep
+   near-black page color rather than --hbd-card so it blends into the
+   page instead of standing out as its own shade. */
+.hero-copy,
+.atelier-copy,
+.card,
+.page-head-frame,
+.prose,
+.project-info {
   position: relative;
-  background-color: #1B140F;
+  background-color: var(--hbd-card);
   border: 2px solid #F9D93A;
   border-radius: 8px;
   background-image: linear-gradient(#F9D93A, #F9D93A);
@@ -405,12 +409,20 @@ section { padding: 80px 0; }
   background-repeat: no-repeat;
   box-shadow: none;
 }
-[data-theme="dark"] .hero-copy::after,
-[data-theme="dark"] .atelier-copy::after,
-[data-theme="dark"] .card::after,
-[data-theme="dark"] .page-head-frame::after,
-[data-theme="dark"] .prose::after,
-[data-theme="dark"] .project-info::after {
+[data-theme="dark"] .hero-copy,
+[data-theme="dark"] .atelier-copy,
+[data-theme="dark"] .card,
+[data-theme="dark"] .page-head-frame,
+[data-theme="dark"] .prose,
+[data-theme="dark"] .project-info {
+  background-color: #1B140F;
+}
+.hero-copy::after,
+.atelier-copy::after,
+.card::after,
+.page-head-frame::after,
+.prose::after,
+.project-info::after {
   content: "";
   position: absolute; right: -3px; bottom: -3px;
   width: 48px; height: 48px;
@@ -418,10 +430,10 @@ section { padding: 80px 0; }
   background-size: contain;
   background-repeat: no-repeat;
 }
-[data-theme="dark"] .hero-copy::before,
-[data-theme="dark"] .atelier-copy::before,
-[data-theme="dark"] .page-head-frame::before,
-[data-theme="dark"] .prose::before {
+.hero-copy::before,
+.atelier-copy::before,
+.page-head-frame::before,
+.prose::before {
   content: "";
   position: absolute; right: -3px; top: -3px;
   width: 48px; height: 48px;
@@ -429,23 +441,26 @@ section { padding: 80px 0; }
   background-size: contain;
   background-repeat: no-repeat;
 }
-[data-theme="dark"] .hero-copy { padding: 36px 60px 36px 36px; }
-[data-theme="dark"] .atelier-copy { padding: 36px 60px 36px 36px; }
-[data-theme="dark"] .card { padding: 32px 56px 32px 32px; }
-[data-theme="dark"] .page-head-frame { padding: 28px 60px 28px 32px; margin-bottom: 8px; }
-[data-theme="dark"] .prose { padding: 36px 60px 36px 36px; }
-[data-theme="dark"] .project-info { padding: 16px 56px 16px 16px; }
+.hero-copy { padding: 36px 60px 36px 36px; }
+.atelier-copy { padding: 36px 60px 36px 36px; }
+.card { padding: 32px 56px 32px 32px; }
+.page-head-frame { padding: 28px 60px 28px 32px; margin-bottom: 8px; }
+.prose { padding: 36px 60px 36px 36px; }
+.project-info { padding: 16px 56px 16px 16px; }
 /* Cards keep the top-right corner for the number instead of a second
    medallion -- a small CSS-drawn pill in the same border language rather
-   than the old drawn badge-tab artwork. */
-[data-theme="dark"] .card-num {
+   than the old drawn badge-tab artwork. Text is dark in light mode
+   (yellow-on-cream reads poorly) and yellow in dark mode (yellow-on-near-
+   black is the whole point of the pill there). */
+.card-num {
   position: absolute; top: -3px; right: -3px; left: auto;
   transform: none;
-  background: #1B140F; border: 2px solid #F9D93A; border-radius: 999px;
+  background: var(--hbd-card); border: 2px solid #F9D93A; border-radius: 999px;
   padding: 6px 16px;
   font-size: 1.5rem;
-  color: #F9D93A;
+  color: var(--hbd-deep);
 }
+[data-theme="dark"] .card-num { background: #1B140F; color: #F9D93A; }
 
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
    column count, plain nth-child(odd/even) already lands on the correct
