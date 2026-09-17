@@ -156,13 +156,13 @@ body { padding-top: 64px; }
 
 .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
 
-/* Bare linework, no background chip -- forcing the rectangular toggle art
-   and the hamburger into a circular/pill frame (to match the logo badge)
-   looked worse than just letting them sit at a bigger size on the open
-   sky, same as the logo icon's own art has no box around it either. */
+/* Bare linework, no background chip -- forcing the toggle art and the
+   hamburger into a circular/pill frame (to match the logo badge) looked
+   worse than just letting them sit at a bigger size on the open sky,
+   same as the logo icon's own art has no box around it either. */
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  position: relative; width: 96px; height: 56px;
+  position: relative; width: 56px; height: 56px;
   background: none; border: none;
   cursor: pointer; padding: 0;
   transition: transform 0.15s ease;
@@ -171,11 +171,13 @@ body { padding-top: 64px; }
 .theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
 .theme-toggle img {
   position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain;
   display: block;
   transition: opacity 0.25s ease;
 }
-/* Two hand-drawn states of the same moon/sun switch -- the sun pane swaps
-   for clouds at night. nav-toggle-light.svg / nav-toggle-dark.svg. */
+/* One icon shows at a time, crossfaded -- the live theme's own icon, not
+   both sun and moon together. nav-toggle-light.svg (sun) / _dark.svg
+   (moon, highlighted with its yellow trace + stars). */
 .theme-toggle .toggle-art--light { opacity: 1; }
 .theme-toggle .toggle-art--dark { opacity: 0; }
 [data-theme="dark"] .theme-toggle .toggle-art--light { opacity: 0; }
