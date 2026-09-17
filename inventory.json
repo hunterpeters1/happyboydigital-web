@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-09-17T12:32:34",
+  "items": [
+    {
+      "title": "Pingus",
+      "in_stock": true
+    },
+    {
+      "title": "Sick Duck",
+      "in_stock": true
+    },
+    {
+      "title": "Smiley",
+      "in_stock": true
+    },
+    {
+      "title": "Happy Boy",
+      "in_stock": true
+    },
+    {
+      "title": "Harry",
+      "in_stock": true
+    },
+    {
+      "title": "Moonlight",
+      "in_stock": true
+    },
+    {
+      "title": "Roses",
+      "in_stock": true
+    },
+    {
+      "title": "Silly the Clown",
+      "in_stock": true
+    }
+  ]
+}
