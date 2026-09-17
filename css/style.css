@@ -523,14 +523,13 @@ a.card:hover {
    rounded-corner clip look off. */
 .work-page main .container { max-width: 1320px; }
 
-/* "Sold" / status marker pinned to a thumb corner */
-.status-badge {
-  position: absolute; top: 12px; left: 12px; z-index: 2;
-  padding: 5px 12px; border-radius: 999px;
-  font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  background: var(--hbd-deep); color: var(--hbd-beige);
-  box-shadow: 0 2px 8px rgba(74, 44, 18, 0.25);
+/* "Sold" wax-seal mark pinned to a thumb corner -- hand-drawn art
+   (sold-seal.svg) replacing the old plain CSS pill */
+.project-thumb .status-badge,
+.art-wrap .status-badge {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  width: 56px; height: auto;
+  filter: drop-shadow(0 2px 6px rgba(74, 44, 18, 0.35));
 }
 
 /* ---- Footer ---- */
@@ -671,15 +670,19 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
   cursor: default;
 }
+/* Keeps a translucent dark backdrop chip (unlike the nav's bare
+   linework) since this icon sits over arbitrary painting photos, not
+   the consistent sky background -- needs guaranteed contrast either way. */
 .lightbox-close {
   position: absolute; top: 20px; right: 24px;
   width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12); color: #FFFDF9;
+  background: rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 1.5rem; line-height: 1; cursor: pointer;
-  transition: background 0.15s ease;
+  padding: 10px; cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
-.lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+.lightbox-close:hover { background: rgba(0, 0, 0, 0.75); transform: scale(1.05); }
+.lightbox-close img { display: block; width: 100%; height: 100%; }
 
 /* ---- Self Portrait shelf (work page) ---- */
 .shelf { max-width: 420px; margin: 0 auto; text-align: center; }
@@ -726,7 +729,10 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   margin: 14px 0 10px;
 }
 .prose figcaption { font-size: 0.85rem; opacity: 0.7; margin-bottom: 8px; }
-.prose .section-emoji { margin-right: 8px; }
+.prose .section-emoji {
+  display: inline-block; width: 22px; height: 22px;
+  margin-right: 8px; vertical-align: -4px;
+}
 
 .post-list { list-style: none; max-width: 640px; margin: 0 auto; }
 .post-list li {

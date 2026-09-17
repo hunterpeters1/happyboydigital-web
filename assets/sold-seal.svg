@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="19.212" height="19.035" viewBox="0 0 19.212 19.035" version="1.1">
+  <g transform="translate(-279.716,-12.219)">
+<g id="g29" inkscape:label="CompleteSeal" transform="translate(8.0667765,-3.6991296)">
+      <g id="g3" inkscape:label="SealShadow" style="display:inline">
+        <ellipse style="font-variation-settings:'wght' 500;display:inline;fill:#e0b516;fill-opacity:1;stroke:none;stroke-width:0.229291;stroke-linecap:round" id="path1" cx="280.43411" cy="24.429131" rx="7.5853295" ry="7.3105049" inkscape:label="MainSealLowlight"/>
+        <path style="font-variation-settings:'wght' 500;display:inline;fill:#e0b516;fill-opacity:1;stroke:none;stroke-width:0.220133;stroke-linecap:round" d="m 273.91386,27.810325 c 0,0 0.5348,2.139254 1.15877,4.902459 0,0 1.69358,2.763206 5.70468,-0.713084 l 3.7437,-1.782713 z" id="path2" inkscape:label="Blob2low"/>
+        <path style="font-variation-settings:'wght' 500;display:inline;fill:#e0b516;fill-opacity:1;stroke:none;stroke-width:0.220133;stroke-linecap:round" d="m 282.91656,17.827131 c 3.29802,1.204317 2.72681,0.02423 5.88296,3.119748 2.28638,2.242453 -0.62395,2.495798 -1.33703,5.793817" id="path3" sodipodi:nodetypes="csc" inkscape:label="Blob1low"/>
+      </g>
+      <g id="g6" style="display:inline" inkscape:label="SealBright">
+        <circle style="font-variation-settings:'wght' 500;fill:#f9d93a;fill-opacity:1;stroke:none;stroke-width:0.325966;stroke-linecap:round" id="path4" cx="280.15335" cy="24.066628" r="6.8634453" inkscape:label="MainSealHighlight"/>
+        <path style="font-variation-settings:'wght' 500;fill:#f9d93a;fill-opacity:1;stroke:none;stroke-width:0.220133;stroke-linecap:round" d="m 273.64645,25.671068 c 0,0 1.42617,3.92197 1.78272,5.34814 0.35655,1.42617 3.74371,2.495798 8.73528,-2.228391 z" id="path5" sodipodi:nodetypes="cscc" inkscape:label="Blob2"/>
+        <path style="font-variation-settings:'wght' 500;fill:#f9d93a;fill-opacity:1;stroke:none;stroke-width:0.220133;stroke-linecap:round" d="m 280.68817,17.203181 c 0,0 4.01111,1.693577 5.25899,1.871849 1.24791,0.178271 3.38718,2.050122 3.2089,3.030612 -0.0764,0.419942 -0.59419,0.64844 -1.23135,1.587048 -0.8505,1.252878 -1.91362,3.352906 -2.42321,4.830719 -0.89135,2.584937 -4.81333,-11.320228 -4.81333,-11.320228 z" id="path6" sodipodi:nodetypes="cssssc" inkscape:label="Blob1"/>
+      </g>
+      <g id="g28" inkscape:label="SoldwSmile">
+        <path style="font-variation-settings:'wght' 500;display:inline;fill:none;fill-opacity:1;stroke:#e0b516;stroke-width:0.90514;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 275.07263,24.423169 c 0.75288,6.026095 9.77539,5.903017 10.25061,-0.08914" id="path7" sodipodi:nodetypes="cc" inkscape:label="Smile"/>
+        <path style="font-variation-settings:'wght' 500;fill:none;fill-opacity:1;stroke:#e0b516;stroke-width:0.90514;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 277.12273,20.590336 c 0,0 -1.51529,-1.158763 -2.05011,0.356543 -0.44598,1.263605 1.78272,0.623949 2.05013,1.515306 0.26739,0.891356 -1.15876,1.247899 -2.05012,0.713085" id="path8" sodipodi:nodetypes="cssc" inkscape:label="S"/>
+        <path style="font-variation-settings:'wght' 500;fill:none;fill-opacity:1;stroke:#e0b516;stroke-width:0.90514;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 278.99464,23.531813 c -1.29224,-0.213633 -1.09582,-2.998891 0.40424,-3.261098 1.08676,0.630284 1.19874,3.352089 -0.40424,3.261098 z" id="path9" sodipodi:nodetypes="ccc" inkscape:label="O"/>
+        <path style="font-variation-settings:'wght' 500;fill:none;fill-opacity:1;stroke:#e0b516;stroke-width:0.90514;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 281.22298,20.055522 v 3.387155 l 1.34153,-0.02611" id="path10" sodipodi:nodetypes="ccc" inkscape:label="L"/>
+        <path style="font-variation-settings:'wght' 500;fill:none;fill-opacity:1;stroke:#e0b516;stroke-width:0.90514;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 283.80793,20.670513 v 2.593893 c 0,0 4.18936,-0.18723 0,-2.593893 z" id="path11" sodipodi:nodetypes="ccc" inkscape:label="D"/>
+      </g>
+    </g>
+  </g>
+</svg>

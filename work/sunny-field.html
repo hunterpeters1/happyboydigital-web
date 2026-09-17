@@ -60,7 +60,7 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="/css/style.css?v=45">
+  <link rel="stylesheet" href="/css/style.css?v=46">
 </head>
 <body>
 
@@ -109,7 +109,7 @@
         <div class="grid grid-2 piece-grid">
 
           <div class="art-wrap" data-reveal>
-            <span class="status-badge">Sold</span>
+            <img class="status-badge" src="/assets/sold-seal.svg" alt="Sold" width="56" height="56" loading="lazy">
             <img class="framed-art" src="/assets/sunnyfield.jpeg" alt="Sunny Field, acrylic painting by Hunter Peters" width="1500" height="1125" data-large="/assets/large/sunnyfield.jpeg" decoding="async">
             <p class="zoom-hint">Click to zoom in</p>
           </div>
@@ -146,8 +146,8 @@
     </section>
 
     <div class="lightbox" id="lightbox" hidden>
-      <button type="button" class="lightbox-close" aria-label="Close zoomed image">&times;</button>
-      <img src="" alt="">
+      <button type="button" class="lightbox-close" aria-label="Close zoomed image"><img src="/assets/lightbox-close-icon.svg" alt=""></button>
+      <img src="" alt="" id="lightbox-img">
     </div>
   </main>
 
@@ -158,6 +158,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=10"></script>
+  <script src="/js/main.js?v=11"></script>
 </body>
 </html>

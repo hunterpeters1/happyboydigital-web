@@ -203,7 +203,7 @@
   var zoomImg = document.querySelector('.framed-art[data-large]');
   var lightbox = document.getElementById('lightbox');
   if (zoomImg && lightbox) {
-    var lightboxImg = lightbox.querySelector('img');
+    var lightboxImg = document.getElementById('lightbox-img');
     var lightboxClose = lightbox.querySelector('.lightbox-close');
     var lastFocused = null;
 
