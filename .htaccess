@@ -1,1 +1,5 @@
 ErrorDocument 404 /404.html
+
+# Turn off directory listings -- /js/, /css/, /assets/ etc. should 404
+# instead of showing a raw file index to anyone who browses to them.
+Options -Indexes
