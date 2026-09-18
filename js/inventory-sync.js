@@ -1,5 +1,5 @@
 (function () {
-  // Reads inventory.json (pushed by the Receipt Generator tool's "Sync to
+  // Reads inventory.json (pushed by the Receipt Generator (HBD_POS.py) tool's "Sync to
   // Website" button) and marks any [data-item-title] element whose title is
   // sold out with the same sold-seal badge already used for one-off sold
   // paintings on work.html.
