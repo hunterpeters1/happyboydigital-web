@@ -1,0 +1,31 @@
+---
+title: Blog — Happy Boy Digital
+description: Weekly notes from Hunter Peters — what he's working on, what he's learning, a favourite painting, and a song of the week.
+sitemap: 7
+---
+<section class="page-head">
+  <div class="container">
+    <div class="page-head-frame">
+      <span class="kicker">Journal</span>
+      <h1 class="lead">Blog</h1>
+      <p class="sub">A weekly note on what I'm working on, what I'm learning, a favourite painting, and whatever's on repeat.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <ul class="post-list">
+{% for post in posts %}
+      <li>
+        <a href="{{ post.url }}">
+          <span class="post-date">{{ post.date }}</span>
+          <span class="post-title">{{ post.title }}</span>
+        </a>
+      </li>
+{% endfor %}
+    </ul>
+
+  </div>
+</section>

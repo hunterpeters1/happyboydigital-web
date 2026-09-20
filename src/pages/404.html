@@ -1,0 +1,77 @@
+---
+title: 404 — Happy Boy Digital
+description: This page has gone missing. Welcome to the gap between listings.
+body_class: error-404
+noindex: true
+layout: bare
+---
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="error-stage" id="errorStage">
+
+    <!-- Facade: a corrupted painting-detail page. No nav on purpose. -->
+    <div class="error-facade" id="errorFacade">
+      <main>
+        <section class="page-head">
+          <div class="container">
+            <span class="kicker">Untitled &middot; Location unstable</span>
+            <h1 class="lead">This page exists between listings.</h1>
+          </div>
+        </section>
+
+        <section>
+          <div class="container">
+            <div class="grid grid-2 piece-grid">
+
+              <div class="art-wrap error-void-frame">
+                <span class="error-void-static"></span>
+              </div>
+
+              <div class="piece-details">
+                <h2>Original</h2>
+                <div class="error-specs">
+                  <p><span>Medium</span> unknown</p>
+                  <p><span>Dimensions</span> shifting</p>
+                  <p><span>Status</span> do not linger</p>
+                </div>
+                <p class="error-warning">The gap between two real pages wasn&rsquo;t meant to be found. It isn&rsquo;t dangerous, exactly &mdash; it&rsquo;s just not finished being made yet. <span class="error-corrupt">D&#815;o n&#817;ot&#820; st&#821;ay.</span></p>
+                <button type="button" class="error-hint" id="errorHint">click, or scroll &mdash; it&rsquo;s the only way through</button>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Revealed: the real site, found again -->
+    <div class="error-revealed" id="errorRevealed" aria-hidden="true">
+
+      {{ partial('header', indent=6) }}
+
+      <div class="nav-overlay" id="nav-overlay"></div>
+      {{ partial('nav', indent=6) }}
+
+      <main id="main">
+        <section class="error-found">
+          <div class="container">
+            <div class="error-mark-frame">
+              <img src="/assets/404layout-transparent.svg" alt="404" class="error-mark">
+            </div>
+            <h2 class="section-title">Found the gap.</h2>
+            <p>Not much here yet &mdash; just the way back.</p>
+            <a href="/index.html" class="btn">Back to the studio</a>
+          </div>
+        </section>
+      </main>
+
+      {{ partial('footer', indent=6) }}
+
+    </div>
+
+  </div>
+
+  <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script src="{{ asset('/js/main.js') }}"></script>
+  <script src="{{ asset('/js/error-404.js') }}"></script>

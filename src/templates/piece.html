@@ -1,0 +1,62 @@
+<section class="page-head">
+  <div class="container">
+    <div class="page-head-frame">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/work.html">Work</a> / {{ piece.title }}</nav>
+      <h1 class="lead">{{ piece.title }}</h1>
+      <p class="sub">{{ piece.medium }} · {{ piece.size }} in</p>
+      <details class="artist-notes">
+        <summary>Artist's notes</summary>
+        {{ piece.notes_html | indent(8) }}
+      </details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid grid-2 piece-grid">
+
+      <div class="art-wrap" data-reveal{% if piece.status == 'available' %} data-item-title="{{ piece.title }}"{% endif %}>
+{% if piece.status == 'sold' %}
+        <img class="status-badge" src="/assets/sold-seal.svg" alt="Sold" width="56" height="56" loading="lazy">
+{% endif %}
+        <img class="framed-art" src="/assets/{{ piece.image }}.jpeg" alt="{{ piece.alt }} by Hunter Peters" width="{{ piece.page_w }}" height="{{ piece.page_h }}" data-large="/assets/large/{{ piece.image }}.jpeg" decoding="async">
+        <p class="zoom-hint">Click to zoom in</p>
+      </div>
+
+      <div class="piece-details" data-reveal>
+        <h2>Original</h2>
+{% if piece.status == 'available' %}
+        {# The three data-hide-if-sold items disappear, and the sold message appears, when js/inventory-sync.js
+           finds this painting sold out or on hold in inventory.json. If that file can't be read, they stay visible. #}
+        <p class="price-lg" data-hide-if-sold="{{ piece.title }}">{{ piece.price_label }}</p>
+        <p data-hide-if-sold="{{ piece.title }}" class="piece-note">One original, {{ piece.medium | lower }}, {{ piece.size }} in.</p>
+
+        <div class="buy-box" data-hide-if-sold="{{ piece.title }}">
+          <h2>How to buy</h2>
+          <ol>
+            <li><a href="mailto:{{ site.email }}?subject={{ ('Order: ' ~ piece.title) | urlencode }}&amp;body={{ ('Hi Hunter,\n\nI\'d like to order: ' ~ piece.title ~ '\n\nShipping to (city and province): ') | urlencode }}">Email me</a> what you'd like to order.</li>
+            <li>I&rsquo;ll reply within a day or two with an invoice ($30 flat shipping is included). Once you have it, the painting is on hold for you.</li>
+            <li>Pay by Interac e-Transfer with the invoice number in the message. I&rsquo;ll email your receipt and get it in the mail.</li>
+          </ol>
+          <span class="fine">Shipping is within Canada only. Common questions are on the <a href="/services.html#faq">FAQ</a>.</span>
+        </div>
+        <p data-show-if-sold="{{ piece.title }}" hidden>This original has sold — thank you.</p>
+{% elif piece.status == 'sold' %}
+        <p>This original has sold — thank you.</p>
+{% else %}
+        <p class="price-lg">{{ piece.price_text }}<span class="price-wink">{{ piece.price_note }}</span></p>
+{% endif %}
+      </div>
+
+    </div>
+    <div class="page-actions">
+      <a href="/work.html" class="btn btn-secondary">&larr; All work</a>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox-close" aria-label="Close zoomed image"><img src="/assets/lightbox-close-icon.svg" alt=""></button>
+  <img src="" alt="" id="lightbox-img">
+</div>

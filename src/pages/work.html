@@ -1,0 +1,58 @@
+---
+title: Work — Happy Boy Digital
+description: Original acrylic paintings by Hunter Peters — a few available to order, plus commissions.
+body_class: work-page
+scripts: inventory-sync
+sitemap: 2
+---
+<section class="page-head">
+  <div class="container">
+    <div class="page-head-frame">
+      <span class="kicker">Portfolio</span>
+      <h1 class="lead">Selected Work</h1>
+      <div class="page-head-row">
+        <p class="sub">A few things I've created.</p>
+        <div class="btn-group">
+          <a href="/atelier.html" class="btn btn-sm btn-secondary">Happy Boy Atelier →</a>
+          <a href="/stickers.html" class="btn btn-sm btn-secondary">Stickers →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid grid-3">
+{% for p in grid %}
+
+      {{ partial('card', indent=6, p=p, i=loop.index0) }}
+{% endfor %}
+
+    </div>
+    <div class="page-actions">
+      <a href="mailto:petershunter45@gmail.com" class="btn">Have a project? Let's talk.</a>
+    </div>
+  </div>
+</section>
+
+<!-- Paintings that aren't in the shop grid get their own shelf (set "grid: shelf" in their file). -->
+{% for s in shelf %}
+<section>
+  <div class="container">
+    <span class="kicker kicker-center">Not for sale (probably)</span>
+    <h2 class="section-title">A Personal Favorite</h2>
+    <div class="shelf">
+      <div class="art-wrap">
+        <picture><source type="image/avif" srcset="/assets/thumbs/{{ s.image }}-800.avif"><img class="framed-art" src="/assets/thumbs/{{ s.image }}-800.jpg" alt="{{ s.alt }}" width="{{ s.thumb_w }}" height="{{ s.thumb_h }}" loading="lazy" decoding="async"></picture>
+      </div>
+      <div class="shelf-info">
+        <h3>{{ s.title }}</h3>
+        <p class="mb-8">{{ s.medium }}. {{ s.size }} in</p>
+        <p class="price">{{ s.price_text }}<span class="price-wink">{{ s.shelf_note }}</span></p>
+        <a href="{{ s.url }}" class="btn btn-sm">The full story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}

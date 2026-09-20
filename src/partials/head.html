@@ -1,0 +1,33 @@
+<head>
+  <meta charset="UTF-8">
+{% if not noindex %}
+  <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+{% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+{% if noindex %}
+  <meta name="robots" content="noindex">
+{% else %}
+
+  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:url" content="{{ og_url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+{% endif %}
+
+  <link rel="icon" type="image/svg+xml" href="/assets/happyboy-logo0926.svg">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preload" href="/css/SpaceGrotesk-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+{% if head_extra %}
+{{ head_extra }}
+{% endif %}
+  <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+</head>

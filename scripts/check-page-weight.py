@@ -2,8 +2,10 @@
 """Check that a painting-grid page follows the page-weight rules.
 
 Usage (from the repo root):
-    python scripts/check-page-weight.py              # checks work.html
-    python scripts/check-page-weight.py index.html   # or any other page(s)
+    python scripts/check-page-weight.py              # checks work.html and index.html
+    python scripts/check-page-weight.py work.html    # or any other page(s)
+
+Pages are read from dist/ (the built site) when it exists. Run `python build.py` first.
 
 Exits non-zero if a rule is broken, so it can be run before every commit.
 The rules and the numbers behind them are in CLAUDE.md ("Page weight").
@@ -18,6 +20,7 @@ except ImportError:
     sys.exit("Pillow is not installed. Run: pip install --upgrade pillow")
 
 ROOT = Path(__file__).resolve().parent.parent
+PAGES = ROOT / "dist" if (ROOT / "dist").is_dir() else ROOT   # built pages; images are always under ROOT
 
 # ---- budgets: tweak here, not in the checks below -------------------------
 MAX_THUMB_WIDTH = 900            # px; grid columns are ~376 CSS px, so 800 covers 2x screens
@@ -77,7 +80,7 @@ def local(path):
 def check(page):
     errors, warns = [], []
     scan = Scan()
-    scan.feed((ROOT / page).read_text(encoding="utf-8"))
+    scan.feed((PAGES / page).read_text(encoding="utf-8"))
 
     thumbs = [r for r in scan.imgs if r["thumb"] and not r["badge"] and (r["attrs"].get("src") or "").lower().endswith(RASTER)]
     avif_total = jpeg_total = 0
@@ -160,6 +163,6 @@ def check(page):
 
 
 if __name__ == "__main__":
-    pages = sys.argv[1:] or ["work.html"]
+    pages = sys.argv[1:] or ["work.html", "index.html"]
     ok = all([check(p) for p in pages])
     sys.exit(0 if ok else 1)

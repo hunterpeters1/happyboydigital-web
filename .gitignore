@@ -4,3 +4,7 @@
 # don't belong in git.
 **/originals/
 assets/paintings.zip
+
+# Private working notes -- never part of the site or the public repo.
+SCRATCH/
+.claude/

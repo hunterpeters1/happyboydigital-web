@@ -1,0 +1,8 @@
+<div class="project-thumb" data-reveal="info" data-item-title="{{ p.title }}">
+  <picture><source type="image/avif" srcset="/assets/thumbs/{{ p.image }}-800.avif"><img src="/assets/thumbs/{{ p.image }}-800.jpg" alt="{{ p.alt }}" width="{{ p.thumb_w }}" height="{{ p.thumb_h }}" loading="lazy" decoding="async"></picture>
+  <div class="project-info">
+    <h3>{{ p.title }}</h3>
+    <p class="mb-8">{{ p.medium }}. {{ p.size }} in</p>
+    <a href="{{ p.url }}" class="btn btn-sm">{{ p.home_label }} →</a>
+  </div>
+</div>

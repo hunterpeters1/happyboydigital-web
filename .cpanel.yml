@@ -1,27 +1,25 @@
 ---
 # cPanel "Git Version Control" deploy script (Namecheap shared hosting).
 #
-# Workflow after this is set up:
-#   1. I push changes to GitHub.
-#   2. You open cPanel > Git Version Control > Manage > "Pull or Deploy".
-#   3. Click "Update from Remote", then "Deploy HEAD Commit".
+# Workflow:
+#   1. Edit files in src/, run `python build.py`, commit (dist/ is part of the commit).
+#   2. Push to GitHub.
+#   3. cPanel > Git Version Control > Manage > "Pull or Deploy" > "Update from Remote" > "Deploy HEAD Commit".
 #
-# The tasks below copy the site into public_html. Nothing is deleted except
-# full-res source files that don't belong on the live server (originals/
-# folders and paintings.zip) — everything else is only added or overwritten.
-# Those source files are also gitignored now, so this rm is mainly a safety
-# net for anything already sitting in public_html from before that change.
+# The server builds nothing. It copies the finished pages from dist/ plus the folders that are
+# served as they are (css, js, assets) and three loose files. Deploys only ever add or overwrite:
+# a page you retire stays live until you delete it from public_html by hand (`python build.py`
+# lists them). The one deletion below removes full-resolution source images that don't belong online.
 #
-# If a deploy fails with a path error, replace  $HOME/public_html  with the
-# absolute path cPanel shows for your account, e.g. /home/yourusername/public_html
+# If a deploy fails with a path error, replace  $HOME/public_html  with the absolute path
+# cPanel shows for your account, e.g. /home/yourusername/public_html
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html
-    - /bin/mkdir -p "$DEPLOYPATH/css" "$DEPLOYPATH/js" "$DEPLOYPATH/assets" "$DEPLOYPATH/work" "$DEPLOYPATH/blog"
-    - /bin/cp -R index.html work.html services.html atelier.html about.html stickers.html blog.html sitemap.xml robots.txt 404.html .htaccess inventory.json "$DEPLOYPATH/"
+    - /bin/mkdir -p "$DEPLOYPATH/css" "$DEPLOYPATH/js" "$DEPLOYPATH/assets"
+    - /bin/cp -R dist/. "$DEPLOYPATH/"
     - /bin/cp -R css/. "$DEPLOYPATH/css/"
     - /bin/cp -R js/. "$DEPLOYPATH/js/"
     - /bin/cp -R assets/. "$DEPLOYPATH/assets/"
-    - /bin/cp -R work/. "$DEPLOYPATH/work/"
-    - /bin/cp -R blog/. "$DEPLOYPATH/blog/"
-    - /bin/rm -rf "$DEPLOYPATH/assets/originals" "$DEPLOYPATH/assets/paintings.zip" "$DEPLOYPATH/blog/blogasets/Sept1226/originals"
+    - /bin/cp robots.txt .htaccess inventory.json "$DEPLOYPATH/"
+    - /bin/rm -rf "$DEPLOYPATH/assets/originals" "$DEPLOYPATH/assets/paintings.zip" "$DEPLOYPATH"/assets/blog/*/originals

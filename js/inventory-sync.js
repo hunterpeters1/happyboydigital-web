@@ -1,8 +1,9 @@
 (function () {
-  // Reads inventory.json (pushed by the Receipt Generator (HBD_POS.py) tool's "Sync to
-  // Website" button) and marks any [data-item-title] element whose title is
-  // sold out with the same sold-seal badge already used for one-off sold
-  // paintings on work.html.
+  // Reads inventory.json (published by the shop tools) and reflects it on the page.
+  //   [data-item-title]     gets the "Sold" badge when that painting is sold out or on hold
+  //   [data-hide-if-sold]   is hidden when the painting named in it is sold out (price, buy box)
+  //   [data-show-if-sold]   is revealed when the painting named in it is sold out ("This original has sold")
+  // If inventory.json can't be read the page just shows everything as available.
   var INVENTORY_URL = '/inventory.json';
   var SOLD_GRAPHIC_URL = '/assets/sold-seal.svg';
 
@@ -28,11 +29,19 @@
       var byTitle = {};
       items.forEach(function (item) { byTitle[item.title] = item.in_stock; });
 
+      function isSoldOut(title) {
+        return Object.prototype.hasOwnProperty.call(byTitle, title) && byTitle[title] === false;
+      }
+
       document.querySelectorAll('[data-item-title]').forEach(function (el) {
-        var title = el.getAttribute('data-item-title');
-        if (Object.prototype.hasOwnProperty.call(byTitle, title) && byTitle[title] === false) {
-          markSoldOut(el);
-        }
+        if (isSoldOut(el.getAttribute('data-item-title'))) markSoldOut(el);
+      });
+      document.querySelectorAll('[data-hide-if-sold]').forEach(function (el) {
+        // Inline style rather than the hidden attribute, so it wins over any display rule in the CSS.
+        if (isSoldOut(el.getAttribute('data-hide-if-sold'))) el.style.display = 'none';
+      });
+      document.querySelectorAll('[data-show-if-sold]').forEach(function (el) {
+        if (isSoldOut(el.getAttribute('data-show-if-sold'))) el.hidden = false;
       });
     })
     .catch(function (err) {

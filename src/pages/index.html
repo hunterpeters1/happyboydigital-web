@@ -1,0 +1,68 @@
+---
+title: Happy Boy Digital — Hunter Peters
+description: Find paintings and interactive tools for artists, designed and built by an artist.
+url: /
+scripts: inventory-sync
+sitemap: 1
+---
+<!-- Hero -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="kicker">Such a happy boy.</span>
+        <h1 class="lead">Original paintings, a glimpse into the world of Happy Boy.</h1>
+        <p class="sub">My name is Hunter Peters and I like to overwhelm myself with creative projects. Happy Boy is the embodiment of all of them.</p>
+        <div class="btn-group">
+          <a href="/work.html" class="btn">Shop paintings</a>
+          <a href="mailto:petershunter45@gmail.com" class="btn btn-secondary">Commission a piece</a>
+          <a href="/atelier.html" class="btn btn-secondary">Try Atelier</a>
+        </div>
+      </div>
+      <div class="hero-vis">
+        <span class="hero-frame">
+          <img src="/assets/happyboy.jpeg" alt="Happy Boy, acrylic painting" width="1125" height="1500" decoding="async" fetchpriority="high">
+        </span>
+        <p class="hero-caption">Happy Boy — acrylic on canvas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Commissions -->
+<section>
+  <div class="container">
+    <span class="kicker kicker-center">Commissions</span>
+    <h2 class="section-title">Commission a Piece</h2>
+    <div class="grid grid-2">
+      <a href="mailto:petershunter45@gmail.com" class="card">
+        <span class="card-num">01</span>
+        <h3>Painting Commission</h3>
+        <p class="price">$1 CAD / sq in</p>
+        <p>Stretched canvas</p>
+      </a>
+      <a href="mailto:petershunter45@gmail.com" class="card">
+        <span class="card-num">02</span>
+        <h3>Mural Commission</h3>
+        <p class="price">$20 CAD / sq ft</p>
+        <p>Bedroom walls and more</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio preview -->
+<section class="section-tint">
+  <div class="container">
+    <span class="kicker kicker-center">Portfolio</span>
+    <h2 class="section-title">Selected Work</h2>
+    <div class="grid grid-3">
+{% for p in home %}
+      {{ partial('home_card', indent=6, p=p) }}
+{% endfor %}
+    </div>
+    <div class="page-actions">
+      <a href="/work.html" class="btn">View all work</a>
+    </div>
+  </div>
+</section>

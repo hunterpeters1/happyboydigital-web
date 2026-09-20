@@ -1,23 +1,30 @@
 # happyboy.digital
 
-Static HTML/CSS/JS portfolio and shop for Hunter Peters. No build step. Deployed by cPanel Git Version Control using the explicit file list in `.cpanel.yml`, so a new top-level page or folder must be added there. `CLAUDE.md` and `scripts/` are deliberately not deployed.
+A small static site. **`python build.py` turns the files in `src/` into finished pages in `dist/`**, and `dist/` is what cPanel deploys. Read `README.md` for the everyday guide.
+
+## The rules that matter
+
+- **Edit `src/` (and `css/`, `js/`, `assets/`). Never edit `dist/` by hand.** A rebuild replaces it. `dist/` is committed because the server builds nothing.
+- Pages: `src/pages/`. Paintings: one file each in `src/pieces/`. Shared header, nav and footer: `src/partials/`. Page shell: `src/layout.html`. Painting page layout: `src/templates/piece.html`.
+- **Prices come from the Curation Log**, not from anywhere in this repo. `python build.py` refreshes `src/content/catalog.json` (title, type, size, price only, never stock counts).
+- Cache-busting is automatic: `style.css` and `main.js` are linked with a version taken from a hash of the file. There is nothing to bump.
+- Deployed by cPanel Git Version Control using the explicit list in `.cpanel.yml` (`dist/`, `css/`, `js/`, `assets/`, `robots.txt`, `.htaccess`, `inventory.json`). A new top-level folder that must go live needs adding there. `CLAUDE.md`, `README.md`, `src/`, `scripts/` and `build.py` are deliberately not deployed.
 
 ## Working in this repo
-- The owner edits the working tree and commits in parallel. Run `git status` first, stage only files you changed, and commit with explicit paths (`git commit -m ... -- path1 path2`) so their staged or uncommitted work is not swept in.
-- After any change to `css/style.css` or `js/main.js`, bump the `?v=N` query string on every HTML page that links it (cache busting).
+
+- **This repo is public.** Never commit anything the owner has said should stay private (pricing nuances, internal notes, business details from chat). When unsure, ask. The owner's private wording list is checked by a tool that lives outside this repo (see below), so read your diff before committing.
+- The owner edits the working tree and commits in parallel. Run `git status` first, stage only files you changed, and commit with explicit paths (`git commit -m ... -- path1 path2`) so their staged or uncommitted work is not swept in. Changing a source file means committing its rebuilt `dist/` output too.
+- Before committing site changes: `python build.py --check` (broken links and images, structured data), and the owner's preflight `check_site.py` from the Garden's `05 Tools` folder if it is on this machine.
 - Commit messages end with `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
+- Don't remind the owner how to deploy. Just say what was pushed.
 
 ## Page weight: painting grids (work.html, index.html)
+
 The paintings are shown about 360 CSS px wide in the grids, so the grids must never load the full-size files. Loading them was 3.5 MB on work.html; the thumbnails bring it to about 1 MB.
 
+- **The build handles this.** The grid cards (`src/partials/card.html`, `home_card.html`) already use the `<picture>` thumbnail markup, with the real width/height read from the files, the first 3 items eager (the first with `fetchpriority="high"`) and the rest lazy. Don't hand-write grid images.
+- Thumbnails live in `assets/thumbs/` as `<name>-800.avif` (AVIF q55) and `<name>-800.jpg` (JPEG q78, fallback). `python build.py` makes any that are missing or stale by calling `python scripts/make-thumbs.py [name]` (needs Pillow 11.2+). The source is `assets/<name>.jpeg`.
 - **Never** reference `assets/<name>.jpeg`, `assets/large/`, or `assets/originals/` inside a grid. Full-size art belongs to the painting detail pages and their lightbox only.
-- Every painting has 800 px thumbnails in `assets/thumbs/`: `<name>-800.avif` (AVIF q55) and `<name>-800.jpg` (JPEG q78, fallback). Generate them with `python scripts/make-thumbs.py [name]`. The source is `assets/<name>.jpeg`. Needs Pillow 11.2+.
-- Markup for every grid image, with `width`/`height` equal to the thumbnail's real size (the script prints a ready-made snippet):
-  ```html
-  <picture><source type="image/avif" srcset="/assets/thumbs/NAME-800.avif"><img src="/assets/thumbs/NAME-800.jpg" alt="..." width="800" height="1067" loading="lazy" decoding="async"></picture>
-  ```
-- The first 3 grid items (first row on desktop) load eagerly, and the first also gets `fetchpriority="high"`. Every item after that gets `loading="lazy"`.
-- **Adding a painting:** put the 1125 px file at `assets/NAME.jpeg` (and `assets/large/NAME.jpeg` for the lightbox), run `make-thumbs.py NAME`, paste the snippet into the grid, then run the check below.
-- **Before committing any change to `work.html` or `index.html`, run `python scripts/check-page-weight.py work.html` (and `index.html`). It must pass.** The budgets are constants at the top of that script: per-thumbnail size and width, first-row eager and the rest lazy, width/height attributes, and a page total of about 1.15 MB on the AVIF path.
+- **Adding a painting:** `python build.py --new-piece "Title"`, add its row to the Curation Log, put the 1125px file at `assets/NAME.jpeg` (and `assets/large/NAME.jpeg`), fill in the new file in `src/pieces/`, then `python build.py --check`.
+- Before committing a change that touches the grids, run `python scripts/check-page-weight.py` (it checks `dist/work.html` and `dist/index.html` by default). It must pass. The budgets are constants at the top of that script.
 - Text, SVG and fonts need no page-weight work: the host already serves Brotli and 7-day caching.
-- `index.html` still uses the full-size files, so the checker fails on it. Convert its grid the same way.

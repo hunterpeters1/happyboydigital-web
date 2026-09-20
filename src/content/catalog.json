@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Pingus",
+    "type": "Sticker",
+    "size": "75mm",
+    "price": 5.0
+  },
+  {
+    "title": "Sick Duck",
+    "type": "Sticker",
+    "size": "75mm",
+    "price": 5.0
+  },
+  {
+    "title": "Smiley",
+    "type": "Sticker",
+    "size": "75mm",
+    "price": 5.0
+  },
+  {
+    "title": "Happy Boy",
+    "type": "Acrylic on Canvas",
+    "size": "18 x 24",
+    "price": 150.0
+  },
+  {
+    "title": "Harry",
+    "type": "Acrylic on Canvas",
+    "size": "18 x 24",
+    "price": 120.0
+  },
+  {
+    "title": "Moonlight",
+    "type": "Acrylic on Canvas",
+    "size": "11 x 14",
+    "price": 90.0
+  },
+  {
+    "title": "Roses",
+    "type": "Acrylic on Canvas",
+    "size": "18 x 24",
+    "price": 150.0
+  },
+  {
+    "title": "Silly the Clown",
+    "type": "Acrylic on Canvas",
+    "size": "16 x 20",
+    "price": 120.0
+  }
+]

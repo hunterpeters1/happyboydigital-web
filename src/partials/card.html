@@ -1,0 +1,14 @@
+<div class="project-thumb" data-reveal="info"{% if p.status == 'available' %} data-item-title="{{ p.title }}"{% endif %}>
+{% if p.status == 'sold' %}
+  <img class="status-badge" src="/assets/sold-seal.svg" alt="Sold" width="56" height="56" loading="lazy">
+{% endif %}
+  <picture><source type="image/avif" srcset="/assets/thumbs/{{ p.image }}-800.avif"><img src="/assets/thumbs/{{ p.image }}-800.jpg" alt="{{ p.alt }}" width="{{ p.thumb_w }}" height="{{ p.thumb_h }}"{% if i >= EAGER_THUMBS %} loading="lazy"{% endif %} decoding="async"{% if i == 0 %} fetchpriority="high"{% endif %}></picture>
+  <div class="project-info">
+    <h3>{{ p.title }}</h3>
+{% if p.status == 'available' %}
+    <p class="price">{{ p.price_label }}</p>
+{% endif %}
+    <p class="mb-8">{{ p.medium }}. {{ p.size }} in</p>
+    <a href="{{ p.url }}" class="btn btn-sm">View →</a>
+  </div>
+</div>
