@@ -30,6 +30,7 @@ MAX_PAGE_AVIF_BYTES = int(1.15 * 1024 * 1024)   # all thumbnails on one page, AV
 MAX_PAGE_JPEG_BYTES = int(1.6 * 1024 * 1024)    # same page on the JPEG fallback path
 MAX_OTHER_IMAGE_BYTES = 150 * 1024              # any other raster <img> on the page
 EAGER_COUNT = 3                  # first row on desktop loads immediately, the rest lazy
+EAGER_PAGES = ("work.html",)     # only pages whose grid is at the top; elsewhere (home) the grid is below the hero, so all lazy
 FORBIDDEN = ("/assets/originals/", "/assets/large/")   # full-size art: detail-page lightbox only
 RASTER = (".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif")
 # ---------------------------------------------------------------------------
@@ -133,15 +134,18 @@ def check(page):
         elif abs(aw / ah - w / h) > 0.01:
             errors.append(f"{name}: width/height {aw}x{ah} do not match the file's {w}x{h}")
         lazy = a.get("loading") == "lazy"
-        if n < EAGER_COUNT and lazy:
+        eager_n = EAGER_COUNT if page in EAGER_PAGES else 0
+        if n < eager_n and lazy:
             warns.append(f"{name}: in the first row but loading=lazy; make it eager so it does not pop in")
-        if n >= EAGER_COUNT and not lazy:
-            errors.append(f"{name}: below the first row, so it needs loading=\"lazy\"")
+        if n >= eager_n and not lazy:
+            errors.append(f"{name}: not in the first row, so it needs loading=\"lazy\"")
 
     for rec in scan.imgs:
         if rec in thumbs or rec["badge"]:
             continue
         src = rec["attrs"].get("src") or ""
+        if src.startswith("/assets/thumbs/"):
+            continue   # a thumbnail used outside the grid (the home hero) is already the small copy
         if any(f in src for f in FORBIDDEN):
             errors.append(f"{src}: full-size art on a grid page")
         elif src.lower().endswith(RASTER) and local(src).exists() and local(src).stat().st_size > MAX_OTHER_IMAGE_BYTES:
