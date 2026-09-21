@@ -9,7 +9,7 @@
     python build.py --new-post 2026-09-28   start a new blog post
 
 Everything you edit lives in src/ (and css/, js/, assets/). dist/ is generated:
-never edit it by hand, a rebuild replaces it. See README.md for the full guide.
+never edit it by hand, a rebuild replaces it. The everyday guide is kept outside this repo.
 """
 
 import argparse
@@ -556,7 +556,7 @@ def serve(port):
 # ---------------------------------------------------------------------- #
 
 def main():
-    ap = argparse.ArgumentParser(description="Build the Happy Boy Digital website (see README.md).")
+    ap = argparse.ArgumentParser(description="Build the Happy Boy Digital website.")
     ap.add_argument("--serve", action="store_true", help="build, then preview in a browser (rebuilds on save)")
     ap.add_argument("--port", type=int, default=8000, help="port for --serve (default 8000)")
     ap.add_argument("--check", action="store_true", help="after building, check links, images and structured data")
