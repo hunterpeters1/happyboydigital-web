@@ -57,38 +57,6 @@ body {
 }
 .skip-link:focus { top: 16px; }
 
-/* Hand-drawn background, fixed to the viewport, split into two layers:
-     ::before -- sun/moon + clouds.
-     ::after  -- the treeline, always full strength, pinned to the true
-                 bottom of the screen (what was actually asked for: "always
-                 visible at the bottom"). Sits on top of ::before in the
-                 stacking order for free, just from being the later box.
-   ::before runs dimmed in light mode -- there's no card system behind
-   hero/etc. there yet (see the manifest's light-mode container item), so
-   full strength runs the clouds straight through the hero heading. Dark
-   mode already has that card system shielding real content, so it stays
-   at full, sharp-contrast strength there.
-   All three files are exports of one source (bg_bananamoon.svg) with its
-   DarkMode/LightMode/Treetops layers toggled per file. */
-body::before, body::after {
-  content: ""; position: fixed; inset: 0; z-index: -1;
-  background-repeat: no-repeat; pointer-events: none;
-}
-body::before {
-  background-image: url('/assets/bg_bananamoon-light.svg');
-  background-size: cover;
-  background-position: center bottom;
-  opacity: 0.3;
-}
-[data-theme="dark"] body::before {
-  background-image: url('/assets/bg_bananamoon-dark.svg');
-  opacity: 1;
-}
-body::after {
-  background-image: url('/assets/bg_treetops.svg');
-  background-size: 100% auto;
-  background-position: center bottom;
-}
 h1, h2, h3 {
   color: var(--hbd-deep);
   line-height: 1.2;
@@ -126,8 +94,7 @@ main { flex: 1 0 auto; }
 @media (max-width: 768px) { .container { padding: 0 24px; } }
 
 /* ---- Site header: just the logo badge + toggle + menu button, no bar
-   background -- the hand-drawn sky is meant to show through here instead
-   of being covered by a solid color. All nav links live in the slide-out
+   background, so the page ground shows through. All nav links live in the slide-out
    .side-nav panel below, opened by #nav-toggle, so there's no separate
    desktop-inline vs. mobile-dropdown split to maintain anymore. ---- */
 .site-header {
@@ -561,9 +528,8 @@ a.card:hover {
 }
 
 /* ---- Footer ---- */
-/* Slightly translucent (not solid) card color so the treeline bleeds
-   through at the bottom edge, per the "maybe even the footer" ask --
-   85% keeps the email/copy-button text at full legibility. */
+/* Slightly translucent (85%) card colour; still keeps the email/copy-button
+   text at full legibility. */
 footer {
   padding: 48px 0 24px; background: rgba(255, 253, 249, 0.85);
   border-top: 1px solid rgba(107, 66, 38, 0.1);
