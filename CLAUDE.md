@@ -18,6 +18,22 @@ A small static site. **`python build.py` turns the files in `src/` into finished
 - Commit messages end with `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
 - Don't remind the owner how to deploy. Just say what was pushed.
 
+## Branches: live site vs redesign rollout
+
+Two folders, two branches, one GitHub repo (the second folder is a `git worktree` of the first):
+
+| Folder (siblings) | Branch | Work that belongs here |
+|---|---|---|
+| `happyboydigital-web` | `main` | The live site: paintings, blog posts, prices, inventory, bug fixes, page weight. |
+| `happyboydigital-web-rollout` | `rollout-ui` | The redesign only (below). Nothing here goes live until the owner says it's rollout day. |
+
+- **First thing in any session: run `git branch --show-current`** and check it matches the folder you are in. If it does not, stop and tell the owner.
+- **Never commit redesign work to `main`, and never commit content or fixes to `rollout-ui`.** Content and fixes go to `main` and reach the branch by merging `main` into it. The main folder always stays on `main`; the POS's "Sync to Website" commits `inventory.json` there.
+- **Never merge `rollout-ui` into `main`, push it to `main`, or deploy it without the owner's explicit go-ahead.** Before that merge, tag `main` as `pre-rollout`.
+- The redesign is: retire the hand-drawn sky; gallery-white ground (`#F7F6F4`), with a per-set colour only when the owner feels inspired by a piece; footer `#1B140F` with yellow text; a short text nav on desktop and the small menu on phones; the border-and-medallion frames kept only on the Blog and Atelier pages; Newsreader (titles) with Space Grotesk (everything else), regular or medium weights; minimal motion. The logo badge, sold seal and blog icons stay. Keep the redesign to `css/`, `src/layout.html`, `src/partials/`, `src/templates/`, small page tweaks it needs and its own assets.
+- Every commit on either branch includes its rebuilt `dist/` and passes `python build.py --check`. When merging `main` into `rollout-ui`, `dist/` will conflict: it is generated, so take either side and run `python build.py`. Conflicts in `src/`, `css/` or `js/` need a real look, so ask the owner.
+- Preview the branch with `python build.py --serve --port 8001` (the main folder uses 8000). The owner's step-by-step guide is in their Field Guide (`Redesign_Rollout.md`).
+
 ## Page weight: painting grids (work.html, index.html)
 
 The paintings are shown about 360 CSS px wide in the grids, so the grids must never load the full-size files. Loading them was 3.5 MB on work.html; the thumbnails bring it to about 1 MB.
