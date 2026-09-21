@@ -262,7 +262,10 @@ def file_version(url_path):
     target = ROOT / url_path.lstrip("/")
     if not target.exists():
         raise BuildError(f"A page links to {url_path}, but that file doesn't exist.")
-    return f"{url_path}?v={hashlib.sha1(target.read_bytes()).hexdigest()[:8]}"
+    # Hash with Windows line endings folded to Unix ones, so the same file gives the
+    # same version in every checkout (a fresh checkout or worktree has CRLF files).
+    content = target.read_bytes().replace(b"\r\n", b"\n")
+    return f"{url_path}?v={hashlib.sha1(content).hexdigest()[:8]}"
 
 
 def make_env(site, pieces, posts):
