@@ -1,6 +1,6 @@
 # happyboy.digital
 
-A small static site. **`python build.py` turns the files in `src/` into finished pages in `dist/`**, and `dist/` is what cPanel deploys. Read `README.md` for the everyday guide.
+A small static site. **`python build.py` turns the files in `src/` into finished pages in `dist/`**, and `dist/` is what cPanel deploys. The everyday guide is `Website_README.md` in the owner's Field Guide, which is kept outside this repo; `README.md` here is deliberately just two lines.
 
 ## The rules that matter
 
