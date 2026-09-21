@@ -11,7 +11,7 @@
 
 /* ---- Color palette ---- */
 :root {
-  --hbd-beige:    #D9EAF9;   /* off-white background, sky-blue tint -- lighter than the cloud-hatching blue (light mode only) */
+  --hbd-beige:    #F7F6F4;   /* page ground, gallery white (light mode only) */
   --hbd-yellow:   #F9D93A;   /* bright yellow accent -- same in both themes */
   --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
   --hbd-brown:    #6B4226;   /* body text */
@@ -137,7 +137,7 @@ main { flex: 1 0 auto; }
 
 /* Bare linework, no background chip -- forcing the toggle art and the
    hamburger into a circular/pill frame (to match the logo badge) looked
-   worse than just letting them sit at a bigger size on the open sky,
+   worse than just letting them sit at a bigger size on the open page,
    same as the logo icon's own art has no box around it either. */
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
@@ -655,7 +655,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 }
 /* Keeps a translucent dark backdrop chip (unlike the nav's bare
    linework) since this icon sits over arbitrary painting photos, not
-   the consistent sky background -- needs guaranteed contrast either way. */
+   the plain page ground -- needs guaranteed contrast either way. */
 .lightbox-close {
   position: absolute; top: 20px; right: 24px;
   width: 40px; height: 40px; border-radius: 50%;
