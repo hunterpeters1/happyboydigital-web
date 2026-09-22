@@ -20,6 +20,7 @@
   --hbd-card:     #FFFDF9;   /* card/mat surfaces, a touch off the page background */
   --hbd-border:   rgba(107, 66, 38, 0.15); /* the common hairline border */
   --hbd-shadow:   rgba(74, 44, 18, 0.08);  /* the common soft card shadow */
+  --hbd-rose:     #C96F74;  /* reserved, not wired in anywhere yet -- candidate per-set ground/accent */
 }
 
 /* ---- Dark mode ---- */
