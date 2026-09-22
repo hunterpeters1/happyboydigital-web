@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("hbd-announcement-dismissed")==="metamorphosis-2026-11"){document.documentElement.setAttribute("data-announcement-dismissed","");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Happy Boy Digital</title>
   <meta name="description" content="Hunter Peters — the painter and builder behind Happy Boy Digital. Original paintings, commissions, and the free Happy Boy Atelier app.">
@@ -22,7 +23,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/happyboy-logo0926.svg">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="preload" href="/css/SpaceGrotesk-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=56ed7975">
+  <link rel="stylesheet" href="/css/style.css?v=027e6b65">
 </head>
 <body>
 
@@ -50,6 +51,17 @@
       <a href="/blog.html">Blog</a>
     </div>
   </nav>
+
+  <div class="announcement-bar" id="announcement-bar" data-announcement-id="metamorphosis-2026-11">
+    <div class="container announcement-bar-inner">
+      <p class="announcement-text">
+        <span class="announcement-eyebrow">Coming soon</span>
+        <strong>Metamorphosis</strong>
+        <span class="announcement-message">New set dropping end of November.</span>
+      </p>
+      <button type="button" class="announcement-close" id="announcement-close" aria-label="Dismiss this announcement">&times;</button>
+    </div>
+  </div>
 
   <main id="main">
     <section class="page-head">
@@ -101,6 +113,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=99161d8e"></script>
+  <script src="/js/main.js?v=1ebeb994"></script>
 </body>
 </html>

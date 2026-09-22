@@ -3,6 +3,9 @@
 {% if not noindex %}
   <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
 {% endif %}
+{% if site.announcement.enabled | default(false) %}
+  <script>(function(){try{if(localStorage.getItem("hbd-announcement-dismissed")==="{{ site.announcement.id }}"){document.documentElement.setAttribute("data-announcement-dismissed","");}}catch(e){}})();</script>
+{% endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">

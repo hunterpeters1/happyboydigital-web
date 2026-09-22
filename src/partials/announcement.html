@@ -1,0 +1,24 @@
+{# Site-wide teaser bar, driven entirely by the "announcement" block in site.json -- nothing
+   here is specific to any one drop. To announce something: set enabled: true and fill in
+   id/eyebrow/title/message (link/link_label are optional, leave them "" to omit the link).
+   To end it: set enabled: false. Changing "id" makes it reappear even for someone who
+   dismissed the last announcement (dismissal is remembered per id, in main.js). #}
+{% if site.announcement.enabled | default(false) %}
+<div class="announcement-bar" id="announcement-bar" data-announcement-id="{{ site.announcement.id }}">
+  <div class="container announcement-bar-inner">
+    <p class="announcement-text">
+{% if site.announcement.eyebrow | default('') %}
+      <span class="announcement-eyebrow">{{ site.announcement.eyebrow }}</span>
+{% endif %}
+      <strong>{{ site.announcement.title }}</strong>
+{% if site.announcement.message | default('') %}
+      <span class="announcement-message">{{ site.announcement.message }}</span>
+{% endif %}
+{% if site.announcement.link | default('') %}
+      <a href="{{ site.announcement.link }}" class="announcement-link">{{ site.announcement.link_label | default('') or 'Learn more' }}</a>
+{% endif %}
+    </p>
+    <button type="button" class="announcement-close" id="announcement-close" aria-label="Dismiss this announcement">&times;</button>
+  </div>
+</div>
+{% endif %}
