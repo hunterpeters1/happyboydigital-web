@@ -1,8 +1,10 @@
 (function () {
   // Reads inventory.json (published by the shop tools) and reflects it on the page.
-  //   [data-item-title]     gets the "Sold" badge when that painting is sold out or on hold
-  //   [data-hide-if-sold]   is hidden when the painting named in it is sold out (price, buy box)
-  //   [data-show-if-sold]   is revealed when the painting named in it is sold out ("This original has sold")
+  // Each painting is 'available', 'held' (an open invoice is holding it) or 'sold'.
+  //   [data-item-title]           gets the Sold seal when that painting is sold (a hold doesn't get one)
+  //   [data-hide-if-unavailable]  is hidden unless the painting named in it is available (price, buy box)
+  //   [data-show-if-sold]         is revealed when the painting is sold ("This original has sold")
+  //   [data-show-if-held]         is revealed when the painting is on hold ("This original is on hold")
   // If inventory.json can't be read the page just shows everything as available.
   var INVENTORY_URL = '/inventory.json';
   var SOLD_GRAPHIC_URL = '/assets/sold-seal.svg';
@@ -26,22 +28,28 @@
     })
     .then(function (data) {
       var items = (data && data.items) || [];
-      var byTitle = {};
-      items.forEach(function (item) { byTitle[item.title] = item.in_stock; });
+      var statusByTitle = {};
+      items.forEach(function (item) {
+        // Older files only have in_stock: false, which meant sold.
+        statusByTitle[item.title] = item.status || (item.in_stock === false ? 'sold' : 'available');
+      });
 
-      function isSoldOut(title) {
-        return Object.prototype.hasOwnProperty.call(byTitle, title) && byTitle[title] === false;
+      function statusOf(title) {
+        return Object.prototype.hasOwnProperty.call(statusByTitle, title) ? statusByTitle[title] : 'available';
       }
 
       document.querySelectorAll('[data-item-title]').forEach(function (el) {
-        if (isSoldOut(el.getAttribute('data-item-title'))) markSoldOut(el);
+        if (statusOf(el.getAttribute('data-item-title')) === 'sold') markSoldOut(el);
       });
-      document.querySelectorAll('[data-hide-if-sold]').forEach(function (el) {
+      document.querySelectorAll('[data-hide-if-unavailable]').forEach(function (el) {
         // Inline style rather than the hidden attribute, so it wins over any display rule in the CSS.
-        if (isSoldOut(el.getAttribute('data-hide-if-sold'))) el.style.display = 'none';
+        if (statusOf(el.getAttribute('data-hide-if-unavailable')) !== 'available') el.style.display = 'none';
       });
       document.querySelectorAll('[data-show-if-sold]').forEach(function (el) {
-        if (isSoldOut(el.getAttribute('data-show-if-sold'))) el.hidden = false;
+        if (statusOf(el.getAttribute('data-show-if-sold')) === 'sold') el.hidden = false;
+      });
+      document.querySelectorAll('[data-show-if-held]').forEach(function (el) {
+        if (statusOf(el.getAttribute('data-show-if-held')) === 'held') el.hidden = false;
       });
     })
     .catch(function (err) {
