@@ -153,6 +153,32 @@ main { flex: 1 0 auto; }
 
 .header-controls { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
 
+/* Desktop nav: a dark pill of plain text links, same dark-fill/yellow-text
+   language as the logo badge next to it -- guarantees the links stay
+   readable over whatever scrolls under the fixed, otherwise transparent
+   header, without adding a new visual language. Hidden on phones, where
+   the slide-out panel (opened by .menu-btn) is the nav instead. */
+.site-nav-row {
+  display: none; align-items: center; gap: 4px;
+  pointer-events: auto;
+  background: #0d0a07; border-radius: 999px; padding: 6px;
+}
+.site-nav-row a {
+  color: var(--hbd-yellow); font-size: 0.95rem; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.site-nav-row a:hover,
+.site-nav-row a:focus-visible {
+  color: var(--hbd-yellow); background: rgba(249, 217, 58, 0.16);
+  text-decoration: none;
+}
+.site-nav-row a[aria-current="page"] { background: rgba(249, 217, 58, 0.16); }
+@media (min-width: 769px) {
+  .site-nav-row { display: flex; }
+  .menu-btn { display: none; }
+}
+
 /* Bare linework, no background chip -- forcing the toggle art and the
    hamburger into a circular/pill frame (to match the logo badge) looked
    worse than just letting them sit at a bigger size on the open page,

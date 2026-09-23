@@ -3,6 +3,13 @@
   "url": "https://happyboy.digital",
   "default_image": "/assets/og-image.png",
   "email": "petershunter45@gmail.com",
+  "nav": [
+    {"label": "Work", "url": "/work.html"},
+    {"label": "Services", "url": "/services.html"},
+    {"label": "Atelier", "url": "/atelier.html"},
+    {"label": "About", "url": "/about.html"},
+    {"label": "Blog", "url": "/blog.html"}
+  ],
   "announcement": {
     "enabled": true,
     "id": "metamorphosis-2026-11",

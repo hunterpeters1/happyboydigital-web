@@ -110,8 +110,10 @@
     });
   }
 
-  // Highlight the nav link matching the current page
-  var navAnchors = document.querySelectorAll('#nav-links a');
+  // Highlight the nav link matching the current page (both the slide-out
+  // panel's links and the desktop text row's -- same site.json list, two
+  // places it's rendered)
+  var navAnchors = document.querySelectorAll('#nav-links a, #site-nav-links a');
   var currentPath = window.location.pathname.replace(/\/index\.html$/, '/');
   navAnchors.forEach(function(anchor) {
     var anchorPath = anchor.getAttribute('href').replace(/\/index\.html$/, '/');
