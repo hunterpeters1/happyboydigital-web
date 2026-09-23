@@ -13,13 +13,16 @@
 :root {
   --hbd-beige:    #F7F6F4;   /* page ground, gallery white (light mode only) */
   --hbd-yellow:   #F9D93A;   /* bright yellow accent -- same in both themes */
-  --hbd-yellow-dark: #E0B516; /* button hover -- same in both themes */
-  --hbd-brown:    #6B4226;   /* body text */
-  --hbd-deep:     #4A2C18;   /* headings */
-  --hbd-on-yellow: #4A2C18;  /* text sitting on yellow-filled buttons/badges -- always dark, ignores theme */
+  --hbd-yellow-dark: #E0B516; /* fills only now (button hover bg) -- foreground/text uses --hbd-gold instead, see below */
+  --hbd-gold:     #8A6B0C;   /* yellow used as a foreground element (link hover, kicker, nav, carets, focus rings) on light backgrounds -- ~4.7:1 on gallery white vs. --hbd-yellow-dark's ~1.8:1, same hue family */
+  --hbd-brown:    #2B2A28;   /* body text -- true neutral ink now (brown retired 2026-09-23), name kept to avoid a sweeping rename */
+  --hbd-deep:     #1A1918;   /* headings -- true neutral ink */
+  --hbd-on-yellow: #1A1918;  /* text sitting on yellow-filled buttons/badges -- always dark, ignores theme */
   --hbd-card:     #FFFDF9;   /* card/mat surfaces, a touch off the page background */
-  --hbd-border:   rgba(107, 66, 38, 0.15); /* the common hairline border */
-  --hbd-shadow:   rgba(74, 44, 18, 0.08);  /* the common soft card shadow */
+  --hbd-ink-rgb:    43, 42, 40;  /* rgb triplet of --hbd-brown, for rgba() border/ring/hover-tint literals that can't reference a var() directly; flips in dark mode below */
+  --hbd-shadow-rgb: 26, 25, 24;  /* rgb triplet of --hbd-deep, for cast-shadow literals -- stays dark in both themes (a shadow shouldn't invert), so no dark-mode override */
+  --hbd-border:   rgba(var(--hbd-ink-rgb), 0.15); /* the common hairline border */
+  --hbd-shadow:   rgba(var(--hbd-shadow-rgb), 0.08);  /* the common soft card shadow */
   --hbd-rose:     #C96F74;  /* reserved, not wired in anywhere yet -- candidate per-set ground/accent */
 }
 
@@ -29,12 +32,14 @@
    flash of the light theme). Only the variables below change -- buttons
    and the accent yellow stay identical in both themes. */
 [data-theme="dark"] {
-  --hbd-beige: #1B140F;
-  --hbd-brown: #E8DCC0;
+  --hbd-beige: #17171A;
+  --hbd-brown: #EDEAE4;
   --hbd-deep:  #F9D93A;
-  --hbd-card:  #241C15;
+  --hbd-card:  #211F21;
+  --hbd-ink-rgb: 237, 234, 228; /* light ink tint, so border/ring literals built from it stay visible against the dark ground -- mirrors --hbd-border's own flip to a yellow tint below */
   --hbd-border: rgba(249, 217, 58, 0.2);
   --hbd-shadow: rgba(0, 0, 0, 0.45);
+  --hbd-gold: var(--hbd-yellow-dark); /* dark ground already gives --hbd-yellow-dark ~9:1+ contrast, no separate value needed */
 }
 
 /* ---- Reset & base ---- */
@@ -66,7 +71,7 @@ h1, h2, h3 {
 }
 
 a { color: var(--hbd-deep); text-decoration: none; }
-a:hover { color: var(--hbd-yellow-dark); text-decoration: underline; }
+a:hover { color: var(--hbd-gold); text-decoration: underline; }
 
 ::selection {
   /* --hbd-on-yellow, not --hbd-deep: in dark mode --hbd-deep IS the yellow
@@ -75,7 +80,7 @@ a:hover { color: var(--hbd-yellow-dark); text-decoration: underline; }
   text-shadow: 0.03em 0 rgba(255, 0, 200, 0.5), -0.03em 0 rgba(0, 231, 255, 0.5);
 }
 
-:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--hbd-gold); outline-offset: 2px; }
 
 /* ---- Layout ---- */
 /* Sticky footer: on short pages (few blog posts, short content) footer
@@ -128,7 +133,7 @@ main { flex: 1 0 auto; }
   color: var(--hbd-yellow); white-space: nowrap;
 }
 .logo-badge:hover { filter: brightness(1.15); text-decoration: none; }
-.logo-badge:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; }
+.logo-badge:focus-visible { outline: 2px solid var(--hbd-gold); outline-offset: 2px; }
 @media (max-width: 480px) {
   .logo-badge-text { display: none; }
   .logo-badge { padding: 8px; }
@@ -148,7 +153,7 @@ main { flex: 1 0 auto; }
   transition: transform 0.15s ease;
 }
 .theme-toggle:hover { transform: scale(1.05); }
-.theme-toggle:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+.theme-toggle:focus-visible { outline: 2px solid var(--hbd-gold); outline-offset: 2px; border-radius: 8px; }
 .theme-toggle img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: contain;
@@ -171,13 +176,13 @@ main { flex: 1 0 auto; }
   transition: transform 0.15s ease;
 }
 .menu-btn:hover { transform: scale(1.05); }
-.menu-btn:focus-visible { outline: 2px solid var(--hbd-yellow-dark); outline-offset: 2px; border-radius: 8px; }
+.menu-btn:focus-visible { outline: 2px solid var(--hbd-gold); outline-offset: 2px; border-radius: 8px; }
 .menu-btn img { display: block; width: 100%; height: 100%; }
 
 /* ---- Side slide-out nav panel (all viewport widths) ---- */
 .nav-overlay {
   position: fixed; inset: 0; z-index: 1500;
-  background: rgba(20, 14, 8, 0.55);
+  background: rgba(var(--hbd-shadow-rgb), 0.55);
   opacity: 0; pointer-events: none;
   transition: opacity 0.25s ease;
 }
@@ -204,7 +209,7 @@ main { flex: 1 0 auto; }
   background: none; border: none; cursor: pointer;
   font-size: 1.8rem; line-height: 1; color: var(--hbd-brown);
 }
-.side-nav-close:hover { color: var(--hbd-yellow-dark); }
+.side-nav-close:hover { color: var(--hbd-gold); }
 
 .side-nav-links { display: flex; flex-direction: column; gap: 4px; margin-top: 24px; }
 .side-nav-links a {
@@ -217,15 +222,15 @@ main { flex: 1 0 auto; }
 }
 .side-nav-links a:hover,
 .side-nav-links a:focus-visible {
-  color: var(--hbd-yellow-dark);
-  background: rgba(107, 66, 38, 0.08);
+  color: var(--hbd-gold);
+  background: rgba(var(--hbd-ink-rgb), 0.08);
   text-decoration: none;
 }
 [data-theme="dark"] .side-nav-links a:hover,
 [data-theme="dark"] .side-nav-links a:focus-visible {
   background: rgba(249, 217, 58, 0.08);
 }
-.side-nav-links a[aria-current="page"] { color: var(--hbd-yellow-dark); }
+.side-nav-links a[aria-current="page"] { color: var(--hbd-gold); }
 /* A tiny medallion appears beside a link on hover -- ties the interaction
    back to the logo itself. */
 .side-nav-links a::after {
@@ -268,7 +273,7 @@ section { padding: 80px 0; }
 .kicker {
   display: block; font-size: 0.8rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--hbd-yellow-dark); margin-bottom: 12px;
+  color: var(--hbd-gold); margin-bottom: 12px;
 }
 .kicker-center { text-align: center; }
 
@@ -287,8 +292,8 @@ section { padding: 80px 0; }
   background: var(--hbd-card);
   padding: 14px;
   box-shadow:
-    0 0 0 1px rgba(107, 66, 38, 0.18),
-    0 28px 50px -18px rgba(74, 44, 18, 0.4);
+    0 0 0 1px rgba(var(--hbd-ink-rgb), 0.18),
+    0 28px 50px -18px rgba(var(--hbd-shadow-rgb), 0.4);
 }
 @media (max-width: 768px) { .hero-vis img { max-height: 62vh; } }
 .hero-caption {
@@ -321,7 +326,7 @@ section { padding: 80px 0; }
   background: var(--hbd-yellow); color: var(--hbd-on-yellow); font-weight: 600; font-size: 0.95rem;
   transition: background 0.2s ease, transform 0.1s ease;
 }
-.btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); color: var(--hbd-yellow); }
+.btn:hover { background: var(--hbd-yellow-dark); transform: translateY(-1px); }
 /* Padding (not min-height/flex) hits the 44px touch target -- flexing this
    would shrink multi-word labels to min-content width and wrap them. */
 .btn-sm { padding: 12px 16px; font-size: 0.85rem; }
@@ -330,7 +335,7 @@ section { padding: 80px 0; }
   border: 1px solid var(--hbd-brown);
   color: var(--hbd-brown);
 }
-.btn-secondary:hover { background: rgba(107, 66, 38, 0.05); color: var(--hbd-yellow-dark); }
+.btn-secondary:hover { background: rgba(var(--hbd-ink-rgb), 0.05); color: var(--hbd-gold); }
 .btn-group { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
 @media (max-width: 768px) { .btn-group { flex-direction: column; align-items: stretch; } }
 
@@ -356,7 +361,7 @@ section { padding: 80px 0; }
 .card-num {
   position: absolute; top: 16px; right: 20px;
   font-size: 2.25rem; font-weight: 700; line-height: 1;
-  color: rgba(74, 44, 18, 0.1);
+  color: rgba(var(--hbd-shadow-rgb), 0.1);
 }
 
 /* Card/container treatment: solid fill + a CSS-drawn border, with the
@@ -395,7 +400,7 @@ section { padding: 80px 0; }
 [data-theme="dark"] .page-head-frame,
 [data-theme="dark"] .prose,
 [data-theme="dark"] .project-info {
-  background-color: #1B140F;
+  background-color: #17171A;
 }
 .hero-copy::after,
 .atelier-copy::after,
@@ -440,7 +445,7 @@ section { padding: 80px 0; }
   font-size: 1.5rem;
   color: var(--hbd-deep);
 }
-[data-theme="dark"] .card-num { background: #1B140F; color: #F9D93A; }
+[data-theme="dark"] .card-num { background: #17171A; color: #F9D93A; }
 
 /* Sticker shelf — an offset checkerboard, three columns. With an odd
    column count, plain nth-child(odd/even) already lands on the correct
@@ -462,7 +467,7 @@ section { padding: 80px 0; }
     drop-shadow(0 1.4px 0 #fff) drop-shadow(0 -1.4px 0 #fff)
     drop-shadow(1.4px 1.4px 0 #fff) drop-shadow(-1.4px -1.4px 0 #fff)
     drop-shadow(1.4px -1.4px 0 #fff) drop-shadow(-1.4px 1.4px 0 #fff)
-    drop-shadow(0 10px 16px rgba(74, 44, 18, 0.3));
+    drop-shadow(0 10px 16px rgba(var(--hbd-shadow-rgb), 0.3));
   transition: transform 0.25s ease;
 }
 /* alternate the tilt too, so the checker doesn't look mechanical */
@@ -496,7 +501,7 @@ a.card {
 a.card:hover {
   text-decoration: none;
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(74, 44, 18, 0.14);
+  box-shadow: 0 10px 28px rgba(var(--hbd-shadow-rgb), 0.14);
   border-color: rgba(224, 181, 22, 0.6);
 }
 
@@ -525,7 +530,7 @@ a.card:hover {
 .sticker-tile .status-badge {
   position: absolute; top: 10px; left: 10px; z-index: 2;
   width: 56px; height: auto;
-  filter: drop-shadow(0 2px 6px rgba(74, 44, 18, 0.35));
+  filter: drop-shadow(0 2px 6px rgba(var(--hbd-shadow-rgb), 0.35));
 }
 
 /* ---- Footer ---- */
@@ -533,9 +538,9 @@ a.card:hover {
    text at full legibility. */
 footer {
   padding: 48px 0 24px; background: rgba(255, 253, 249, 0.85);
-  border-top: 1px solid rgba(107, 66, 38, 0.1);
+  border-top: 1px solid rgba(var(--hbd-ink-rgb), 0.1);
 }
-[data-theme="dark"] footer { background: rgba(36, 28, 21, 0.85); }
+[data-theme="dark"] footer { background: rgba(33, 31, 33, 0.85); }
 footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .copy-email-btn {
@@ -543,12 +548,12 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   margin-left: 8px; padding: 2px 10px;
   font-family: inherit; font-size: 0.75rem; font-weight: 600;
   color: var(--hbd-brown); background: transparent;
-  border: 1px solid rgba(107, 66, 38, 0.3); border-radius: 999px;
+  border: 1px solid rgba(var(--hbd-ink-rgb), 0.3); border-radius: 999px;
   cursor: pointer; vertical-align: middle;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-.copy-email-btn:hover { background: rgba(107, 66, 38, 0.06); }
-.copy-email-btn.copied { color: var(--hbd-yellow-dark); border-color: var(--hbd-yellow-dark); }
+.copy-email-btn:hover { background: rgba(var(--hbd-ink-rgb), 0.06); }
+.copy-email-btn.copied { color: var(--hbd-gold); border-color: var(--hbd-gold); }
 
 /* ---- Scroll-reveal: [data-reveal] elements fade up as they enter view ---- */
 /* Default is fully visible; JS adds .reveal-on to <body> before hiding, so
@@ -588,7 +593,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .framed-art {
   display: block; width: 100%; height: auto;
   border-radius: 4px; background: var(--hbd-card); padding: 14px;
-  box-shadow: 0 0 0 1px rgba(107, 66, 38, 0.18), 0 28px 50px -18px rgba(74, 44, 18, 0.4);
+  box-shadow: 0 0 0 1px rgba(var(--hbd-ink-rgb), 0.18), 0 28px 50px -18px rgba(var(--hbd-shadow-rgb), 0.4);
 }
 .piece-details > h2 { font-size: 1.2rem; margin: 22px 0 8px; }
 .piece-details > h2:first-child { margin-top: 0; }
@@ -616,7 +621,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 0.14em solid var(--hbd-yellow-dark);
+  border-right: 0.14em solid var(--hbd-gold);
   animation:
     kType var(--kt) steps(var(--kn, 10)) both,
     kCaret 0.7s linear var(--kt) 3,
@@ -627,7 +632,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
   from { clip-path: inset(0 100% 0 0); }
   to   { clip-path: inset(0 0 0 0); }
 }
-@keyframes kCaret { 0%, 100% { border-right-color: var(--hbd-yellow-dark); } 50% { border-right-color: transparent; } }
+@keyframes kCaret { 0%, 100% { border-right-color: var(--hbd-gold); } 50% { border-right-color: transparent; } }
 @keyframes kCaretOff { to { border-right-color: transparent; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -643,7 +648,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .lightbox {
   position: fixed; inset: 0; z-index: 2000;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(26, 16, 8, 0.92);
+  background: rgba(var(--hbd-shadow-rgb), 0.92);
   padding: 32px;
   cursor: zoom-out;
 }
@@ -693,7 +698,7 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
   content: "+";
-  font-size: 1.3rem; font-weight: 400; color: var(--hbd-yellow-dark);
+  font-size: 1.3rem; font-weight: 400; color: var(--hbd-gold);
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -720,14 +725,14 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 
 .post-list { list-style: none; max-width: 640px; margin: 0 auto; }
 .post-list li {
-  border-bottom: 1px solid rgba(107, 66, 38, 0.12);
+  border-bottom: 1px solid rgba(var(--hbd-ink-rgb), 0.12);
 }
-.post-list li:first-child { border-top: 1px solid rgba(107, 66, 38, 0.12); }
+.post-list li:first-child { border-top: 1px solid rgba(var(--hbd-ink-rgb), 0.12); }
 .post-list a {
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   padding: 18px 4px; color: var(--hbd-deep);
 }
-.post-list a:hover { color: var(--hbd-yellow-dark); text-decoration: none; }
+.post-list a:hover { color: var(--hbd-gold); text-decoration: none; }
 .post-list a:hover .post-title { text-decoration: underline; }
 .post-list .post-date {
   flex-shrink: 0; font-size: 0.8rem; opacity: 0.65;
@@ -758,7 +763,7 @@ body.error-404 {
 .error-void-frame {
   aspect-ratio: 3 / 4; width: 100%; position: relative;
   display: flex; align-items: center; justify-content: center;
-  border-style: dashed; border-color: rgba(107, 66, 38, 0.35);
+  border-style: dashed; border-color: rgba(var(--hbd-ink-rgb), 0.35);
 }
 [data-theme="dark"] .error-void-frame { border-color: rgba(249, 217, 58, 0.35); }
 .error-void-static {
@@ -776,10 +781,10 @@ body.error-404 {
 
 .error-hint {
   font: inherit; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--hbd-yellow-dark); background: none; border: none; padding: 0; cursor: pointer;
+  color: var(--hbd-gold); background: none; border: none; padding: 0; cursor: pointer;
   animation: errorPulse 2.2s ease-in-out infinite;
 }
-.error-hint:focus-visible { outline: 1px dashed var(--hbd-yellow-dark); outline-offset: 4px; }
+.error-hint:focus-visible { outline: 1px dashed var(--hbd-gold); outline-offset: 4px; }
 @keyframes errorPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
 /* glitch burst on trigger */
@@ -865,4 +870,4 @@ body.error-404 {
 .piece-note { font-size: 0.9rem; opacity: 0.85; margin-top: 4px; }
 .compact-list { margin-bottom: 16px; padding-left: 20px; font-size: 0.95rem; }
 .narrow-block { max-width: 560px; margin: 32px auto 0; }
-.section-tint { background: rgba(74, 44, 18, 0.02); }
+.section-tint { background: rgba(var(--hbd-shadow-rgb), 0.02); }
