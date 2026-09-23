@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script>(function(){try{if(localStorage.getItem("hbd-theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("hbd-announcement-dismissed")==="metamorphosis-2026-11"){document.documentElement.setAttribute("data-announcement-dismissed","");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Silly the Clown — Happy Boy Digital</title>
   <meta name="description" content="Silly the Clown — original acrylic painting by Hunter Peters, 16 x 20 in. Order the original.">
@@ -45,7 +46,7 @@
   ]
 }
   </script>
-  <link rel="stylesheet" href="/css/style.css?v=39952755">
+  <link rel="stylesheet" href="/css/style.css?v=1bcff460">
 </head>
 <body>
 
@@ -74,6 +75,17 @@
     </div>
   </nav>
 
+  <div class="announcement-bar" id="announcement-bar" data-announcement-id="metamorphosis-2026-11">
+    <div class="container announcement-bar-inner">
+      <p class="announcement-text">
+        <span class="announcement-eyebrow">Coming soon</span>
+        <strong>Metamorphosis</strong>
+        <span class="announcement-message">New set dropping end of November.</span>
+      </p>
+      <button type="button" class="announcement-close" id="announcement-close" aria-label="Dismiss this announcement">&times;</button>
+    </div>
+  </div>
+
   <main id="main">
     <section class="page-head">
       <div class="container">
@@ -100,10 +112,10 @@
 
           <div class="piece-details" data-reveal>
             <h2>Original</h2>
-            <p class="price-lg" data-hide-if-sold="Silly the Clown">$120 CAD</p>
-            <p data-hide-if-sold="Silly the Clown" class="piece-note">One original, acrylic on canvas, 16 x 20 in.</p>
+            <p class="price-lg" data-hide-if-unavailable="Silly the Clown">$120 CAD</p>
+            <p data-hide-if-unavailable="Silly the Clown" class="piece-note">One original, acrylic on canvas, 16 x 20 in.</p>
 
-            <div class="buy-box" data-hide-if-sold="Silly the Clown">
+            <div class="buy-box" data-hide-if-unavailable="Silly the Clown">
               <h2>How to buy</h2>
               <ol>
                 <li><a href="mailto:petershunter45@gmail.com?subject=Order%3A%20Silly%20the%20Clown&amp;body=Hi%20Hunter%2C%0A%0AI%27d%20like%20to%20order%3A%20Silly%20the%20Clown%0A%0AShipping%20to%20%28city%20and%20province%29%3A%20">Email me</a> what you'd like to order.</li>
@@ -113,6 +125,7 @@
               <span class="fine">Shipping is within Canada only. Common questions are on the <a href="/services.html#faq">FAQ</a>.</span>
             </div>
             <p data-show-if-sold="Silly the Clown" hidden>This original has sold — thank you.</p>
+            <p data-show-if-held="Silly the Clown" hidden>This original is on hold for another buyer right now. <a href="mailto:petershunter45@gmail.com?subject=On%20hold%3A%20Silly%20the%20Clown">Email me</a> if you'd like to hear if it frees up.</p>
           </div>
 
         </div>
@@ -135,7 +148,7 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=99161d8e"></script>
-  <script src="/js/inventory-sync.js?v=6db95ca4"></script>
+  <script src="/js/main.js?v=1ebeb994"></script>
+  <script src="/js/inventory-sync.js?v=a3150c66"></script>
 </body>
 </html>

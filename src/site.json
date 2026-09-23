@@ -2,5 +2,14 @@
   "name": "Happy Boy Digital",
   "url": "https://happyboy.digital",
   "default_image": "/assets/og-image.png",
-  "email": "petershunter45@gmail.com"
+  "email": "petershunter45@gmail.com",
+  "announcement": {
+    "enabled": true,
+    "id": "metamorphosis-2026-11",
+    "eyebrow": "Coming soon",
+    "title": "Metamorphosis",
+    "message": "New set dropping end of November.",
+    "link": "",
+    "link_label": ""
+  }
 }

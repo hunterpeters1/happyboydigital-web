@@ -46,5 +46,11 @@
     "type": "Acrylic on Canvas",
     "size": "16 x 20",
     "price": 120.0
+  },
+  {
+    "title": "Paranoid Smiley",
+    "type": "Sticker",
+    "size": "75mm",
+    "price": 5.0
   }
 ]

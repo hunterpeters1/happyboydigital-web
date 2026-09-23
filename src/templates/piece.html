@@ -27,12 +27,13 @@
       <div class="piece-details" data-reveal>
         <h2>Original</h2>
 {% if piece.status == 'available' %}
-        {# The three data-hide-if-sold items disappear, and the sold message appears, when js/inventory-sync.js
-           finds this painting sold out or on hold in inventory.json. If that file can't be read, they stay visible. #}
-        <p class="price-lg" data-hide-if-sold="{{ piece.title }}">{{ piece.price_label }}</p>
-        <p data-hide-if-sold="{{ piece.title }}" class="piece-note">One original, {{ piece.medium | lower }}, {{ piece.size }} in.</p>
+        {# The three data-hide-if-unavailable items disappear when js/inventory-sync.js finds this painting sold or
+           on hold in inventory.json, and the matching message below appears instead. If that file can't be read,
+           the price and buy box simply stay visible. #}
+        <p class="price-lg" data-hide-if-unavailable="{{ piece.title }}">{{ piece.price_label }}</p>
+        <p data-hide-if-unavailable="{{ piece.title }}" class="piece-note">One original, {{ piece.medium | lower }}, {{ piece.size }} in.</p>
 
-        <div class="buy-box" data-hide-if-sold="{{ piece.title }}">
+        <div class="buy-box" data-hide-if-unavailable="{{ piece.title }}">
           <h2>How to buy</h2>
           <ol>
             <li><a href="mailto:{{ site.email }}?subject={{ ('Order: ' ~ piece.title) | urlencode }}&amp;body={{ ('Hi Hunter,\n\nI\'d like to order: ' ~ piece.title ~ '\n\nShipping to (city and province): ') | urlencode }}">Email me</a> what you'd like to order.</li>
@@ -42,6 +43,7 @@
           <span class="fine">Shipping is within Canada only. Common questions are on the <a href="/services.html#faq">FAQ</a>.</span>
         </div>
         <p data-show-if-sold="{{ piece.title }}" hidden>This original has sold — thank you.</p>
+        <p data-show-if-held="{{ piece.title }}" hidden>This original is on hold for another buyer right now. <a href="mailto:{{ site.email }}?subject={{ ('On hold: ' ~ piece.title) | urlencode }}">Email me</a> if you'd like to hear if it frees up.</p>
 {% elif piece.status == 'sold' %}
         <p>This original has sold — thank you.</p>
 {% else %}

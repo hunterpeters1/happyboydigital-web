@@ -50,6 +50,18 @@
     });
   }
 
+  // Announcement bar close button -- remembers the dismissal by the bar's
+  // data-announcement-id, so a *different* announcement (a new id, set in
+  // site.json for the next drop) shows again even if the last one was closed.
+  var announcementBar = document.getElementById('announcement-bar');
+  var announcementClose = document.getElementById('announcement-close');
+  if (announcementBar && announcementClose) {
+    announcementClose.addEventListener('click', function() {
+      document.documentElement.setAttribute('data-announcement-dismissed', '');
+      try { localStorage.setItem('hbd-announcement-dismissed', announcementBar.getAttribute('data-announcement-id') || ''); } catch (e) {}
+    });
+  }
+
   // Slide-out side nav (same panel at every viewport width)
   var toggle = document.getElementById('nav-toggle');
   var panel = document.getElementById('side-nav');
