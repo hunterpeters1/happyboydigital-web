@@ -9,6 +9,16 @@
   font-display: swap;
 }
 
+/* Titles only (h1-h3) -- nav, labels and body copy stay on Space Grotesk. */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/css/Newsreader-VariableFont_opsz-wght.woff2') format('woff2'),
+       url('/css/Newsreader-VariableFont_opsz-wght.ttf') format('truetype');
+  font-weight: 300 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---- Color palette ---- */
 :root {
   --hbd-beige:    #F7F6F4;   /* page ground, gallery white (light mode only) */
@@ -64,9 +74,11 @@ body {
 .skip-link:focus { top: 16px; }
 
 h1, h2, h3 {
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
   color: var(--hbd-deep);
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
 
@@ -258,7 +270,7 @@ section { padding: 80px 0; }
 @media (max-width: 768px) { .page-head + section { padding-top: 24px; } }
 
 /* ---- Page headings ---- */
-.lead { font-size: 2.5rem; font-weight: 700; color: var(--hbd-deep); margin-bottom: 16px; text-wrap: balance; }
+.lead { font-size: 2.5rem; font-weight: 500; color: var(--hbd-deep); margin-bottom: 16px; text-wrap: balance; }
 @media (max-width: 768px) { .lead { font-size: 2rem; } }
 .sub { font-size: 1.1rem; margin-bottom: 32px; color: var(--hbd-brown); max-width: 60ch; }
 
