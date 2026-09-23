@@ -434,26 +434,22 @@ section { padding: 80px 0; }
   color: rgba(var(--hbd-shadow-rgb), 0.1);
 }
 
-/* Card/container treatment: solid fill + a CSS-drawn border, with the
-   hand-drawn medallion logo (happyboy-logo0926.svg) sitting at the
-   corners. A solid fill + CSS lines can never gap or distort at any box
-   size, and the medallion is a fixed-size image so it never stretches
-   either. Simplified from the original hand-drawn border: the short
-   secondary accent line and the diamond marker near the right edge
-   aren't reproduced here since they don't translate to a technique that
-   adapts to an arbitrary box size the way a straight border and a
-   gradient line do -- the border, the inset rail line, and the medallion
-   carry the design faithfully.
-   Same treatment in both themes now -- light mode's fill is --hbd-card
-   (the cream used on the Commission cards), dark mode's is the deep
-   near-black page color rather than --hbd-card so it blends into the
-   page instead of standing out as its own shade. */
-.hero-copy,
-.atelier-copy,
-.card,
-.page-head-frame,
-.prose,
-.project-info {
+/* Card/container treatment: solid fill + a CSS-drawn border, with a
+   hand-drawn medallion sitting at the corners. A solid fill + CSS lines
+   can never gap or distort at any box size, and the medallion is a
+   fixed-size image so it never stretches either.
+   Scoped to the Blog and Atelier pages only (redesign decision -- the
+   rest of the site stays unframed). Was shared by .hero-copy, .card and
+   .project-info too; those reverted to their plain, unframed base
+   styles elsewhere since none of them appear on Blog or Atelier.
+   The medallion is logo-smile-mark.svg (the current logo's own smile
+   mark, same file used in the header) rather than the older
+   happyboy-logo0926.svg, so the frame's corners read as the same mark
+   as the logo instead of an older, differently-coloured one. */
+.blog-page .page-head-frame,
+.blog-page .prose,
+.atelier-page .atelier-copy,
+.atelier-page .page-head-frame {
   position: relative;
   background-color: var(--hbd-card);
   border: 2px solid #F9D93A;
@@ -464,44 +460,38 @@ section { padding: 80px 0; }
   background-repeat: no-repeat;
   box-shadow: none;
 }
-[data-theme="dark"] .hero-copy,
-[data-theme="dark"] .atelier-copy,
-[data-theme="dark"] .card,
-[data-theme="dark"] .page-head-frame,
-[data-theme="dark"] .prose,
-[data-theme="dark"] .project-info {
+[data-theme="dark"] .blog-page .page-head-frame,
+[data-theme="dark"] .blog-page .prose,
+[data-theme="dark"] .atelier-page .atelier-copy,
+[data-theme="dark"] .atelier-page .page-head-frame {
   background-color: #17171A;
 }
-.hero-copy::after,
-.atelier-copy::after,
-.card::after,
-.page-head-frame::after,
-.prose::after,
-.project-info::after {
+.blog-page .page-head-frame::after,
+.blog-page .prose::after,
+.atelier-page .atelier-copy::after,
+.atelier-page .page-head-frame::after {
   content: "";
   position: absolute; right: -3px; bottom: -3px;
   width: 48px; height: 48px;
-  background-image: url('/assets/happyboy-logo0926.svg');
+  background-image: url('/assets/logo-smile-mark.svg');
   background-size: contain;
   background-repeat: no-repeat;
 }
-.hero-copy::before,
-.atelier-copy::before,
-.page-head-frame::before,
-.prose::before {
+.blog-page .page-head-frame::before,
+.blog-page .prose::before,
+.atelier-page .atelier-copy::before,
+.atelier-page .page-head-frame::before {
   content: "";
   position: absolute; right: -3px; top: -3px;
   width: 48px; height: 48px;
-  background-image: url('/assets/happyboy-logo0926.svg');
+  background-image: url('/assets/logo-smile-mark.svg');
   background-size: contain;
   background-repeat: no-repeat;
 }
-.hero-copy { padding: 36px 60px 36px 36px; }
-.atelier-copy { padding: 36px 60px 36px 36px; }
-.card { padding: 32px 56px 32px 32px; }
-.page-head-frame { padding: 28px 60px 28px 32px; margin-bottom: 8px; }
-.prose { padding: 36px 60px 36px 36px; }
-.project-info { padding: 16px 56px 16px 16px; }
+.blog-page .page-head-frame,
+.atelier-page .page-head-frame { padding: 28px 60px 28px 32px; margin-bottom: 8px; }
+.blog-page .prose { padding: 36px 60px 36px 36px; }
+.atelier-page .atelier-copy { padding: 36px 60px 36px 36px; }
 /* Cards keep the top-right corner for the number instead of a second
    medallion -- a small CSS-drawn pill in the same border language rather
    than the old drawn badge-tab artwork. Text is dark in light mode
