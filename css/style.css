@@ -580,12 +580,15 @@ a.card:hover {
 /* ---- Footer ---- */
 /* Slightly translucent (85%) card colour; still keeps the email/copy-button
    text at full legibility. */
+/* Dark ink block with yellow text, fixed regardless of site theme -- the
+   footer is a signature, and a signature reads the same however the page
+   around it is lit. Matches the logo badge's own always-dark chrome. */
 footer {
-  padding: 48px 0 24px; background: rgba(255, 253, 249, 0.85);
-  border-top: 1px solid rgba(var(--hbd-ink-rgb), 0.1);
+  padding: 40px 0 24px; background: #17171A;
 }
-[data-theme="dark"] footer { background: rgba(33, 31, 33, 0.85); }
-footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+footer .footer-logo { display: block; height: 28px; width: auto; margin-bottom: 18px; }
+footer, footer a { color: var(--hbd-yellow); }
+footer a:hover { color: var(--hbd-yellow-dark); }
 
 .copy-email-btn {
   display: inline-flex; align-items: center;
@@ -598,6 +601,9 @@ footer .small { font-size: 0.85rem; color: var(--hbd-brown); opacity: 0.85; font
 }
 .copy-email-btn:hover { background: rgba(var(--hbd-ink-rgb), 0.06); }
 .copy-email-btn.copied { color: var(--hbd-gold); border-color: var(--hbd-gold); }
+footer .copy-email-btn { color: var(--hbd-yellow); border-color: rgba(249, 217, 58, 0.35); }
+footer .copy-email-btn:hover { background: rgba(249, 217, 58, 0.12); }
+footer .copy-email-btn.copied { color: var(--hbd-yellow-dark); border-color: var(--hbd-yellow-dark); }
 
 /* ---- Scroll-reveal: [data-reveal] elements fade up as they enter view ---- */
 /* Default is fully visible; JS adds .reveal-on to <body> before hiding, so
