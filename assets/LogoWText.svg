@@ -2,13 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="408.81027"
-   height="67.203125"
-   viewBox="0 0 108.16438 17.780826"
+   width="54.939301"
+   height="56.290932"
+   viewBox="0 0 14.536023 14.893642"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
    sodipodi:docname="LogoWText.svg"
+   inkscape:export-filename="HappyBoyLogo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,20 +29,20 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="2.968322"
-     inkscape:cx="193.2068"
-     inkscape:cy="36.552638"
+     inkscape:cx="188.99567"
+     inkscape:cy="31.499278"
      inkscape:window-width="2560"
      inkscape:window-height="1411"
      inkscape:window-x="1911"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1"
+     inkscape:current-layer="g1"
      showguides="false">
     <inkscape:grid
        id="grid1"
        units="mm"
-       originx="110.39438"
-       originy="268.67584"
+       originx="109.22797"
+       originy="267.32663"
        spacingx="0.99999998"
        spacingy="1"
        empcolor="#0099e5"
@@ -50,22 +53,22 @@
        enabled="true"
        visible="false" />
     <sodipodi:guide
-       position="560.68026,139.30092"
+       position="559.51386,140.65013"
        orientation="0,540.20001"
        id="guide560"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="703.60818,139.30092"
+       position="702.44178,140.65013"
        orientation="950.10291,0"
        id="guide561"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="703.60818,-112.08047"
+       position="702.44178,-110.73126"
        orientation="0,-540.20001"
        id="guide562"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="560.68026,-112.08047"
+       position="559.51386,-110.73126"
        orientation="-950.10291,0"
        id="guide563"
        inkscape:locked="false" />
@@ -130,7 +133,7 @@
   </defs>
   <g
      id="g13"
-     transform="matrix(1.0473225,0,0,1.0473225,-202.1044,195.79397)"
+     transform="matrix(1.0473225,0,0,1.0473225,-203.2708,194.44476)"
      style="display:none"
      inkscape:label="SmileLogo3"
      sodipodi:insensitive="true">
@@ -146,7 +149,7 @@
   </g>
   <g
      id="g8"
-     transform="translate(-207.83914,187.06269)"
+     transform="translate(-209.00554,185.71348)"
      style="display:none"
      inkscape:label="SmileLogo2"
      sodipodi:insensitive="true">
@@ -176,7 +179,7 @@
   </g>
   <g
      id="g563"
-     transform="translate(-224.47865,187.06269)"
+     transform="translate(-225.64505,185.71348)"
      style="display:none"
      inkscape:label="SmileLogo"
      sodipodi:insensitive="true">
@@ -196,7 +199,8 @@
   </g>
   <g
      id="g1"
-     inkscape:label="LogoWithText">
+     inkscape:label="LogoWithText"
+     transform="translate(-1.1664044,-1.3492123)">
     <g
        id="g3"
        inkscape:label="HappyBoyTextLogo"
@@ -249,7 +253,7 @@
          d="m 190.27922,-177.3552 a 6.3570852,6.3570852 0 0 1 -6.35709,6.35709 6.3570852,6.3570852 0 0 1 -6.35708,-6.35709 6.3570852,6.3570852 0 0 1 6.35708,-6.35708 6.3570852,6.3570852 0 0 1 6.35709,6.35708 z" />
       <path
          id="path16"
-         style="fill:#f9e090;fill-opacity:1;stroke:#2b2a28;stroke-width:0.91923432;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
+         style="fill:#f9e090;fill-opacity:1;stroke:#2b2a28;stroke-width:0.919234;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
          d="m 190.11278,-177.9756 a 6.1906442,6.1906442 0 0 1 -6.19065,6.19064 6.1906442,6.1906442 0 0 1 -6.19064,-6.19064 6.1906442,6.1906442 0 0 1 6.19064,-6.19064 6.1906442,6.1906442 0 0 1 6.19065,6.19064 z" />
       <path
          style="fill:none;fill-opacity:1;stroke:#362012;stroke-width:1.0967;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5;stroke-dasharray:none;stroke-dashoffset:10.3625;stroke-opacity:1"
